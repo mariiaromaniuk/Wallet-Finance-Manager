@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "connect-session-sequelize": "^7.0.0",
     "expo": "~38.0.8",
     "expo-status-bar": "^1.0.2",
     "express": "^4.17.1",
@@ -27,7 +28,9 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "sequelize": "^6.3.0",
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
