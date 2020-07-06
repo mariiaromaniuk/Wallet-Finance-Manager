@@ -24,7 +24,7 @@ const initialToken = [];
 export default (state = initialToken, action) => {
     switch (action.type) {
         case SEND_PUBLIC_TOKEN:
-            console.log('action set public tocken', action.token);
+            console.log('Plublic Token was Set', action.token);
             return action.token;
         default:
             return state;
