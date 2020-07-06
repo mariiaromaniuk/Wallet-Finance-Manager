@@ -36,5 +36,18 @@
     "@babel/core": "^7.8.6",
     "babel-preset-expo": "~8.1.0"
   },
-  "private": true
+  "private": true,
+  "name": "wallet",
+  "description": "To run this project, navigate to the directory and run one of the following yarn commands.",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2004-wdf-capstone-team-c/Finance_Manager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2004-wdf-capstone-team-c/Finance_Manager/issues"
+  },
+  "homepage": "https://github.com/2004-wdf-capstone-team-c/Finance_Manager#readme"
 }
