@@ -22,7 +22,6 @@ router.get("/:id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const newUser = await User.create(req.body);
-    console.log('user', )
     if (newUser) {
       res.json({ message: "Created Successfully", newUser });
     } else {

@@ -23,7 +23,7 @@ router.post("/", async (req, res, next) => {
       current_balance: req.body.current_balance,
       available_balance: req.body.available_balance,
       name: req.body.name,
-      userId: req.body.userId,
+      userId: req.session.passport.user,
     });
     if (newAccount) {
       res.status(200).json({
