@@ -1,17 +1,34 @@
+import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Provider } from "react-redux";
 import { StyleSheet, Text, View } from "react-native";
 import store from "./client/index";
-import { SignUp } from "./client/screens/OnBoard/Signup";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+import { SignUpScreen } from "./client/screens/OnBoard/Signup";
+
+const Stack = createStackNavigator();
+
+function DetailsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Details Screen</Text>
+    </View>
+  );
+}
+
 export default function App() {
   return (
     <Provider store={store}>
-      <View style={styles.container}>
-        <Text>WALLET</Text>
-        <SignUp></SignUp>
-        <StatusBar style="auto" />
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Sign Up">
+          <Stack.Screen name="Sign Up" component={SignUpScreen} />
+          <Stack.Screen name="Details" component={DetailsScreen} />
+        </Stack.Navigator>
+        {/* <StatusBar style="auto" /> */}
+      </NavigationContainer>
     </Provider>
   );
 }
