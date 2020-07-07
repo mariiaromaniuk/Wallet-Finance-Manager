@@ -5,15 +5,21 @@ module.exports = router;
 router.get("/:id", async (req, res, next) => {
   try {
     const userId = req.params.id;
-    const data = await User.findOne({
-      where: { id: userId, email: req.body.email },
+    await User.findOne({
+      where: { id: userId },
       include: [{ model: Account }, { model: Budget }, { model: Transaction }],
+    }).then((user) => {
+      if (user) {
+        res.json(user);
+      } else {
+        res.sendStatus(404);
+      }
     });
-    if (data) {
-      res.json(data);
-    } else {
-      res.sendStatus(404);
-    }
+    // if (data) {
+    //   res.json(data);
+    // } else {
+    //   res.sendStatus(404);
+    // }
   } catch (error) {
     next(error);
   }

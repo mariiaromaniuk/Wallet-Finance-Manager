@@ -6,11 +6,11 @@ const Budget = require('./budget');
 /*
  * Associations between the models.
  */
-User.hasMany(Item);
-Item.belongsTo(User);
+// User.hasMany(Item);
+// Item.belongsTo(User);
 
-Item.hasMany(Account);
-Account.belongsTo(Item);
+// Item.hasMany(Account);
+// Account.belongsTo(Item);
 
 User.hasMany(Account);
 Account.belongsTo(User);
