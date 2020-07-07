@@ -8,10 +8,12 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "antd-mobile": "^2.3.3",
     "axios": "^0.19.2",
     "connect-session-sequelize": "^7.0.0",
     "envvar": "^2.0.0",
     "expo": "~38.0.8",
+    "expo-local-authentication": "~9.1.1",
     "expo-status-bar": "^1.0.2",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
