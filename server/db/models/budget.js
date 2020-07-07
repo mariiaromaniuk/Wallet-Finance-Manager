@@ -14,7 +14,7 @@ const Budget = db.define('budget', {
   spending_budget: {
     type: Sequelize.INTEGER
   },
-  food_drink: {
+  food_and_drink: {
     type: Sequelize.INTEGER,
     defaultValue: 35
   },
