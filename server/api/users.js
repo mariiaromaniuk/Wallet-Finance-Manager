@@ -6,7 +6,7 @@ router.get("/:id", async (req, res, next) => {
   try {
     const userId = req.params.id;
     const data = await User.findOne({
-      where: { id: userId },
+      where: { id: userId, email: req.body.email },
       include: [{ model: Account }, { model: Budget }, { model: Transaction }],
     });
     if (data) {

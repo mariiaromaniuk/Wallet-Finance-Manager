@@ -4,6 +4,7 @@ module.exports = router;
 
 router.get("/:id", async (req, res, next) => {
   try {
+    // console.log(user);
     const accountId = req.params.id;
     const account = await Account.findByPk(accountId);
     if (account) {

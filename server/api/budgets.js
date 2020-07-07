@@ -41,7 +41,7 @@ router.put("/:id", async (req, res, next) => {
         static_costs: req.body.static_costs,
         savings: req.body.savings,
         spending_budget: req.body.spending_budget,
-        food_drink: req.body.food_drink,
+        food_and_drink: req.body.food_and_drink,
         travel: req.body.travel,
         entertainment: req.body.entertainment,
         healthcare: req.body.healthcare,
