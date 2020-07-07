@@ -48,4 +48,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatch)(SignUp);
+export default connect(null, mapDispatch)(SignUpScreen);
