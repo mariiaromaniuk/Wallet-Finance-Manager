@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-navigation/drawer": "^5.8.4",
     "antd-mobile": "^2.3.3",
     "axios": "^0.19.2",
     "connect-session-sequelize": "^7.0.0",
