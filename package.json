@@ -9,6 +9,10 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
+<<<<<<< HEAD
+=======
+    "@react-navigation/drawer": "^5.8.4",
+>>>>>>> master
     "@react-navigation/native": "^5.6.1",
     "@react-navigation/stack": "^5.6.2",
     "antd-mobile": "^2.3.3",
@@ -21,6 +25,7 @@
     "expo-status-bar": "^1.0.2",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "helmet": "^3.23.3",
     "moment": "^2.27.0",
     "morgan": "^1.10.0",
     "native-base": "^2.13.12",

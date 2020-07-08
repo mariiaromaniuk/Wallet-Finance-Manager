@@ -1,7 +1,8 @@
-const User = require('./user');
-const Account = require('./account');
-const Transaction = require('./transaction');
-const Budget = require('./budget');
+const User = require("./user");
+const Account = require("./account");
+const Transaction = require("./transaction");
+const Budget = require("./budget");
+const Item = require("./item");
 
 /*
  * Associations between the models.
@@ -32,4 +33,5 @@ module.exports = {
   Account,
   Transaction,
   Budget,
+  Item,
 };
