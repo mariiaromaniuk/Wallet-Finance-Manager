@@ -14,7 +14,7 @@ router.get("/:id", async (req, res, next) => {
         req.session.user = user;
         res.json(user);
       } else {
-        res.sendStatus(404);
+        res.sendStatus(401);
       }
     });
   } catch (error) {

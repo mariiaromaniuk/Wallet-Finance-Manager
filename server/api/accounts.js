@@ -2,15 +2,33 @@ const router = require("express").Router();
 const { Account, User } = require("../db/models");
 module.exports = router;
 
+router.get("/", async (req, res, next) => {
+  try {
+    if (req.user) {
+      const data = await Account.findAll({
+        where: {
+          userId: req.user.dataValues.id,
+        },
+      });
+      res.status(200).json(data);
+    } else {
+      res.sendStatus(401);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 router.get("/:id", async (req, res, next) => {
   try {
     // console.log(req.user.dataValues.id);
     const accountId = req.params.id;
-    const account = await Account.findByPk(accountId);
-    if (account && req.user) {
+    const account = await Account.findOne({
+      where: { id: accountId, userId: req.user.dataValues.id },
+    });
+    if (accountId && req.user && account) {
       res.status(200).json(account);
     } else {
-      res.sendStatus(404);
+      res.sendStatus(401);
     }
   } catch (error) {
     next(error);
@@ -24,7 +42,7 @@ router.post("/", async (req, res, next) => {
       current_balance: req.body.current_balance,
       available_balance: req.body.available_balance,
       name: req.body.name,
-      userId: req.user.dataValues.userId,
+      userId: req.user.dataValues.id,
     });
     if (newAccount && req.user) {
       res.status(200).json({

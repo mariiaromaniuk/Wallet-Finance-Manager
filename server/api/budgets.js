@@ -2,14 +2,35 @@ const router = require("express").Router();
 const { Budget, Account, User } = require("../db/models");
 module.exports = router;
 
+router.get("/", async (req, res, next) => {
+  try {
+    if (req.user) {
+      const data = await Budget.findAll({
+        where: {
+          userId: req.user.dataValues.id,
+        },
+      });
+      res.status(200).json(data);
+    } else {
+      res.sendStatus(500);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 router.get("/:id", async (req, res, next) => {
   try {
     const budgetId = req.params.id;
-    const budget = await Budget.findByPk(budgetId);
-    if (budget && req.user) {
+    if (budget.id && req.user) {
+      const budget = await Budget.findOne({
+        where: {
+          id: budgetId,
+          userId: req.user.dataValues.id,
+        },
+      });
       res.status(200).json(budget);
     } else {
-      res.sendStatus(404);
+      res.sendStatus(401);
     }
   } catch (error) {
     next(error);
