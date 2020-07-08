@@ -2,14 +2,35 @@ const router = require("express").Router();
 const { Budget, Account, User } = require("../db/models");
 module.exports = router;
 
+router.get("/", async (req, res, next) => {
+  try {
+    if (req.user) {
+      const data = await Budget.findAll({
+        where: {
+          userId: req.user.dataValues.id,
+        },
+      });
+      res.status(200).json(data);
+    } else {
+      res.sendStatus(500);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 router.get("/:id", async (req, res, next) => {
   try {
     const budgetId = req.params.id;
-    const budget = await Budget.findByPk(budgetId);
-    if (budget) {
+    if (budget.id && req.user) {
+      const budget = await Budget.findOne({
+        where: {
+          id: budgetId,
+          userId: req.user.dataValues.id,
+        },
+      });
       res.status(200).json(budget);
     } else {
-      res.sendStatus(404);
+      res.sendStatus(401);
     }
   } catch (error) {
     next(error);
@@ -19,7 +40,7 @@ router.get("/:id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const newBudget = await Budget.create(req.body);
-    if (newBudget) {
+    if (newBudget && req.user) {
       res.status(200).json({
         message: "new budget created succesfully",
         budget: newBudget,
@@ -41,7 +62,7 @@ router.put("/:id", async (req, res, next) => {
         static_costs: req.body.static_costs,
         savings: req.body.savings,
         spending_budget: req.body.spending_budget,
-        food_drink: req.body.food_drink,
+        food_and_drink: req.body.food_and_drink,
         travel: req.body.travel,
         entertainment: req.body.entertainment,
         healthcare: req.body.healthcare,
@@ -51,7 +72,7 @@ router.put("/:id", async (req, res, next) => {
       },
       { where: { id: budgetId } }
     );
-    if (!budgetId) {
+    if (!budgetId || !req.user) {
       res.sendStatus(500);
     } else {
       const updatedBudget = await Budget.findOne({ where: { id: budgetId } });
@@ -69,7 +90,7 @@ router.delete("/:id", async (req, res, next) => {
   try {
     const budgetId = req.params.id;
     const budget = await Budget.findByPk(budgetId);
-    if (!budget) {
+    if (!budget || !req.user) {
       res.sendStatus(500);
     } else {
       await Budget.destroy({

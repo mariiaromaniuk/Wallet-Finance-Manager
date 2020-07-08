@@ -11,12 +11,28 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 // const socketio = require("socket.io");
 module.exports = app;
+const helmet = require("helmet");
 
 // This is a global Mocha hook, used for resource cleanup.
 // Otherwise, Mocha v4+ never quits after tests.
 if (process.env.NODE_ENV === "test") {
   after("close the session store", () => sessionStore.stopExpiringSessions());
 }
+
+app.use(helmet());
+
+//X-Frame-Options: DENY will prevent anyone from putting this page in an iframe.
+app.use(helmet.frameguard({ action: "deny" }));
+
+//The Hide Powered-By middleware removes the X-Powered-By header
+app.use(helmet.hidePoweredBy());
+
+//This will prevent old versions of Internet Explorer from allowing malicious HTML downloads to be executed in the context of your site.
+app.use(helmet.ieNoOpen());
+
+//header tells browsers not to sniff MIME types. When this header is set to nosniff, browsers won’t sniff the MIME type—they will trust what the server says and block the resource if it’s wrong.
+// Sets "X-Content-Type-Options: nosniff".
+app.use(helmet.noSniff());
 
 /**
  * In your development environment, you can keep all of your
@@ -54,18 +70,28 @@ const createApp = () => {
 
   // session middleware with passport
   app.use(
-    session({
-      secret: process.env.SESSION_SECRET || "my best friend is Cody",
-      store: sessionStore,
-      resave: false,
-      saveUninitialized: false,
-    })
+    session(
+      {
+        secret: process.env.SESSION_SECRET || "my best friend is Cody",
+        store: sessionStore,
+        resave: false,
+        saveUninitialized: false,
+      },
+      {
+        cookie: {
+          maxAge: null,
+          expires: { maxAge: 60 * 2000 }, // one minute timeout
+          httpOnly: true,
+          secure: true,
+        },
+      }
+    )
   );
   app.use(passport.initialize());
   app.use(passport.session());
 
   // auth and api routes
-  // app.use("/auth", require("./auth"));
+  app.use("/auth", require("./auth"));
   app.use("/api", require("./api"));
 
   // static file-serving middleware

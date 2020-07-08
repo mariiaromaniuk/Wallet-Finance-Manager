@@ -21,6 +21,7 @@
     "expo-status-bar": "^1.0.2",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "helmet": "^3.23.3",
     "moment": "^2.27.0",
     "morgan": "^1.10.0",
     "native-base": "^2.13.12",
