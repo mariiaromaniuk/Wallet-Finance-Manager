@@ -1,16 +1,17 @@
-const User = require('./user');
-const Account = require('./account');
-const Transaction = require('./transaction');
-const Budget = require('./budget');
+const User = require("./user");
+const Account = require("./account");
+const Transaction = require("./transaction");
+const Budget = require("./budget");
+const Item = require("./item");
 
 /*
  * Associations between the models.
  */
-// User.hasMany(Item);
-// Item.belongsTo(User);
+User.hasMany(Item);
+Item.belongsTo(User);
 
-// Item.hasMany(Account);
-// Account.belongsTo(Item);
+Item.hasMany(Account);
+Account.belongsTo(Item);
 
 User.hasMany(Account);
 Account.belongsTo(User);
@@ -32,4 +33,5 @@ module.exports = {
   Account,
   Transaction,
   Budget,
+  Item,
 };
