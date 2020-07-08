@@ -8,7 +8,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { SignUpScreen } from "./client/screens/OnBoard/Signup";
-
+import { LogInScreen } from "./client/screens/OnBoard/Login";
 const Stack = createStackNavigator();
 
 function DetailsScreen() {
@@ -24,6 +24,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Sign Up">
+          <Stack.Screen name="Log In" component={LogInScreen}></Stack.Screen>
           <Stack.Screen name="Sign Up" component={SignUpScreen} />
           <Stack.Screen name="Details" component={DetailsScreen} />
         </Stack.Navigator>
