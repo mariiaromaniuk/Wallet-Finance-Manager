@@ -20,7 +20,7 @@ export function SignUpScreen({ navigation }) {
       ></TextInput>
       <Button
         title="Sign Up"
-        onPress={() => navigation.navigate("Details")}
+        onPress={() => navigation.navigate("Log In")}
       ></Button>
     </View>
   );
@@ -43,7 +43,7 @@ const styles = {
 const mapDispatch = (dispatch) => {
   return {
     handleSubmit(email, password) {
-      dispatch(signup(email, password));
+      dispatch(SignUpScreen(email, password));
     },
   };
 };
