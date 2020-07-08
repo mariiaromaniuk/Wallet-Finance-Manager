@@ -4,22 +4,19 @@ module.exports = router;
 
 router.get("/:id", async (req, res, next) => {
   try {
+    console.log("USER", req.user.id);
     const userId = req.params.id;
     await User.findOne({
       where: { id: userId },
       include: [{ model: Account }, { model: Budget }, { model: Transaction }],
     }).then((user) => {
-      if (user) {
+      if (user.id === req.user.id) {
+        req.session.user = user;
         res.json(user);
       } else {
         res.sendStatus(404);
       }
     });
-    // if (data) {
-    //   res.json(data);
-    // } else {
-    //   res.sendStatus(404);
-    // }
   } catch (error) {
     next(error);
   }

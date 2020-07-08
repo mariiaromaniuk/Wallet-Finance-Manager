@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const User = require("../db/models/user");
+const { User, Budget, Transaction, Account } = require("../db/models/index");
 
 module.exports = router;
 
@@ -13,7 +13,9 @@ router.post("/login", (req, res, next) => {
         console.log("Incorrect password for user:", req.body.email);
         res.status(401).send("Wrong username and/or password");
       } else {
-        console.log(user);
+        req.session.email = user.email;
+        req.session.userId = user.dataValues.id;
+        req.login(user, (err) => (err ? next(err) : res.json(user)));
         let currentDate = new Date();
         let userId = user.id;
         user.update({ pushToken: req.body.pushToken, lastLogin: currentDate });
@@ -36,15 +38,37 @@ router.post("/signup", async (req, res, next) => {
   }
 });
 
-router.post("/logout", (req, res) => {
+router.delete("/logout", (req, res) => {
   req.logout();
-  req.session.destroy();
+  req.session.destroy((error) => {
+    if (error) {
+      next(error);
+    } else {
+      res.status(200).end();
+    }
+  });
   res.redirect("/");
 });
 
-router.get("/me", (req, res) => {
-  res.json(req.user);
+router.get("/me", async (req, res) => {
+  const user = await User.findOne(
+    {
+      where: { id: req.user.id },
+    },
+    {
+      include: {
+        model: Account,
+        include: {
+          model: Transaction,
+          include: {
+            model: Budget,
+          },
+        },
+      },
+    }
+  );
+  res.json(user);
 });
 
-// router.use('/faceID', require('./faceid'));
+// router.use("/faceID", require("./faceid"));
 // router.use('/google', require('./google'));
