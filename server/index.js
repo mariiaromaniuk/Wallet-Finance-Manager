@@ -70,12 +70,22 @@ const createApp = () => {
 
   // session middleware with passport
   app.use(
-    session({
-      secret: process.env.SESSION_SECRET || "my best friend is Cody",
-      store: sessionStore,
-      resave: false,
-      saveUninitialized: false,
-    })
+    session(
+      {
+        secret: process.env.SESSION_SECRET || "my best friend is Cody",
+        store: sessionStore,
+        resave: false,
+        saveUninitialized: false,
+      },
+      {
+        cookie: {
+          maxAge: null,
+          expires: { maxAge: 60 * 2000 }, // one minute timeout
+          httpOnly: true,
+          secure: true,
+        },
+      }
+    )
   );
   app.use(passport.initialize());
   app.use(passport.session());

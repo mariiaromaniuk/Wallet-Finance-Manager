@@ -5,7 +5,7 @@ module.exports = router;
 router.post("/", async (req, res, next) => {
   try {
     const newTransaction = await Transaction.create(req.body);
-    if (newTransaction) {
+    if (newTransaction && req.user) {
       res.status(200).json({
         message: "Transaction created successfully",
         transaction: newTransaction,
@@ -57,7 +57,7 @@ router.delete("/:id", async (req, res, next) => {
     const transaction = await Transaction.findOne({
       where: { id: transactionId },
     });
-    if (!transaction) {
+    if (!transaction || !req.user) {
       res.sendStatus(500);
     } else {
       await Transaction.destroy({

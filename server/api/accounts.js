@@ -4,10 +4,10 @@ module.exports = router;
 
 router.get("/:id", async (req, res, next) => {
   try {
-    // console.log(user);
+    // console.log(req.user.dataValues.id);
     const accountId = req.params.id;
     const account = await Account.findByPk(accountId);
-    if (account) {
+    if (account && req.user) {
       res.status(200).json(account);
     } else {
       res.sendStatus(404);
@@ -24,9 +24,9 @@ router.post("/", async (req, res, next) => {
       current_balance: req.body.current_balance,
       available_balance: req.body.available_balance,
       name: req.body.name,
-      userId: req.session.passport.user,
+      userId: req.user.dataValues.userId,
     });
-    if (newAccount) {
+    if (newAccount && req.user) {
       res.status(200).json({
         message: "New Account Created",
         account: newAccount,
@@ -78,7 +78,7 @@ router.delete("/:id", async (req, res, next) => {
     const account = Account.findOne({
       where: { id: accountId },
     });
-    if (account) {
+    if (account && req.user) {
       Account.destroy({
         where: {
           id: accountId,

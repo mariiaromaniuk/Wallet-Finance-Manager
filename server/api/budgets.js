@@ -6,7 +6,7 @@ router.get("/:id", async (req, res, next) => {
   try {
     const budgetId = req.params.id;
     const budget = await Budget.findByPk(budgetId);
-    if (budget) {
+    if (budget && req.user) {
       res.status(200).json(budget);
     } else {
       res.sendStatus(404);
@@ -19,7 +19,7 @@ router.get("/:id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const newBudget = await Budget.create(req.body);
-    if (newBudget) {
+    if (newBudget && req.user) {
       res.status(200).json({
         message: "new budget created succesfully",
         budget: newBudget,
@@ -51,7 +51,7 @@ router.put("/:id", async (req, res, next) => {
       },
       { where: { id: budgetId } }
     );
-    if (!budgetId) {
+    if (!budgetId || !req.user) {
       res.sendStatus(500);
     } else {
       const updatedBudget = await Budget.findOne({ where: { id: budgetId } });
@@ -69,7 +69,7 @@ router.delete("/:id", async (req, res, next) => {
   try {
     const budgetId = req.params.id;
     const budget = await Budget.findByPk(budgetId);
-    if (!budget) {
+    if (!budget || !req.user) {
       res.sendStatus(500);
     } else {
       await Budget.destroy({
