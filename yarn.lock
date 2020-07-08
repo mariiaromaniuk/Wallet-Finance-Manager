@@ -2918,6 +2918,12 @@ expo-localization@~8.2.1:
   integrity sha512-T2S1J6L0VaKdiO10kQk690GGMdO990zKXKGvdw5D8UEfoFomXh0W2CTtfqN2HCkkpc7iqvn7MYaKN0yJxu+jJQ==
   dependencies:
     rtl-detect "^1.0.2"
+expo-local-authentication@~9.1.1:
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/expo-local-authentication/-/expo-local-authentication-9.1.1.tgz#70058829268f6f652b40fc69cc075f0310b4eff2"
+  integrity sha512-VMk6PTzIdGFBTDWUcB7JgoTV0bOm6bQ9LXeEsT4Wb0y9Uou3IjZKmcVLsMDa3wje7K5B7bs2DZ5acmhB+/AIIA==
+  dependencies:
+    invariant "^2.2.4"
 
 expo-location@~8.2.1:
   version "8.2.1"

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, TextInput, Button } from "react-native";
+import { connect } from "react-redux";
 
 export class SignUp extends Component {
   render() {
@@ -34,3 +35,13 @@ const styles = {
     borderWidth: 1,
   },
 };
+
+const mapDispatch = (dispatch) => {
+  return {
+    handleSubmit(email, password) {
+      dispatch(signup(email, password));
+    },
+  };
+};
+
+export default connect(null, mapDispatch)(SignUp);
