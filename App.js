@@ -7,7 +7,7 @@ import store from "./client/index";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { SignUpScreen } from "./client/screens/OnBoard/Signup";
+import SignUpScreen from "./client/screens/OnBoard/Signup";
 import { LogInScreen } from "./client/screens/OnBoard/Login";
 const Stack = createStackNavigator();
 
