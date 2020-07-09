@@ -56,6 +56,7 @@ class Pie extends React.Component {
       .innerRadius(30);
 
     var arcData = arcs[index];
+    
     var path =
       this.state.highlightedIndex == index
         ? hightlightedArc(arcData)
