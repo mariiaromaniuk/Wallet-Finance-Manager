@@ -24,9 +24,10 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Sign Up">
-          <Stack.Screen name="Log In" component={LogInScreen}></Stack.Screen>
+          <Stack.Screen name="Link Bank" component={Link}/>
+          {/*<Stack.Screen name="Log In" component={LogInScreen}/> 
           <Stack.Screen name="Sign Up" component={SignUpScreen} />
-          <Stack.Screen name="Details" component={DetailsScreen} />
+          <Stack.Screen name="Details" component={DetailsScreen} /> */}
         </Stack.Navigator>
         {/* <StatusBar style="auto" /> */}
       </NavigationContainer>
