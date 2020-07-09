@@ -1,29 +1,41 @@
 import React, { Component } from "react";
 import { View, Text, TextInput, Button } from "react-native";
 import { connect } from "react-redux";
+import { withNavigation } from "react-navigation";
 
-export function SignUpScreen({ navigation }) {
-  return (
-    <View style={styles.container}>
-      <Text>WALLET</Text>
+class SignUpScreen extends Component {
+  constructor() {
+    super();
+    this.state = {
+      username: "",
+      email: "",
+      password: "",
+    };
+  }
 
-      <Text>Username: </Text>
-      <TextInput style={styles.inputStyle} placeholder="Username"></TextInput>
-      <Text>Email: </Text>
-      <TextInput style={styles.inputStyle} placeholder="Email"></TextInput>
-      <Text>Password: </Text>
-      <TextInput style={styles.inputStyle} placeholder="Password"></TextInput>
-      <Text>Confirm Password: </Text>
-      <TextInput
-        style={styles.inputStyle}
-        placeholder="Confirm Password"
-      ></TextInput>
-      <Button
-        title="Sign Up"
-        onPress={() => navigation.navigate("Log In")}
-      ></Button>
-    </View>
-  );
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>WALLET</Text>
+
+        <Text>Username: </Text>
+        <TextInput style={styles.inputStyle} placeholder="Username"></TextInput>
+        <Text>Email: </Text>
+        <TextInput style={styles.inputStyle} placeholder="Email"></TextInput>
+        <Text>Password: </Text>
+        <TextInput style={styles.inputStyle} placeholder="Password"></TextInput>
+        <Text>Confirm Password: </Text>
+        <TextInput
+          style={styles.inputStyle}
+          placeholder="Confirm Password"
+        ></TextInput>
+        <Button
+          title="Sign Up"
+          onPress={() => this.props.navigation.navigate("Log In")}
+        ></Button>
+      </View>
+    );
+  }
 }
 
 const styles = {
@@ -47,5 +59,5 @@ const mapDispatch = (dispatch) => {
     },
   };
 };
-
-export default connect(null, mapDispatch)(SignUpScreen);
+const wrappedSignUpScreen = withNavigation(SignUpScreen);
+export default connect(null, mapDispatch)(wrappedSignUpScreen);
