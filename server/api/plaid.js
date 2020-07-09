@@ -1,21 +1,21 @@
 const plaid = require('plaid');
-const envvar = require('envvar');
 const moment = require('moment');
 const { Budget, Transaction, Account } = require("../db/model");
+const {SECRET_CLIENT_ID,SECTRET_KEY,PUBLIC_PLAID} =require('../../secrets')
 
 module.exports = router;
 
 
-const PLAID_CLIENT_ID = process.env.PLAID_CLIENT_ID;
-const PLAID_SECRET = process.env.PLAID_SECRET;
-const PLAID_PUBLIC_KEY = process.env.PLAID_PUBLIC_KEY;
-const PLAID_ENV = envvar.string('PLAID_ENV', 'sandbox');
+const PLAID_CLIENT_ID = process.env.PLAID_CLIENT_ID || SECRET_CLIENT_ID;
+const PLAID_PUBLIC_KEY = process.env.PLAID_PUBLIC_KEY || PUBLIC_PLAID;
+const PLAID_SECRET = process.env.PLAID_SECRET || SECTRET_KEY;
+const PLAID_ENV = 'sandbox';
 
 const plaidClient = new plaid.Client(
     PLAID_CLIENT_ID,
     PLAID_SECRET,
     PLAID_PUBLIC_KEY,
-    plaid.environments[PLAID_ENV]
+    PLAID_ENV
 );
 
 
