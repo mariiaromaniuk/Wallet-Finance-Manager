@@ -24,8 +24,8 @@ class Budget extends React.Component {
     const { budget } = this.props;
     let pieData = [];
     let categories = [
-      'community',
       'foodAndDrink',
+      'community',
       'healthcare',
       'recreation',
       'service',
