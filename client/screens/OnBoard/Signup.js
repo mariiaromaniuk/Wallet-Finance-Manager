@@ -21,10 +21,10 @@ class SignUpScreen extends Component {
       password: "",
     };
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleOnSignUp = this.handleOnSignUp.bind(this);
   }
 
   handleOnChange(name, value) {
-    console.log(name);
     let change = {};
     switch (name) {
       case "username":
@@ -43,14 +43,14 @@ class SignUpScreen extends Component {
         change = { ...this.state };
     }
     this.setState(change);
-    console.log(this.state);
   }
 
   handleOnSignUp() {
     const email = this.state.email;
     const password = this.state.password;
+    // Error begins in the line below
     this.props.handleSubmit(email, password);
-    this.props.navigation.navigate("Log In");
+    this.props.navigation.navigate("Link Bank");
   }
 
   render() {
@@ -90,10 +90,7 @@ class SignUpScreen extends Component {
           placeholder="Confirm Password"
           onChangeText={this.handleOnChange}
         ></TextInputComponent>
-        <Button
-          title="Sign Up"
-          onPress={() => this.props.navigation.navigate("Log In")}
-        ></Button>
+        <Button title="Sign Up" onPress={() => this.handleOnSignUp()}></Button>
       </View>
     );
   }
@@ -120,5 +117,5 @@ const mapDispatch = (dispatch) => {
     },
   };
 };
-const wrappedSignUpScreen = withNavigation(SignUpScreen);
-export default connect(null, mapDispatch)(wrappedSignUpScreen);
+// const wrappedSignUpScreen = withNavigation(SignUpScreen);
+export default connect(null, mapDispatch)(SignUpScreen);

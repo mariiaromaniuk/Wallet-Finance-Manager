@@ -1,8 +1,6 @@
 const router = require("express").Router();
 const { User, Budget, Transaction, Account } = require("../db/models/index");
 
-module.exports = router;
-
 router.post("/login", (req, res, next) => {
   User.findOne({ where: { email: req.body.email } })
     .then((user) => {
@@ -26,7 +24,13 @@ router.post("/login", (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
+    console.log(req.body);
     let user = await User.create(req.body);
+
+    if (!user) {
+      throw new Error("Something is wrong with signup post route");
+    }
+
     user.budget = await user.createBudget();
     req.login(user, (err) => (err ? next(err) : res.json(user)));
   } catch (err) {
@@ -69,6 +73,8 @@ router.get("/me", async (req, res) => {
   );
   res.json(user);
 });
+
+module.exports = router;
 
 // router.use("/faceID", require("./faceid"));
 // router.use('/google', require('./google'));

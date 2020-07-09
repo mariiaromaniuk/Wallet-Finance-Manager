@@ -1,16 +1,16 @@
-import axios from 'axios';
+import axios from "axios";
 
 //ACTION TYPES
 
-const GET_USER = 'GET_USER'
-const REMOVE_USER = 'REMOVE_USER';
+const GET_USER = "GET_USER";
+const REMOVE_USER = "REMOVE_USER";
 
 //INITIAL STATE
 
-const initialDefaultUser = {}
+const initialDefaultUser = {};
 
 //ACTION CREATORS
-const getUser = user => ({ type: GET_USER, user });
+const getUser = (user) => ({ type: GET_USER, user });
 const removeUser = () => ({ type: REMOVE_USER });
 
 /**
@@ -18,37 +18,49 @@ const removeUser = () => ({ type: REMOVE_USER });
  */
 
 export const signup = (email, password) => {
-    return async dispatch => {
-        try {
-
-            let user = await axios.post(`api/auth/signup`, { email, password })
-            dispatch(getUser(user.data))
-
-        } catch (error) {
-            console.error(error)
-        }
-    };
-}
+  return async (dispatch) => {
+    try {
+      console.log(email, password);
+      const firstName = "j";
+      const lastName = "m";
+      //   Line below fails
+      let user = await axios.post(`auth/signup`, {
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+      console.log("USER", {
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+      dispatch(getUser(user.data));
+    } catch (error) {
+      console.error(error, "asdfasdffs");
+    }
+  };
+};
 
 export const logout = () => {
-    return async dispatch => {
-        try {
-            await axios.post(`api/auth/logout`)
-            dispatch(removeUser());
-
-        } catch (error) {
-            console.error(error)
-        }
-    };
-}
+  return async (dispatch) => {
+    try {
+      await axios.post(`api/auth/logout`);
+      dispatch(removeUser());
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
 
 export default function (state = initialDefaultUser, action) {
-    switch (action.type) {
-        case GET_USER:
-            return action.user;
-        case REMOVE_USER:
-            return defaultUser;
-        default:
-            return state
-    }
+  switch (action.type) {
+    case GET_USER:
+      return action.user;
+    case REMOVE_USER:
+      return defaultUser;
+    default:
+      return state;
+  }
 }

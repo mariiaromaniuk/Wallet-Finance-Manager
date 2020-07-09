@@ -24,6 +24,7 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
+    console.log("POST /api/users");
     const newUser = await User.create(req.body);
     if (newUser) {
       res.json({ message: "Created Successfully", newUser });
