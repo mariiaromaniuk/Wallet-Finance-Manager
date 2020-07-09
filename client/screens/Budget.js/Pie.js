@@ -56,7 +56,7 @@ class Pie extends React.Component {
       .innerRadius(30);
 
     var arcData = arcs[index];
-    
+
     var path =
       this.state.highlightedIndex == index
         ? hightlightedArc(arcData)
@@ -112,5 +112,22 @@ class Pie extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+    pieColor = [
+        '#EF4C22',
+        '#AE4787',
+        '#D4F2D2',
+        '#B776B2',
+        '#84A59D',
+        '#262560',
+        '#4F5DA9',
+        '#f2edd7',
+        '#b87ca5',
+        '#7c87b8',
+        '#d7f2df',
+        '#f1dd6a',
+      ];
+});
 
 export default Pie;
