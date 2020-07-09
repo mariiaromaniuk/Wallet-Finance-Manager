@@ -46,6 +46,13 @@ class SignUpScreen extends Component {
     console.log(this.state);
   }
 
+  handleOnSignUp() {
+    const email = this.state.email;
+    const password = this.state.password;
+    this.props.handleSubmit(email, password);
+    this.props.navigation.navigate("Log In");
+  }
+
   render() {
     return (
       <View style={styles.container}>
