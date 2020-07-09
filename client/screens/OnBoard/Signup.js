@@ -20,6 +20,30 @@ class SignUpScreen extends Component {
       email: "",
       password: "",
     };
+    this.handleOnChange = this.handleOnChange.bind(this);
+  }
+
+  handleOnChange(name, value) {
+    console.log(name);
+    let change = {};
+    switch (name) {
+      case "username":
+        change = { ...this.state, username: value };
+        break;
+      case "email":
+        change = { ...this.state, email: value };
+        break;
+      case "password":
+        change = { ...this.state, password: value };
+        break;
+      case "confirmPassword":
+        change = { ...this.state, confirmPassword: value };
+        break;
+      default:
+        change = { ...this.state };
+    }
+    this.setState(change);
+    console.log(this.state);
   }
 
   render() {
@@ -33,6 +57,7 @@ class SignUpScreen extends Component {
           name="username"
           value={this.state.value}
           placeholder="Username"
+          onChangeText={this.handleOnChange}
         ></TextInputComponent>
         <Text>Email: </Text>
         <TextInputComponent
@@ -40,6 +65,7 @@ class SignUpScreen extends Component {
           name="email"
           value={this.state.value}
           placeholder="Email"
+          onChangeText={this.handleOnChange}
         ></TextInputComponent>
         <Text>Password: </Text>
         <TextInputComponent
@@ -47,6 +73,7 @@ class SignUpScreen extends Component {
           name="password"
           value={this.state.value}
           placeholder="Password"
+          onChangeText={this.handleOnChange}
         ></TextInputComponent>
         <Text>Confirm Password: </Text>
         <TextInputComponent
@@ -54,6 +81,7 @@ class SignUpScreen extends Component {
           name="confirmPassword"
           value={this.state.value}
           placeholder="Confirm Password"
+          onChangeText={this.handleOnChange}
         ></TextInputComponent>
         <Button
           title="Sign Up"
