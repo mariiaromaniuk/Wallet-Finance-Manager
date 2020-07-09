@@ -7,11 +7,15 @@ import { SignUp } from "./client/screens/OnBoard/Signup";
 export default function App() {
   return (
     <Provider store={store}>
-      <View style={styles.container}>
-        <Text>WALLET</Text>
-        <SignUp></SignUp>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Sign Up">
+          <Stack.Screen name="Link Bank" component={Link}/>
+          <Stack.Screen name="Log In" component={LogInScreen}/> 
+          <Stack.Screen name="Sign Up" component={SignUpScreen} />
+          <Stack.Screen name="Details" component={DetailsScreen} />
+        </Stack.Navigator>
         <StatusBar style="auto" />
-      </View>
+      </NavigationContainer>
     </Provider>
   );
 }
