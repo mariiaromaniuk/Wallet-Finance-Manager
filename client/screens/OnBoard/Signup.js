@@ -2,6 +2,15 @@ import React, { Component } from "react";
 import { View, Text, TextInput, Button } from "react-native";
 import { connect } from "react-redux";
 import { withNavigation } from "react-navigation";
+import { signup } from "../../store/user";
+
+const TextInputComponent = ({ value, onChangeText, name, ...props }) => (
+  <TextInput
+    value={value}
+    onChangeText={(value) => onChangeText(name, value)} //... Bind the name here
+    {...props}
+  />
+);
 
 class SignUpScreen extends Component {
   constructor() {
@@ -19,16 +28,33 @@ class SignUpScreen extends Component {
         <Text>WALLET</Text>
 
         <Text>Username: </Text>
-        <TextInput style={styles.inputStyle} placeholder="Username"></TextInput>
-        <Text>Email: </Text>
-        <TextInput style={styles.inputStyle} placeholder="Email"></TextInput>
-        <Text>Password: </Text>
-        <TextInput style={styles.inputStyle} placeholder="Password"></TextInput>
-        <Text>Confirm Password: </Text>
-        <TextInput
+        <TextInputComponent
           style={styles.inputStyle}
+          name="username"
+          value={this.state.value}
+          placeholder="Username"
+        ></TextInputComponent>
+        <Text>Email: </Text>
+        <TextInputComponent
+          style={styles.inputStyle}
+          name="email"
+          value={this.state.value}
+          placeholder="Email"
+        ></TextInputComponent>
+        <Text>Password: </Text>
+        <TextInputComponent
+          style={styles.inputStyle}
+          name="password"
+          value={this.state.value}
+          placeholder="Password"
+        ></TextInputComponent>
+        <Text>Confirm Password: </Text>
+        <TextInputComponent
+          style={styles.inputStyle}
+          name="confirmPassword"
+          value={this.state.value}
           placeholder="Confirm Password"
-        ></TextInput>
+        ></TextInputComponent>
         <Button
           title="Sign Up"
           onPress={() => this.props.navigation.navigate("Log In")}
@@ -55,7 +81,7 @@ const styles = {
 const mapDispatch = (dispatch) => {
   return {
     handleSubmit(email, password) {
-      dispatch(SignUpScreen(email, password));
+      dispatch(signup(email, password));
     },
   };
 };
