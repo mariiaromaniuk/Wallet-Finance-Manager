@@ -20,7 +20,7 @@ export function SignUpScreen({ navigation }) {
       ></TextInput>
       <Button
         title="Sign Up"
-        onPress={() => navigation.navigate("Log In")}
+        onPress={() => navigation.navigate("Welcome")}
       ></Button>
     </View>
   );
