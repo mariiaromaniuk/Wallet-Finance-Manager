@@ -53,6 +53,7 @@ export class Signup extends Component{
       </Container>
     );
   }
+
 }
 
 const mapDispatch = (dispatch) => {
