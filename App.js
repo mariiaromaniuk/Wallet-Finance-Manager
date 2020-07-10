@@ -6,6 +6,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { Signup, Login, Link, Initial } from "./client/screens";
+// import { Signup } from "./client/screens/OnBoard/Signup";
+// import Initial from "./client/screens/OnBoard/Initial";
+// import Login from "./client/screens/OnBoard/Login";
+// import Link from "./client/screens/OnBoard/Link";
+
 const Stack = createStackNavigator();
 
 export default class App extends Component {
