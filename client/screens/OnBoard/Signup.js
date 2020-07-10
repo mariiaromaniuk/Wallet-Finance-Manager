@@ -34,7 +34,7 @@ import { signup } from "../../store/user";
 //     this.props.navigation.navigate("Link");
 //   }
 
-export class Signup extends Component {
+class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = { firstName: "", lastName: "", email: "", password: "" };
@@ -91,4 +91,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 // const wrappedSignUpScreen = withNavigation(SignUpScreen);
-export default connect(null, mapDispatch)(SignUpScreen);
+export default connect(null, mapDispatch)(Signup);
