@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Text, Item, Form, Input, Button, Label } from "native-base";
 import { connect } from "react-redux";
+import {login} from '../../store/user'
 
 class Login extends Component {
   constructor(props) {
@@ -24,10 +25,9 @@ class Login extends Component {
           block
           style={{ margin: 20, marginTop: 40 }}
           primary
-          onPress={this.props.handleSubmit(
-            this.state.email,
-            this.state.password
-          )}
+          onPress={
+            this.props.handleSubmit(this.state.email, this.state.password, this.props.navigation)
+          }
         >
           <Text>LOGIN</Text>
         </Button>
@@ -38,8 +38,8 @@ class Login extends Component {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleSubmit(email, password) {
-      // dispatch(LogInScreen(email, password));
+    handleSubmit(email, password, navigation) {
+      dispatch(login(email, password, navigation));
     },
   };
 };
