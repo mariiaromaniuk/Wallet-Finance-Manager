@@ -83,9 +83,6 @@ const mapState = state => {
 };
 
 const BudgetConnect = connect(mapState)(Budget);
-
 export default BudgetConnect;
 
-export const BudgetStack = createStackNavigator({
-  BudgetSetup: { screen: BudgetSetup }
-});
+export BudgetSetup;

@@ -14,7 +14,7 @@ export function LogInScreen({ navigation }) {
 
       <Button
         title="Log In"
-        onPress={() => navigation.navigate("Details")}
+        onPress={() => navigation.navigate("Welcome")}
       ></Button>
     </View>
   );
