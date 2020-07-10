@@ -22,15 +22,8 @@ export const signup = (userInput) => {
   return async (dispatch) => {
     try {
       //   Line below fails
-      let user = await axios.post(`${server}/auth/signup`, {
-        userInput,
-      });
-      console.log("USER", {
-        firstName,
-        lastName,
-        email,
-        password,
-      });
+      let user = await axios.post(`${server}/auth/signup`, userInput);
+      console.log("USER", userInput);
       dispatch(getUser(user.data));
     } catch (error) {
       console.error(error, "asdfasdffs");
