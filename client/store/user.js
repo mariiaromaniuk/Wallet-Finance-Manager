@@ -1,5 +1,6 @@
 import axios from "axios";
 import { server } from "../index";
+import { get } from "../../server/api";
 
 //ACTION TYPES
 
@@ -18,22 +19,26 @@ const removeUser = () => ({ type: REMOVE_USER });
  * THUNK CREATORS
  */
 
+ export const login = (email, password,navigation) => {
+   return async (dispatch) =>{
+     try {
+       await axios.post(`${server}/auth/login`,{email, password})
+       dispatch(getUser(res.data))
+       navigation.navigate('Home')
+     } catch (error) {
+      console.log(error)
+     }
+   }
+ }
+
 export const signup = (userInput) => {
   return async (dispatch) => {
     try {
       //   Line below fails
-      let user = await axios.post(`${server}/auth/signup`, {
-        userInput,
-      });
-      console.log("USER", {
-        firstName,
-        lastName,
-        email,
-        password,
-      });
+      let user = await axios.post(`${server}/auth/signup`, { userInput });
       dispatch(getUser(user.data));
     } catch (error) {
-      console.error(error, "asdfasdffs");
+      console.error('Error: ',error)
     }
   };
 };
