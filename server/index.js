@@ -18,6 +18,11 @@ const helmet = require("helmet");
 if (process.env.NODE_ENV === "test") {
   after("close the session store", () => sessionStore.stopExpiringSessions());
 }
+// debug statement
+app.use((req, res, next) => {
+  console.log("hello");
+  next();
+});
 
 app.use(helmet());
 
