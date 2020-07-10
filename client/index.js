@@ -13,6 +13,8 @@ const middleware = composeWithDevTools(
 );
 const store = createStore(reducer, middleware);
 
+export const server = "http://localhost:8080";
+
 export default store;
 
 export * from "./store/user";

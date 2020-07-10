@@ -9,7 +9,7 @@ const sendPublicToken = token => ({ type: SEND_PUBLIC_TOKEN, token });
 export const sendToken = token => {
     return async dispatch => {
         try {
-            const res = await axios.post(`/api/plaid/plaid_exchange`, {
+            const res = await axios.post(`api/plaid/plaid_exchange`, {
                 public_token: token,
             });
             dispatch(sendPublicToken(res.data));

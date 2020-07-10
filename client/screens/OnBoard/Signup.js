@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, Button } from "react-native";
+import { Container, Text, Item, Form, Input, Button, Label } from "native-base";
 import { connect } from "react-redux";
+import { View, TextInput } from "react-native";
 import { withNavigation } from "react-navigation";
 import { signup } from "../../store/user";
 
@@ -55,12 +56,14 @@ class SignUpScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View
+      //   style={styles.container}
+      >
         <Text>WALLET</Text>
 
         <Text>Username: </Text>
         <TextInputComponent
-          style={styles.inputStyle}
+          //   style={styles.inputStyle}
           name="username"
           value={this.state.value}
           placeholder="Username"
@@ -68,7 +71,7 @@ class SignUpScreen extends Component {
         ></TextInputComponent>
         <Text>Email: </Text>
         <TextInputComponent
-          style={styles.inputStyle}
+          //   style={styles.inputStyle}
           name="email"
           value={this.state.value}
           placeholder="Email"
@@ -76,7 +79,7 @@ class SignUpScreen extends Component {
         ></TextInputComponent>
         <Text>Password: </Text>
         <TextInputComponent
-          style={styles.inputStyle}
+          //   style={styles.inputStyle}
           name="password"
           value={this.state.value}
           placeholder="Password"
@@ -84,7 +87,7 @@ class SignUpScreen extends Component {
         ></TextInputComponent>
         <Text>Confirm Password: </Text>
         <TextInputComponent
-          style={styles.inputStyle}
+          //   style={styles.inputStyle}
           name="confirmPassword"
           value={this.state.value}
           placeholder="Confirm Password"
@@ -96,19 +99,60 @@ class SignUpScreen extends Component {
   }
 }
 
-const styles = {
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputStyle: {
-    height: 40,
-    borderColor: "black",
-    borderWidth: 1,
-  },
-};
+// import { render } from "react-dom";
+
+// export class Signup extends Component{
+//   constructor(props){
+//   super(props);
+//   this.state = {firstName:"",lastName:"",email:"", password:""}
+//   }
+//   render(){
+//     return (
+//       <Container>
+//         <Form>
+//         <Item floatingLabel>
+//           <Label>First Name</Label>
+//           <Input
+//           onChangeText={text=> this.setState({firstName: text})}
+//           />
+//         </Item>
+//         <Item floatingLabel>
+//           <Label>Last Name</Label>
+//           <Input
+//           onChangeText={text=> this.setState({lastName: text})}
+//           />
+//         </Item>
+//         <Item floatingLabel>
+//           <Label>Email</Label>
+//           <Input
+//           onChangeText={text=> this.setState({email: text})}
+//           />
+//         </Item>
+//         <Item floatingLabel secureTextEntry>
+//           <Label>Password</Label>
+//           <Input
+//           onChangeText={text=> this.setState({password: text})}
+//           />
+//         </Item>
+//       </Form>
+//       <Button
+//         block
+//         style={{margin:20, marginTop:40}}
+//         success
+//         onPress={()=>{
+//           console.log(this.state)
+//           this.props.navigation.reset({
+//           index:0,
+//           routes:[{name: 'Link'}]
+//         })}}
+//       >
+//         <Text>SIGNUP</Text>
+//       </Button>
+//       </Container>
+//     );
+//   }
+
+// }
 
 const mapDispatch = (dispatch) => {
   return {

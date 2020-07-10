@@ -1,4 +1,5 @@
 import axios from "axios";
+import { server } from "../index";
 
 //ACTION TYPES
 
@@ -24,7 +25,7 @@ export const signup = (email, password) => {
       const firstName = "j";
       const lastName = "m";
       //   Line below fails
-      let user = await axios.post(`auth/signup`, {
+      let user = await axios.post(`${server}/auth/signup`, {
         firstName,
         lastName,
         email,
@@ -46,7 +47,7 @@ export const signup = (email, password) => {
 export const logout = () => {
   return async (dispatch) => {
     try {
-      await axios.post(`api/auth/logout`);
+      await axios.post(`${server}/auth/logout`);
       dispatch(removeUser());
     } catch (error) {
       console.error(error);

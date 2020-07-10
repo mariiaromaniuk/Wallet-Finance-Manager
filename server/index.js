@@ -18,6 +18,11 @@ const helmet = require("helmet");
 if (process.env.NODE_ENV === "test") {
   after("close the session store", () => sessionStore.stopExpiringSessions());
 }
+// debug statement
+app.use((req, res, next) => {
+  console.log("hello");
+  next();
+});
 
 app.use(helmet());
 
@@ -42,7 +47,7 @@ app.use(helmet.noSniff());
  * keys as environment variables, so that they can still be read by the
  * Node process on process.env
  */
-if (process.env.NODE_ENV !== "production") require("../secrets");
+// if (process.env.NODE_ENV !== "production") require("../secrets");
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id));
