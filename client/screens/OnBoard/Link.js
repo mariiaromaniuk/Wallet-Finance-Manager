@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import PlaidAuthenticator from "react-native-plaid-link";
 import { connect } from "react-redux";
 import { sendToken } from "../../store/token";
-
+import Dashboard from "./Dashboard";
 class Link extends React.Component {
   state = {
     data: {},
@@ -48,10 +48,11 @@ class Link extends React.Component {
     this.props.sendToken(this.state.data.metadata.public_token);
     return (
       <View style={styles.container}>
-        <Text>
+        {/* <Text>
           This shows after plaid is connected and we get the Public key from
           user
-        </Text>
+        </Text> */}
+        <Dashboard></Dashboard>
       </View>
     );
   }

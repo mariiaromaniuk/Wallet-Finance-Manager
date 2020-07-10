@@ -34,8 +34,8 @@ const removeUser = () => ({ type: REMOVE_USER });
 export const signup = (userInput) => {
   return async (dispatch) => {
     try {
-      //   Line below fails
-      let user = await axios.post(`${server}/auth/signup`, { userInput });
+      let user = await axios.post(`${server}/auth/signup`, userInput);
+      console.log("USER", userInput);
       dispatch(getUser(user.data));
     } catch (error) {
       console.error('Error: ',error)
