@@ -18,18 +18,12 @@ const removeUser = () => ({ type: REMOVE_USER });
  * THUNK CREATORS
  */
 
-export const signup = (email, password) => {
+export const signup = (userInput) => {
   return async (dispatch) => {
     try {
-      console.log(email, password);
-      const firstName = "j";
-      const lastName = "m";
       //   Line below fails
       let user = await axios.post(`${server}/auth/signup`, {
-        firstName,
-        lastName,
-        email,
-        password,
+        userInput,
       });
       console.log("USER", {
         firstName,

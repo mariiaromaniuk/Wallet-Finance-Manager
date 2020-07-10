@@ -5,9 +5,7 @@ import store from "./client/index";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import SignUpScreen from "./client/screens/OnBoard/Signup";
-import LogInScreen from "./client/screens/OnBoard/Login";
-import Link from "./client/screens/OnBoard/Link";
+import { Signup, Login, Link, Initial } from "./client/screens";
 const Stack = createStackNavigator();
 
 export default class App extends Component {
@@ -49,16 +47,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Sign Up">
-            <Stack.Screen name="Link Bank" component={Link} />
-            <Stack.Screen name="Sign Up" component={SignUpScreen} />
-            {/*<Stack.Screen name="Log In" component={LogInScreen}/> 
-          <Stack.Screen name="Details" component={DetailsScreen} /> */}
-            <Stack.Screen name="Log In" component={LogInScreen} />
-          </Stack.Navigator>
-          {/* <StatusBar style="auto" /> */}
-        </NavigationContainer>
+        <NavigationContainer>{this.createHomeStack()}</NavigationContainer>
       </Provider>
     );
   }
