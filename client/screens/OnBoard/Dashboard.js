@@ -19,7 +19,7 @@ class Dashboard extends Component {
   render() {
     return (
       <View>
-        <Text>Bezier Line Chart</Text>
+        <Text>Hello user</Text>
         <LineChart
           data={{
             labels: ["January", "February", "March", "April", "May", "June"],
