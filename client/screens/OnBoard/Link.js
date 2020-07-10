@@ -15,7 +15,6 @@ class Link extends React.Component {
     switch(this.state.status) {
       case 'CONNECTED':
         return this.renderDetails()
-      case 'LOGIN':
       case 'EXIT':
         return this.renderButton();
       default:
@@ -38,13 +37,12 @@ class Link extends React.Component {
   renderButton = () => {
     return <View style={styles.container}>
       <TouchableOpacity onPress={() => this.setState({status: ''})}>
-        <Text style={styles.paragraph}>Login with Plaid</Text>
+        <Text style={styles.paragraph}>Link Bank Account</Text>
       </TouchableOpacity>
     </View>
   }
 
   renderDetails() {
-    console.log('Public token ==============', this.state.data.metadata.public_token)
     this.props.sendToken(this.state.data.metadata.public_token);
     return (
       <View style={styles.container}>
