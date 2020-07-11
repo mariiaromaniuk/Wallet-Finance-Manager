@@ -1,38 +1,7 @@
 import React, { Component } from "react";
-import { Container, Text, Item, Form, Input, Button, Label } from "native-base";
+import { Container, Text, Icon, Item, Form, InputGroup, Input, Button, Label } from "native-base";
 import { connect } from "react-redux";
-import { View, TextInput } from "react-native";
-import { withNavigation } from "react-navigation";
 import { signup } from "../../store/user";
-
-//   handleOnChange(name, value) {
-//     let change = {};
-//     switch (name) {
-//       case "username":
-//         change = { ...this.state, username: value };
-//         break;
-//       case "email":
-//         change = { ...this.state, email: value };
-//         break;
-//       case "password":
-//         change = { ...this.state, password: value };
-//         break;
-//       case "confirmPassword":
-//         change = { ...this.state, confirmPassword: value };
-//         break;
-//       default:
-//         change = { ...this.state };
-//     }
-//     this.setState(change);
-//   }
-
-//   handleOnSignUp() {
-//     const email = this.state.email;
-//     const password = this.state.password;
-//     // Error begins in the line below
-//     this.props.handleSubmit(email, password);
-//     this.props.navigation.navigate("Link");
-//   }
 
 class Signup extends Component {
   constructor(props) {
@@ -43,25 +12,23 @@ class Signup extends Component {
   render() {
     return (
       <Container>
-        <Form>
-          <Item floatingLabel>
-            <Label>First Name</Label>
-            <Input
-              onChangeText={(text) => this.setState({ firstName: text })}
-            />
-          </Item>
-          <Item floatingLabel>
-            <Label>Last Name</Label>
-            <Input onChangeText={(text) => this.setState({ lastName: text })} />
-          </Item>
-          <Item floatingLabel>
-            <Label>Email</Label>
-            <Input onChangeText={(text) => this.setState({ email: text })} />
-          </Item>
-          <Item floatingLabel secureTextEntry>
-            <Label>Password</Label>
-            <Input onChangeText={(text) => this.setState({ password: text })} />
-          </Item>
+        <Form style={{paddingTop:20}}>
+        <InputGroup>
+        <Icon name="ios-person"/>
+          <Input placeholder='First Name' onChangeText={(text) => this.setState({ firstName: text })} />
+        </InputGroup>
+        <InputGroup>
+        <Icon name="ios-person"/>
+          <Input placeholder='Last Name' onChangeText={(text) => this.setState({ lastName: text })} />
+        </InputGroup>
+        <InputGroup>
+           <Icon name='ios-mail' />
+          <Input placeholder='EMAIL' keyboardType={"email-address"} onChangeText={(text) => this.setState({ email: text })}  />
+        </InputGroup>
+        <InputGroup>
+          <Icon name='ios-unlock' />
+          <Input placeholder='PASSWORD' secureTextEntry  onChangeText={(text) => this.setState({ password: text })} />
+        </InputGroup>
         </Form>
         <Button
           block

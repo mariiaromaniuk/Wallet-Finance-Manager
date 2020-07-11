@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Text, Item, Form, Input, Button, Label } from "native-base";
+import { Container, Text, Item,InputGroup, Icon, Form, Input, Button, Label } from "native-base";
 import { connect } from "react-redux";
 
 class Login extends Component {
@@ -11,14 +11,14 @@ class Login extends Component {
     return (
       <Container>
         <Form>
-          <Item floatingLabel>
-            <Label>Email</Label>
-            <Input onChangeText={(text) => this.setState({ email: text })} />
-          </Item>
-          <Item floatingLabel secureTextEntry>
-            <Label>Password</Label>
-            <Input onChangeText={(text) => this.setState({ password: text })} />
-          </Item>
+        <InputGroup>
+           <Icon name='ios-mail' />
+          <Input placeholder='EMAIL' keyboardType={"email-address"} onChangeText={(text) => this.setState({ email: text })}  />
+        </InputGroup>
+        <InputGroup>
+          <Icon name='ios-unlock' />
+          <Input placeholder='PASSWORD' secureTextEntry={true} onChangeText={(text) => this.setState({ password: text })}/>
+         </InputGroup>
         </Form>
         <Button
           block
