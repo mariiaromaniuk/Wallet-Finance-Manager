@@ -11,9 +11,12 @@ router.post("/login", (req, res, next) => {
         console.log("Incorrect password for user:", req.body.email);
         res.status(401).send("Wrong username and/or password");
       } else {
+        req.session.email = user.email;
+        req.session.userId = user.dataValues.id;
         req.login(user, (err) => (err ? next(err) : res.json(user)));
         let currentDate = new Date();
-        user.update({lastLogin: currentDate });
+        let userId = user.id;
+        user.update({ pushToken: req.body.pushToken, lastLogin: currentDate });
       }
     })
     .catch(next);
@@ -23,10 +26,16 @@ router.post("/signup", async (req, res, next) => {
   try {
     console.log(req.body);
     let user = await User.create(req.body);
+
+    if (!user) {
+      throw new Error("Something is wrong with signup post route");
+    }
+
+    user.budget = await user.createBudget();
     req.login(user, (err) => (err ? next(err) : res.json(user)));
   } catch (err) {
     if (err.name === "SequelizeUniqueConstraintError") {
-      res.status(401).send("User already exists");  
+      res.status(401).send("User already exists");
     } else {
       next(err);
     }
@@ -46,6 +55,22 @@ router.delete("/logout", (req, res) => {
 });
 
 router.get("/me", async (req, res) => {
+  const user = await User.findOne(
+    {
+      where: { id: req.user.id },
+    },
+    {
+      include: {
+        model: Account,
+        include: {
+          model: Transaction,
+          include: {
+            model: Budget,
+          },
+        },
+      },
+    }
+  );
   res.json(user);
 });
 
