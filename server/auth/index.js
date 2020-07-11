@@ -11,9 +11,9 @@ router.post("/login", (req, res, next) => {
         console.log("Incorrect password for user:", req.body.email);
         res.status(401).send("Wrong username and/or password");
       } else {
+        req.login(user, (err) => (err ? next(err) : res.json(user)));
         let currentDate = new Date();
         user.update({lastLogin: currentDate });
-        req.login(user, err => (err ? next(err) : res.json(user) ))
       }
     })
     .catch(next);
@@ -22,11 +22,10 @@ router.post("/login", (req, res, next) => {
 router.post("/signup", async (req, res, next) => {
   try {
     let user = await User.create(req.body);
-    user.budget = await user.createBudget();
     req.login(user, (err) => (err ? next(err) : res.json(user)));
   } catch (err) {
     if (err.name === "SequelizeUniqueConstraintError") {
-      res.status(401).send("User already exists");
+      res.status(401).send("User already exists");  
     } else {
       next(err);
     }
@@ -46,7 +45,7 @@ router.delete("/logout", (req, res) => {
 });
 
 router.get("/me", async (req, res) => {
-  res.json(req.user);
+  res.json(user);
 });
 
 module.exports = router;
