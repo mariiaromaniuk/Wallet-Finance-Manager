@@ -26,7 +26,7 @@ export const signup = (userInput) => {
       console.log("USER", userInput);
       dispatch(getUser(user.data));
     } catch (error) {
-      console.error(error, "asdfasdffs");
+      console.error("There was an Error", error);
     }
   };
 };
