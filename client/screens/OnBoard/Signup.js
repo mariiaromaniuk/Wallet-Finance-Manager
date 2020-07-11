@@ -57,5 +57,4 @@ const mapDispatch = (dispatch) => {
     },
   };
 };
-// const wrappedSignUpScreen = withNavigation(SignUpScreen);
 export default connect(null, mapDispatch)(Signup);
