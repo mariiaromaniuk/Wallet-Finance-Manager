@@ -6,7 +6,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Signup, Login, Link, Initial, DummyPage } from "./client/screens";
+import {
+  Signup,
+  Login,
+  Link,
+  Initial,
+  DummyPage,
+  Dashboard,
+} from "./client/screens";
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
@@ -19,8 +26,8 @@ export default class App extends Component {
         }}
       >
         <Tabs.Screen
-          name="Dummy1"
-          component={DummyPage}
+          name="Dashboard"
+          component={Dashboard}
           options={{
             tabBarLabel: "Dashboard",
             tabBarIcon: ({ color, size }) => {
