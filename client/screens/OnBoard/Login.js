@@ -1,6 +1,15 @@
 import React, { Component } from "react";
-import { Container, Text, Item,InputGroup, Icon, Form, Input, Button, Label } from "native-base";
+import {
+  Container,
+  Text,
+  InputGroup,
+  Icon,
+  Form,
+  Input,
+  Button,
+} from "native-base";
 import { connect } from "react-redux";
+import { login } from "../../store/user";
 
 class Login extends Component {
   constructor(props) {
@@ -11,23 +20,34 @@ class Login extends Component {
     return (
       <Container>
         <Form>
-        <InputGroup>
-           <Icon name='ios-mail' />
-          <Input placeholder='EMAIL' keyboardType={"email-address"} onChangeText={(text) => this.setState({ email: text })}  />
-        </InputGroup>
-        <InputGroup>
-          <Icon name='ios-unlock' />
-          <Input placeholder='PASSWORD' secureTextEntry={true} onChangeText={(text) => this.setState({ password: text })}/>
-         </InputGroup>
+          <InputGroup>
+            <Icon name="ios-mail" />
+            <Input
+              placeholder="EMAIL"
+              keyboardType={"email-address"}
+              onChangeText={(text) => this.setState({ email: text })}
+            />
+          </InputGroup>
+          <InputGroup>
+            <Icon name="ios-unlock" />
+            <Input
+              placeholder="PASSWORD"
+              secureTextEntry={true}
+              onChangeText={(text) => this.setState({ password: text })}
+            />
+          </InputGroup>
         </Form>
         <Button
           block
           style={{ margin: 20, marginTop: 40 }}
           primary
-          onPress={this.props.handleSubmit(
-            this.state.email,
-            this.state.password
-          )}
+          onPress={() =>
+            this.props.handleSubmit(
+              this.state.email,
+              this.state.password,
+              this.props.navigation
+            )
+          }
         >
           <Text>LOGIN</Text>
         </Button>
@@ -38,8 +58,8 @@ class Login extends Component {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleSubmit(email, password) {
-      // dispatch(LogInScreen(email, password));
+    handleSubmit(email, password, navigate) {
+      dispatch(login(email, password, navigate));
     },
   };
 };
