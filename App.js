@@ -1,57 +1,66 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import store from "./client/index";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import {FontAwesome5} from '@expo/vector-icons'
-import {MaterialCommunityIcons} from '@expo/vector-icons'
-import { Signup, Login, Link, Initial } from "./client/screens";
-
+import { FontAwesome5 } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Signup, Login, Link, Initial, DummyPage } from "./client/screens";
 const Stack = createStackNavigator();
-const Tabs = createBottomTabNavigator()
+const Tabs = createBottomTabNavigator();
 
 export default class App extends Component {
-  createTabs = () =>{	
-    return(	
-      <Tabs.Navigator	
-      tabBarOptions={{	
-        activeTintColor:'red'	
-      }}	
-      >	
-        <Tabs.Screen	
-        name='Signup'	
-        component={Signup}	
-        options={{	
-          tabBarLabel: 'Dashboard',	
-          tabBarIcon: ({color, size }) => {	
-            return <MaterialCommunityIcons name="home" size={size} color={color} />;	
-            }	
-          }}	
-        />	
-        <Tabs.Screen	
-        name='Login'	
-        component={Login}	
-        options={{	
-          tabBarLabel: 'Budgets',	
-          tabBarIcon: ({color, size }) => {	
-            return <FontAwesome5 name="piggy-bank" size={size} color={color} />;	
-            }	
-          }}	
-        />	
-        <Tabs.Screen	
-        name='Initial'	
-        component={Initial}	
-        options={{	
-          tabBarLabel: 'Profile',	
-          tabBarIcon: ({color, size }) => {	
-            return <MaterialCommunityIcons name="account" size={size} color={color} />;	
-            }	
-          }}	
-        />	
-      </Tabs.Navigator>	
-    )	
-  }
+  createTabs = () => {
+    return (
+      <Tabs.Navigator
+        tabBarOptions={{
+          activeTintColor: "red",
+        }}
+      >
+        <Tabs.Screen
+          name="Dummy1"
+          component={DummyPage}
+          options={{
+            tabBarLabel: "Dashboard",
+            tabBarIcon: ({ color, size }) => {
+              return (
+                <MaterialCommunityIcons name="home" size={size} color={color} />
+              );
+            },
+          }}
+        />
+        <Tabs.Screen
+          name="Dummy2"
+          component={DummyPage}
+          options={{
+            tabBarLabel: "Budgets",
+            tabBarIcon: ({ color, size }) => {
+              return (
+                <FontAwesome5 name="piggy-bank" size={size} color={color} />
+              );
+            },
+          }}
+        />
+        <Tabs.Screen
+          name="Dummy3"
+          component={DummyPage}
+          options={{
+            tabBarLabel: "Profile",
+            tabBarIcon: ({ color, size }) => {
+              return (
+                <MaterialCommunityIcons
+                  name="account"
+                  size={size}
+                  color={color}
+                />
+              );
+            },
+          }}
+        />
+      </Tabs.Navigator>
+    );
+  };
 
   createHomeStack = () => {
     return (
@@ -81,12 +90,15 @@ export default class App extends Component {
           name="Link"
           component={Link}
           options={{
-            title: "Link your bank to Wallet",
+            headerLeft: () => {},
           }}
         />
         <Stack.Screen
           name="Dashboard"
           component={this.createTabs}
+          options={{
+            headerLeft: () => {},
+          }}
         />
       </Stack.Navigator>
     );
