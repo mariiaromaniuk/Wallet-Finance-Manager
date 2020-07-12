@@ -11,7 +11,7 @@ router.post("/login", (req, res, next) => {
       } else {
         req.login(user, (err) => (err ? next(err) : res.json(user)));
         let currentDate = new Date();
-        user.update({ lastLogin: currentDate });
+        user.update({ lastLogin: currentDate.toDateString() });
       }
     })
     .catch(next);
