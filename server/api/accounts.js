@@ -21,9 +21,10 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     // console.log(req.user.dataValues.id);
+    // console.log("req.params", req.params);
     const accountId = req.params.id;
     const account = await Account.findOne({
-      where: { id: accountId, userId: req.user.dataValues.id },
+      where: { userId: req.user.dataValues.id },
     });
     if (accountId && req.user && account) {
       res.status(200).json(account);
