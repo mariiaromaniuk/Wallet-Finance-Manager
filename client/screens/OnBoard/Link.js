@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Container, Button } from "native-base";
 import PlaidAuthenticator from "react-native-plaid-link";
 import { connect } from "react-redux";
 import { sendToken } from "../../store/token";
-import Dashboard from "./Dashboard";
+
 class Link extends React.Component {
-  state = {
-    data: {},
-    status: "LOGIN",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: {},
+      status: "LOGIN",
+    };
+  }
 
   render() {
     // Status: CONNECTED|EVENT|ACKOWLEDGE|EXIT|LOGIN
@@ -38,7 +42,9 @@ class Link extends React.Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={() => this.setState({ status: "" })}>
-          <Text style={styles.paragraph}>Link Bank Account</Text>
+          <Text style={styles.paragraph}>
+            Link Bank account to start using Wallet
+          </Text>
         </TouchableOpacity>
       </View>
     );
@@ -47,13 +53,17 @@ class Link extends React.Component {
   renderDetails() {
     this.props.sendToken(this.state.data.metadata.public_token);
     return (
-      <View style={styles.container}>
-        {/* <Text>
-          This shows after plaid is connected and we get the Public key from
-          user
-        </Text> */}
-        <Dashboard></Dashboard>
-      </View>
+      <Container>
+        <Text>Render Welcome Component here!!! </Text>
+        <Button
+          block
+          style={{ margin: 20, marginTop: 40 }}
+          onPress={() => this.props.navigation.navigate("Dashboard")}
+          primary
+        >
+          <Text>Take me to Dashboard</Text>
+        </Button>
+      </Container>
     );
   }
 

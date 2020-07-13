@@ -18,13 +18,24 @@ const removeUser = () => ({ type: REMOVE_USER });
  * THUNK CREATORS
  */
 
-export const signup = (userInput) => {
+export const login = (email, password, navigation) => {
   return async (dispatch) => {
     try {
-      //   Line below fails
-      let user = await axios.post(`${server}/auth/signup`, userInput);
-      console.log("USER", userInput);
+      let user = await axios.post(`${server}/auth/login`, { email, password });
       dispatch(getUser(user.data));
+      navigation.navigate("Dashboard");
+    } catch (error) {
+      console.error("There was an Error", error);
+    }
+  };
+};
+
+export const signup = (userInput, navigation) => {
+  return async (dispatch) => {
+    try {
+      let user = await axios.post(`${server}/auth/signup`, userInput);
+      dispatch(getUser(user.data));
+      navigation.navigate("Link");
     } catch (error) {
       console.error("There was an Error", error);
     }

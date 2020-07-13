@@ -3,24 +3,24 @@ const db = require("../db");
 
 const Transaction = db.define("transaction", {
   name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   amount: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT,
   },
   date: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   accountId: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   category: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   included: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true
-  }
+    defaultValue: true,
+  },
 });
 
 module.exports = Transaction;

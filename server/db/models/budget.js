@@ -1,46 +1,46 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+const Sequelize = require("sequelize");
+const db = require("../db");
 
-const Budget = db.define('budget', {
+const Budget = db.define("budget", {
   income: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT,
   },
   static_costs: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT,
   },
   savings: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT,
   },
   spending_budget: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT,
   },
   food_and_drink: {
-    type: Sequelize.INTEGER,
-    defaultValue: 35
+    type: Sequelize.FLOAT,
+    defaultValue: 35,
   },
   travel: {
-    type: Sequelize.INTEGER,
-    defaultValue: 10
+    type: Sequelize.FLOAT,
+    defaultValue: 10,
   },
   entertainment: {
-    type: Sequelize.INTEGER,
-    defaultValue: 15
+    type: Sequelize.FLOAT,
+    defaultValue: 15,
   },
   healthcare: {
-    type: Sequelize.INTEGER,
-    defaultValue: 10
+    type: Sequelize.FLOAT,
+    defaultValue: 10,
   },
   service: {
-    type: Sequelize.INTEGER,
-    defaultValue: 10
+    type: Sequelize.FLOAT,
+    defaultValue: 10,
   },
   community: {
-    type: Sequelize.INTEGER,
-    defaultValue: 10
+    type: Sequelize.FLOAT,
+    defaultValue: 10,
   },
   shopping: {
-    type: Sequelize.INTEGER,
-    defaultValue: 10
+    type: Sequelize.FLOAT,
+    defaultValue: 10,
   },
 });
 
