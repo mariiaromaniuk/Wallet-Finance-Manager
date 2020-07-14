@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Text, Item, Form, Input, Button, Label } from "native-base";
 import { connect } from "react-redux";
 import { View, Dimensions } from "react-native";
+import { fetchInfo } from "../../store/Dashboard";
 import {
   LineChart,
   BarChart,
@@ -16,13 +17,26 @@ class Dashboard extends Component {
     super(props);
     this.state = { email: "", password: "" };
   }
+
+  async componentDidMount() {
+    const info = this.props.handleRetrieval();
+    // this.setState(this.state);
+    console.log("info", info);
+  }
+
   render() {
+    const userFirstName = this.props.firstName;
+    // const userId = this.props.userId;
+    // console.log("ACCOUNTS : ", this.props.handleRetrieval(userId));
+    // const account = this.props.handleRetrieval(userId).info.available_balance;
     return (
       <View>
-        <Text>Hello user</Text>
+        <Text>Hello {userFirstName}</Text>
         <LineChart
           data={{
+            // get last three months pulled from Plaid api
             labels: ["January", "February", "March", "April", "May", "June"],
+            // insert in order total amount of income from last three months
             datasets: [
               {
                 data: [
@@ -41,6 +55,7 @@ class Dashboard extends Component {
           yAxisLabel="$"
           yAxisSuffix="k"
           yAxisInterval={1} // optional, defaults to 1
+          // Chart's configurations i.e styles, precision, etc.
           chartConfig={{
             backgroundColor: "#e26a00",
             backgroundGradientFrom: "#fb8c00",
@@ -68,12 +83,18 @@ class Dashboard extends Component {
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapStateToProp = (state) => {
+  // console.log("This is the state");
+  // console.log(state);
   return {
-    handleSubmit(email, password) {
-      // dispatch(LogInScreen(email, password));
-    },
+    firstName: state.user.firstName,
   };
 };
 
-export default connect(null, mapDispatch)(Dashboard);
+const mapDispatch = (dispatch) => {
+  return {
+    handleRetrieval: () => dispatch(fetchInfo()),
+  };
+};
+
+export default connect(mapStateToProp, mapDispatch)(Dashboard);
