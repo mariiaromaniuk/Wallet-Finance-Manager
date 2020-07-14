@@ -24,6 +24,8 @@ class Login extends Component {
             <Icon name="ios-mail" />
             <Input
               placeholder="EMAIL"
+              autoCapitalize="none"
+              autoCorrect={false}
               keyboardType={"email-address"}
               onChangeText={(text) => this.setState({ email: text })}
             />
@@ -32,6 +34,8 @@ class Login extends Component {
             <Icon name="ios-unlock" />
             <Input
               placeholder="PASSWORD"
+              autoCapitalize="none"
+              autoCorrect={false}
               secureTextEntry={true}
               onChangeText={(text) => this.setState({ password: text })}
             />
