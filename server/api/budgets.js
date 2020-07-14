@@ -42,7 +42,7 @@ router.post("/", async (req, res, next) => {
     const newBudget = await Budget.create(req.body);
     if (newBudget && req.user) {
       res.status(200).json({
-        message: "new budget created succesfully",
+        message: "New budget created succesfully",
         budget: newBudget,
       });
     } else {
