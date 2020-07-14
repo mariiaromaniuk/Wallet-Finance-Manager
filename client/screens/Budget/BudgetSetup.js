@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { Component } from "react";
 import {
   View,
   Text,
   TextInput,
   Image
 } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button} from "native-base";
 import { connect } from 'react-redux';
-import { setBudget } from '../../store';
+import { setBudget } from '../../store/budget';
 
-class BudgetSetup extends React.Component {
+class BudgetSetup extends Component {
   constructor() {
     super();
     this.state = {
@@ -80,8 +80,8 @@ class BudgetSetup extends React.Component {
               const spendingBudget =
                 this.state.income - this.state.staticCosts - this.state.savings;
               this.props.setBudget({ ...this.state, spendingBudget });
-              this.props.navigation.navigate('EditBudget', {
-                title: 'EditBudget'
+              this.props.navigation.navigate('Budget', {
+                title: 'Budget'
               });
             }}
           />
@@ -91,14 +91,12 @@ class BudgetSetup extends React.Component {
 
     let question;
 
-    if (this.state.question === 1) {
-      question = question1;
-    } else if (this.state.question === 2) {
-      question = question2;
-    } else {
-      question = question3;
-    }
-
+    if (this.state.question === 1) 
+      return question1;
+    else if (this.state.question === 2) 
+      return question2;
+    else 
+      return question3;
   }
 }
 
