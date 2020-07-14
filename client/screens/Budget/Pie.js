@@ -2,15 +2,15 @@
 // import {
 //   Text,
 //   View,
-//   ART,
 //   TouchableWithoutFeedback,
 //   ScrollView
 // } from 'react-native';
+import {Surface, Group, Rectangle, Shape} from '@react-native-community/art'
 // import * as scale from 'd3-scale';
 // import * as shape from 'd3-shape';
 // import * as d3Array from 'd3-array';
 
-// const { Surface, Group, Rectangle, Shape } = ART;
+
 
 // const d3 = {
 //   scale,

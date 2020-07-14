@@ -34,7 +34,7 @@ export default class App extends Component {
           name="Dummy2"
           component={Budget}
           options={{
-            tabBarLabel: "Budgets",
+            tabBarLabel: "Budget",
             tabBarIcon: ({ color, size }) => {
               return (
                 <FontAwesome5 name="piggy-bank" size={size} color={color} />
