@@ -14,7 +14,7 @@ const Budget = db.define("budget", {
   spending_budget: {
     type: Sequelize.FLOAT,
   },
-  food_and_drink: {
+  foodAndDrink: {
     type: Sequelize.FLOAT,
     defaultValue: 35,
   },
@@ -22,7 +22,7 @@ const Budget = db.define("budget", {
     type: Sequelize.FLOAT,
     defaultValue: 10,
   },
-  entertainment: {
+  recreation: {
     type: Sequelize.FLOAT,
     defaultValue: 15,
   },
@@ -38,7 +38,7 @@ const Budget = db.define("budget", {
     type: Sequelize.FLOAT,
     defaultValue: 10,
   },
-  shopping: {
+  shops: {
     type: Sequelize.FLOAT,
     defaultValue: 10,
   },
