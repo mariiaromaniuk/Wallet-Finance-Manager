@@ -6,3 +6,4 @@ export { default as Initial } from "./OnBoard/Initial";
 export { default as DummyPage } from "./OnBoard/DummyPage";
 
 export { default as Budget } from "./Budget/Budget";
+export { default as BudgetSetup } from './Budget/BudgetSetup';

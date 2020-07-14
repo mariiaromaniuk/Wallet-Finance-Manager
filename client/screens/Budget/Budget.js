@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { View, Text, Button } from 'react-native';
+import { View } from 'react-native';
+import { Button, Text } from "native-base";
 import { createStackNavigator } from 'react-navigation';
-// import BudgetSetup from './BudgetSetup';
-import Pie from './Pie';
+import BudgetSetup from './BudgetSetup';
+// import Pie from './Pie';
 
 import {
   LineChart,
@@ -136,6 +137,17 @@ class Budget extends Component {
             absolute
           />
 
+          <View>
+            <Button
+              block style={{ margin: 20, marginTop: 20 }} danger
+              title={`EDIT BUDGET`}
+              onPress={() => {
+                this.props.navigation.navigate('BudgetSetup', {
+                  title: 'BudgetSetup'
+                });
+              }}
+            />
+          </View>
 
           
         {/* <View>

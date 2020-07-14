@@ -6,7 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Signup, Login, Link, Initial, DummyPage, Budget } from "./client/screens";
+import { Signup, Login, Link, Initial, DummyPage, Budget, BudgetSetup } from "./client/screens";
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
@@ -31,7 +31,7 @@ export default class App extends Component {
           }}
         />
         <Tabs.Screen
-          name="Dummy2"
+          name="Budget"
           component={Budget}
           options={{
             tabBarLabel: "Budget",
@@ -98,6 +98,13 @@ export default class App extends Component {
           component={this.createTabs}
           options={{
             headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="BudgetSetup"
+          component={BudgetSetup}
+          options={{
+            title: "Budget Setup",
           }}
         />
       </Stack.Navigator>
