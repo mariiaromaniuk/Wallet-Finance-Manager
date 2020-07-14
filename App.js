@@ -101,6 +101,13 @@ export default class App extends Component {
           }}
         />
         <Stack.Screen
+          name="Budget"
+          component={Budget}
+          options={{
+            title: "Budget",
+          }}
+        />
+        <Stack.Screen
           name="BudgetSetup"
           component={BudgetSetup}
           options={{

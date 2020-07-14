@@ -74,17 +74,17 @@ class BudgetSetup extends Component {
             onChangeText={savings => this.setState({ savings: +savings })}
             placeholder="Savings"
           />
-          {/* <Button
+          <Button
             title={"Next"}
             onPress={() => {
               const spendingBudget =
                 this.state.income - this.state.staticCosts - this.state.savings;
               this.props.setBudget({ ...this.state, spendingBudget });
-              this.props.navigation.navigate('EditBudget', {
-                title: 'EditBudget'
+              this.props.navigation.navigate('Budget', {
+                title: 'Budget'
               });
             }}
-          /> */}
+          />
         </View>
       </View>
     );

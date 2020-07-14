@@ -32,49 +32,49 @@ const chartConfig = {
 const data = [
   {
     name: "Food / Drink",
-    population: 35,
+    amount: 35,
     color: "#EF4C22",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15
   },
   {
     name: "Travel",
-    population: 10,
+    amount: 10,
     color: "#f1dd6a",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15
   },
   {
     name: "Recreation",
-    population: 15,
+    amount: 15,
     color: "#D4F2D2",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15
   },
   {
     name: "Healthcare",
-    population: 10,
+    amount: 10,
     color: "#B776B2",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15
   },
   {
     name: "Service",
-    population: 10,
+    amount: 10,
     color: "#84A59D",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15
   },
   {
     name: "Community",
-    population: 10,
+    amount: 10,
     color: "#262560",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15
   },
   {
     name: "Shops",
-    population: 10,
+    amount: 10,
     color: "#4F5DA9",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15
@@ -85,53 +85,54 @@ class Budget extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // activeIndex: 0
+      activeIndex: 0
     };
     // this._onPieItemSelected = this._onPieItemSelected.bind(this);
-    // this.getData = this.getData.bind(this);
+    this.getData = this.getData.bind(this);
   }
 
   // _onPieItemSelected(newIndex) {
   //   this.setState({ ...this.state, activeIndex: newIndex });
   // }
 
-  // getData() {
-  //   const { budget } = this.props;
-  //   let pieData = [];
-  //   let categories = [
-  //     'foodAndDrink',
-  //     'community',
-  //     'healthcare',
-  //     'recreation',
-  //     'service',
-  //     'shops',
-  //     'travel'
-  //   ];
+  getData() {
+    const { budget } = this.props;
+    let pieData = [];
+    let categories = [
+      'foodAndDrink',
+      'community',
+      'healthcare',
+      'recreation',
+      'service',
+      'shops',
+      'travel'
+    ];
 
-  //   for (let key in budget) {
-  //     if (categories.includes(key)) {
-  //       const properCase = key
-  //         .replace(/([a-z\d])([A-Z])/g, '$1' + ' ' + '$2')
-  //         .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1' + ' ' + '$2')
-  //         .replace(/\w\S*/g, function(txt) {
-  //           return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-  //         });
-  //       pieData.push({ name: properCase, number: budget[key] });
-  //     }
-  //   }
-  //   return pieData;
-  // }
+    for (let key in budget) {
+      if (categories.includes(key)) {
+        const properCase = key
+          .replace(/([a-z\d])([A-Z])/g, '$1' + ' ' + '$2')
+          .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1' + ' ' + '$2')
+          .replace(/\w\S*/g, function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+          });
+        pieData.push({ name: properCase, number: budget[key] });
+      }
+    }
+    console.log(pieData);
+    return pieData;
+  }
 
   render() {
     return (
       <View>
         <Text>Budget</Text>
           <PieChart
-            data={data}
+            data={this.getData()}
             width={screenWidth}
             height={220}
             chartConfig={chartConfig}
-            accessor="population"
+            accessor="amount"
             backgroundColor="transparent"
             paddingLeft="15"
             absolute
