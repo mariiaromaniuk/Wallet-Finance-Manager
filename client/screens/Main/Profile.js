@@ -83,6 +83,7 @@ class Profile extends React.Component {
               fontWeight: "bold",
               alignSelf: "center",
               paddingTop: 25,
+              marginBottom: 30,
             }}
           >
             <Text style={{ color: "#fc5185", fontSize: 20 }}>Wallet </Text>
@@ -91,6 +92,26 @@ class Profile extends React.Component {
               {this.state.joined}{" "}
             </Text>
           </Text>
+          <Button
+            large
+            block
+            primary
+            style={{
+              margin: 10,
+            }}
+          >
+            <Text style={{ fontWeight: "bold" }}>User Settings</Text>
+          </Button>
+          <Button
+            large
+            block
+            primary
+            style={{
+              margin: 10,
+            }}
+          >
+            <Text style={{ fontWeight: "bold" }}>Link Bank Account</Text>
+          </Button>
           <Button
             large
             block
