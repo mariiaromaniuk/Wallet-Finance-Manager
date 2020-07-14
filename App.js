@@ -6,7 +6,15 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Signup, Login, Link, Initial, DummyPage } from "./client/screens";
+import {
+  Signup,
+  Login,
+  Link,
+  Initial,
+  DummyPage,
+  Profile,
+} from "./client/screens";
+import { Root } from "native-base";
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
@@ -15,7 +23,10 @@ export default class App extends Component {
     return (
       <Tabs.Navigator
         tabBarOptions={{
-          activeTintColor: "red",
+          activeTintColor: "#eb6383",
+          style: {
+            backgroundColor: "#222831",
+          },
         }}
       >
         <Tabs.Screen
@@ -23,9 +34,9 @@ export default class App extends Component {
           component={DummyPage}
           options={{
             tabBarLabel: "Dashboard",
-            tabBarIcon: ({ color, size }) => {
+            tabBarIcon: ({ color }) => {
               return (
-                <MaterialCommunityIcons name="home" size={size} color={color} />
+                <MaterialCommunityIcons name="home" size={30} color={color} />
               );
             },
           }}
@@ -43,15 +54,15 @@ export default class App extends Component {
           }}
         />
         <Tabs.Screen
-          name="Dummy3"
-          component={DummyPage}
+          name="Profile"
+          component={Profile}
           options={{
             tabBarLabel: "Profile",
-            tabBarIcon: ({ color, size }) => {
+            tabBarIcon: ({ color }) => {
               return (
                 <MaterialCommunityIcons
                   name="account"
-                  size={size}
+                  size={30}
                   color={color}
                 />
               );
@@ -68,9 +79,7 @@ export default class App extends Component {
         <Stack.Screen
           name="Initial"
           component={Initial}
-          options={{
-            title: "Welcome",
-          }}
+          options={{ headerShown: false, headerLeft: () => {} }}
         />
         <Stack.Screen
           name="Signup"
@@ -97,6 +106,7 @@ export default class App extends Component {
           name="Dashboard"
           component={this.createTabs}
           options={{
+            headerShown: false,
             headerLeft: () => {},
           }}
         />

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Budget, Transaction, Account } = require("../db/models/index");
+const { User } = require("../db/models/index");
 
 router.post("/login", (req, res, next) => {
   User.findOne({ where: { email: req.body.email } })
@@ -9,9 +9,9 @@ router.post("/login", (req, res, next) => {
       } else if (!user.correctPassword(req.body.password)) {
         res.status(401).send("Wrong username and/or password");
       } else {
-        req.login(user, (err) => (err ? next(err) : res.json(user)));
         let currentDate = new Date();
         user.update({ lastLogin: currentDate });
+        req.login(user, (err) => (err ? next(err) : res.json(user)));
       }
     })
     .catch(next);
@@ -19,7 +19,6 @@ router.post("/login", (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
-    console.log(req.body);
     let user = await User.create(req.body);
 
     if (!user) {
@@ -37,35 +36,16 @@ router.post("/signup", async (req, res, next) => {
   }
 });
 
-router.delete("/logout", (req, res) => {
-  req.logout();
-  req.session.destroy((error) => {
-    if (error) {
-      next(error);
-    } else {
-      res.status(200).end();
-    }
-  });
-  res.redirect("/");
+router.post("/logout", (req, res) => {
+  try {
+    req.logout();
+    req.session.destroy();
+  } catch (error) {
+    console.log("Logout Error", error);
+  }
 });
 
 router.get("/me", async (req, res) => {
-  const user = await User.findOne(
-    {
-      where: { id: req.user.id },
-    },
-    {
-      include: {
-        model: Account,
-        include: {
-          model: Transaction,
-          include: {
-            model: Budget,
-          },
-        },
-      },
-    }
-  );
   res.json(user);
 });
 

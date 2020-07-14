@@ -1,30 +1,53 @@
 import React, { Component } from "react";
-import { Container, Button, Text } from "native-base";
+import {
+  Container,
+  Content,
+  Header,
+  Body,
+  Button,
+  Text,
+  Thumbnail,
+} from "native-base";
 
 class First extends Component {
   render() {
     return (
       <Container>
-        <Button
-          block
-          style={{ margin: 20, marginTop: 150 }}
-          primary
-          onPress={() => {
-            this.props.navigation.navigate("Login");
-          }}
+        <Header
+          iosBarStyle
+          androidStatusBarColor
+          style={{ backgroundColor: "#222831" }}
         >
-          <Text>LOGIN</Text>
-        </Button>
-        <Button
-          block
-          style={{ margin: 20, marginTop: 20 }}
-          success
-          onPress={() => {
-            this.props.navigation.navigate("Signup");
-          }}
-        >
-          <Text>SIGNUP</Text>
-        </Button>
+          <Body
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          ></Body>
+        </Header>
+        <Content>
+          <Button
+            block
+            style={{ margin: 20, marginTop: 150 }}
+            primary
+            onPress={() => {
+              this.props.navigation.navigate("Login");
+            }}
+          >
+            <Text>LOGIN</Text>
+          </Button>
+          <Button
+            block
+            style={{ margin: 20, marginTop: 20 }}
+            success
+            onPress={() => {
+              this.props.navigation.navigate("Signup");
+            }}
+          >
+            <Text>SIGNUP</Text>
+          </Button>
+        </Content>
       </Container>
     );
   }
