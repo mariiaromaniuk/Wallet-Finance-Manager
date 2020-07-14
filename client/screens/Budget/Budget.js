@@ -126,10 +126,11 @@ class Budget extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>Budget</Text>
           <PieChart
-            data={this.getData()}
+            data={data}
+            // data={this.getData()}
             width={screenWidth}
             height={220}
             chartConfig={chartConfig}
@@ -139,17 +140,15 @@ class Budget extends Component {
             absolute
           />
 
-          <View>
-            <Button
-              block style={{ margin: 20, marginTop: 20 }} danger
-              title={`EDIT BUDGET`}
-              onPress={() => {
-                this.props.navigation.navigate('BudgetSetup', {
-                  title: 'BudgetSetup'
-                });
-              }}
-            />
-          </View>
+          <Button
+            block style={{ margin: 40, marginTop: 40 }} danger
+            title={`EDIT BUDGET`} 
+            onPress={() => {
+              this.props.navigation.navigate('BudgetSetup', {
+                title: 'BudgetSetup'
+              });
+            }}
+          />
 
           
         {/* <View>
@@ -186,3 +185,17 @@ const mapState = state => {
 
 const BudgetConnect = connect(mapState, null)(Budget);
 export default BudgetConnect;
+
+
+const styles = {
+  container: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    color: "white",
+    fontWeight: 'bold',
+    position: 'absolute',
+  },
+};
