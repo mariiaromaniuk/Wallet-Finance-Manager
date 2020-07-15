@@ -8,17 +8,17 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   Signup,
+  ResetPassword,
   Login,
   Link,
   Initial,
   DummyPage,
   Profile,
-  Budget, 
-  BudgetSetup
+  Settings,
+  Budget,
+  BudgetSetup,
 } from "./client/screens";
 import { Root } from "native-base";
-
-
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
@@ -103,6 +103,22 @@ export default class App extends Component {
           name="Link"
           component={Link}
           options={{
+            headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            headerShown: false,
+            headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="PasswordReset"
+          component={ResetPassword}
+          options={{
+            headerShown: false,
             headerLeft: () => {},
           }}
         />

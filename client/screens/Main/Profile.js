@@ -89,12 +89,13 @@ class Profile extends React.Component {
             <Text style={{ color: "#fc5185", fontSize: 20 }}>Wallet </Text>
             <Text style={{ fontSize: 20 }}>member since </Text>
             <Text style={{ color: "#fc5185", fontSize: 20 }}>
-              {this.state.joined}{" "}
+              {this.state.joined}
             </Text>
           </Text>
           <Button
             large
             block
+            onPress={() => this.props.navigation.navigate("Settings")}
             primary
             style={{
               margin: 10,
@@ -105,12 +106,24 @@ class Profile extends React.Component {
           <Button
             large
             block
-            primary
+            secondary
+            onPress={() => this.props.navigation.navigate("Link")}
             style={{
               margin: 10,
             }}
           >
             <Text style={{ fontWeight: "bold" }}>Link Bank Account</Text>
+          </Button>
+          <Button
+            large
+            block
+            primary
+            onPress={() => this.props.navigation.navigate("PasswordReset")}
+            style={{
+              margin: 10,
+            }}
+          >
+            <Text style={{ fontWeight: "bold" }}>Change Password</Text>
           </Button>
           <Button
             large
