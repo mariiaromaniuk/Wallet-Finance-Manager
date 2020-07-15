@@ -2,38 +2,19 @@ const router = require("express").Router();
 const { Budget, Account, User } = require("../db/models");
 module.exports = router;
 
-router.get("/", async (req, res, next) => {
+
+router.get('/:id', async (req, res, next) => {
   try {
-    if (req.user) {
-      const data = await Budget.findAll({
-        where: {
-          userId: req.user.dataValues.id,
-        },
-      });
-      res.status(200).json(data);
-    } else {
-      res.sendStatus(500);
-    }
-  } catch (error) {
-    next(error);
-  }
-});
-router.get("/:id", async (req, res, next) => {
-  try {
-    const budgetId = req.params.id;
-    if (budget.id && req.user) {
-      const budget = await Budget.findOne({
-        where: {
-          id: budgetId,
-          userId: req.user.dataValues.id,
-        },
-      });
-      res.status(200).json(budget);
-    } else {
-      res.sendStatus(401);
-    }
-  } catch (error) {
-    next(error);
+    const userId = req.params.id;
+    const budget = await Budget.findOne({
+      where: {
+        userId: userId
+      }
+    });
+    if (!budget) res.sendStatus(404);
+    res.json(budget);
+  } catch (err) {
+    next(err);
   }
 });
 
@@ -42,7 +23,7 @@ router.post("/", async (req, res, next) => {
     const newBudget = await Budget.create(req.body);
     if (newBudget && req.user) {
       res.status(200).json({
-        message: "new budget created succesfully",
+        message: "New budget created succesfully",
         budget: newBudget,
       });
     } else {
@@ -55,34 +36,17 @@ router.post("/", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
-    const budgetId = req.params.id;
-    await Budget.update(
-      {
-        income: req.body.income,
-        static_costs: req.body.static_costs,
-        savings: req.body.savings,
-        spending_budget: req.body.spending_budget,
-        food_and_drink: req.body.food_and_drink,
-        travel: req.body.travel,
-        entertainment: req.body.entertainment,
-        healthcare: req.body.healthcare,
-        service: req.body.service,
-        community: req.body.community,
-        shopping: req.body.shopping,
-      },
-      { where: { id: budgetId } }
-    );
-    if (!budgetId || !req.user) {
-      res.sendStatus(500);
-    } else {
-      const updatedBudget = await Budget.findOne({ where: { id: budgetId } });
-      res.status(200).json({
-        message: "Budget updated succesfully",
-        budget: updatedBudget,
-      });
-    }
-  } catch (error) {
-    next(error);
+    const user = req.user;
+    const budget = await Budget.findOne({
+      where: {
+        userId: user.id
+      }
+    });
+    if (!budget) res.sendStatus(404);
+    const updatedBudget = await budget.update(req.body);
+    res.json(updatedBudget);
+  } catch (err) {
+    next(err);
   }
 });
 
