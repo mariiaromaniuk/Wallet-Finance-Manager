@@ -93,13 +93,12 @@ class Budget extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchBudget
+    this.props.fetchBudget(this.props.user.id)
   }
 
   getData() {
-    console.log('PROPS', this.props.budget)
-    const { budget } = this.props.budget;
-
+    // console.log('PROPS', this.props.budget)
+    const budget = this.props.budget;
     let pieData = [];
     let categories = [
       'foodAndDrink',
@@ -113,25 +112,26 @@ class Budget extends Component {
 
     for (let key in budget) {
       if (categories.includes(key)) {
-        const properCase = key
-          .replace(/([a-z\d])([A-Z])/g, '$1' + ' ' + '$2')
-          .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1' + ' ' + '$2')
-          .replace(/\w\S*/g, function(txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-          });
-        pieData.push({ name: properCase, number: budget[key] });
+        console.log(key)
+        pieData.push({ 
+          name: key,
+          amount: budget[key],
+          color: "#4F5DA9",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 15 });
       }
     }
-    console.log(pieData);
+
+    console.log("DATA", pieData);
     return pieData;
   }
 
   render() {
+    console.log('TOKEN2', this.props.token);
     return (
       <View style={styles.container}>
-        <Text>Budget</Text>
+        <Text style={styles.text}>Budget</Text>
           <PieChart
-            // data={data}
             data={this.getData()}
             width={screenWidth}
             height={220}
@@ -151,28 +151,6 @@ class Budget extends Component {
               });
             }}
           />
-
-          
-        {/* <View>
-          <Pie
-            pieWidth={225}
-            pieHeight={225}
-            onItemSelected={this._onPieItemSelected}
-            colors={pieColor}
-            data={data}
-          />
-
-          <View>
-            <Button
-              title={`Edit Budget`}
-              onPress={() => {
-                this.props.navigation.navigate('BudgetSetup', {
-                  title: 'BudgetSetup'
-                });
-              }}
-            />
-          </View>
-        </View> */}
       </View>
     );
   }
@@ -180,13 +158,14 @@ class Budget extends Component {
 
 const mapState = state => {
   return {
+    user: state.user,
     budget: state.budget,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchBudget: () => dispatch(fetchBudget()),
+    fetchBudget: (id) => dispatch(fetchBudget(id)),
   };
 };
 
@@ -204,4 +183,12 @@ const styles = {
     fontWeight: 'bold',
     position: 'absolute',
   },
+  text: {
+    alignSelf: 'center',
+    paddingTop: 15,
+    padding: 8,
+    color: "#D16C58",
+    fontWeight: 'bold',
+    fontSize: 30,
+  }
 };
