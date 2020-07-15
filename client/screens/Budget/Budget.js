@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { Button, Text } from "native-base";
 import { createStackNavigator } from 'react-navigation';
 import BudgetSetup from './BudgetSetup';
+import { fetchBudget } from "../../store/budget";
 // import Pie from './Pie';
 
 import {
@@ -91,12 +92,12 @@ class Budget extends Component {
     this.getData = this.getData.bind(this);
   }
 
-  // _onPieItemSelected(newIndex) {
-  //   this.setState({ ...this.state, activeIndex: newIndex });
-  // }
+  componentDidMount() {
+    this.props.fetchBudget
+  }
 
   getData() {
-    console.log('PROPS', this.props)
+    console.log('PROPS', this.props.budget)
     const { budget } = this.props;
     let pieData = [];
     let categories = [
@@ -129,8 +130,8 @@ class Budget extends Component {
       <View style={styles.container}>
         <Text>Budget</Text>
           <PieChart
-            data={data}
-            // data={this.getData()}
+            // data={data}
+            data={this.getData()}
             width={screenWidth}
             height={220}
             chartConfig={chartConfig}
@@ -178,13 +179,17 @@ class Budget extends Component {
 
 const mapState = state => {
   return {
-    // user: state.user,
-    // budget: state.acctTrans.budget
+    budget: state.budget,
   };
 };
 
-const BudgetConnect = connect(mapState, null)(Budget);
-export default BudgetConnect;
+const mapDispatch = (dispatch) => {
+  return {
+    fetchBudget: () => dispatch(fetchBudget()),
+  };
+};
+
+export default connect(mapState, mapDispatch)(Budget);
 
 
 const styles = {
