@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Container, Button } from "native-base";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import { Container, Button} from "native-base";
 import PlaidAuthenticator from "react-native-plaid-link";
 import { connect } from "react-redux";
 import { sendToken } from "../../store/token";
@@ -53,11 +53,14 @@ class Link extends React.Component {
   renderDetails() {
     this.props.sendToken(this.state.data.metadata.public_token);
     return (
-      <Container>
-        <Text>Render Welcome Component here!!! </Text>
+      <Container style={styles.container}>
+        <Text style={styles.text}>Welcome to Wallet!</Text>
+          <Image
+            style={styles.logo}
+            source={require('../../../assets/wallet.gif')}
+          />
         <Button
-          block
-          style={{ margin: 20, marginTop: 40 }}
+          block style={{ margin: 20, marginTop: 20 }} danger
           onPress={() => this.props.navigation.navigate("Dashboard")}
           primary
         >
@@ -88,8 +91,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: 24,
-    backgroundColor: "#ecf0f1",
+    paddingTop: 10,
+    backgroundColor: "#6CBDC3",
   },
   paragraph: {
     fontSize: 18,
@@ -102,6 +105,20 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: "center",
   },
+  logo: {
+    width: 400,
+    height: 400,
+    resizeMode: 'contain',
+  },
+  text: {
+    alignSelf: 'center',
+    paddingTop: 15,
+    padding: 8,
+    color: "#D16C58",
+    fontWeight: 'bold',
+    fontSize: 40,
+  },
+
 });
 
 export default connect(null, mapDispatch)(Link);

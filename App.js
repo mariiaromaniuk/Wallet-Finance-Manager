@@ -8,11 +8,15 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   Signup,
+  ResetPassword,
   Login,
   Link,
   Initial,
   DummyPage,
   Profile,
+  Settings,
+  Budget,
+  BudgetSetup,
 } from "./client/screens";
 import { Root } from "native-base";
 const Stack = createStackNavigator();
@@ -42,10 +46,10 @@ export default class App extends Component {
           }}
         />
         <Tabs.Screen
-          name="Dummy2"
-          component={DummyPage}
+          name="Budget"
+          component={Budget}
           options={{
-            tabBarLabel: "Budgets",
+            tabBarLabel: "Budget",
             tabBarIcon: ({ color, size }) => {
               return (
                 <FontAwesome5 name="piggy-bank" size={size} color={color} />
@@ -103,11 +107,41 @@ export default class App extends Component {
           }}
         />
         <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            headerShown: false,
+            headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="PasswordReset"
+          component={ResetPassword}
+          options={{
+            headerShown: false,
+            headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
           name="Dashboard"
           component={this.createTabs}
           options={{
             headerShown: false,
             headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="Budget"
+          component={Budget}
+          options={{
+            title: "Budget",
+          }}
+        />
+        <Stack.Screen
+          name="BudgetSetup"
+          component={BudgetSetup}
+          options={{
+            title: "Budget Setup",
           }}
         />
       </Stack.Navigator>
