@@ -98,10 +98,14 @@ class Budget extends Component {
             paddingLeft="15"
             absolute
           />
+          <Button bordered danger>
+            <Text>Edit Budget</Text>
+            
+          </Button>
 
           <Button
-            block style={{ margin: 40, marginTop: 40 }} danger
-            title='EDIT BUDGET'
+            block style={{ margin: 100, marginTop: 40 }} bordered danger
+            title={'EDIT BUDGET'}
             onPress={() => {
               this.props.navigation.navigate('BudgetSetup', {
                 title: 'BudgetSetup'

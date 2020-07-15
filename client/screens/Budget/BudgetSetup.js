@@ -5,7 +5,13 @@ import {
   TextInput,
   Image
 } from 'react-native';
-import { Button} from "native-base";
+import {
+  Container,
+  Content,
+  Button,
+  Header,
+  Body
+} from "native-base";
 import { connect } from 'react-redux';
 import { setBudget } from '../../store/budget';
 
@@ -23,7 +29,7 @@ class BudgetSetup extends Component {
 
   render() {
     const question1 = (
-      <View>
+      <View style={styles.container}>
         <Text>
           What is your monthly income? ($)
         </Text>
@@ -33,6 +39,7 @@ class BudgetSetup extends Component {
             placeholder="Income"
           />
           <Button
+            block style={{ marginTop: 20 }}  bordered danger
             title={"Next"}
             onPress={() => {
               this.setState({ question: 2 });
@@ -43,7 +50,7 @@ class BudgetSetup extends Component {
     );
 
     const question2 = (
-      <View>
+      <View style={styles.container}>
         <Text>
           What are your monthly static costs? ($)
           ex: rent, utilities, insurance, etc.
@@ -55,6 +62,7 @@ class BudgetSetup extends Component {
             placeholder="Static Costs"
           />
           <Button
+            block style={{ marginTop: 20 }}  bordered danger
             title={"Next"}
             onPress={() => {
               this.setState({ question: 3 });
@@ -65,7 +73,7 @@ class BudgetSetup extends Component {
     );
 
     const question3 = (
-      <View>
+      <View style={styles.container}>
         <Text>
           How much would you like to save each month? ($)
         </Text>
@@ -75,6 +83,7 @@ class BudgetSetup extends Component {
             placeholder="Savings"
           />
           <Button
+            block style={{ marginTop: 20 }}  bordered danger
             title={"Next"}
             onPress={() => {
               const spendingBudget =
@@ -113,3 +122,25 @@ const mapDispatch = dispatch => {
 };
 
 export default connect(mapState, mapDispatch)(BudgetSetup);
+
+
+const styles = {
+  container: {
+    flexGrow: 1,
+    paddingTop: 40,
+    // alignItems: 'center',
+  },
+  title: {
+    color: "white",
+    fontWeight: 'bold',
+    position: 'absolute',
+  },
+  text: {
+    alignSelf: 'center',
+    paddingTop: 15,
+    padding: 8,
+    color: "#D16C58",
+    fontWeight: 'bold',
+    fontSize: 30,
+  }
+};
