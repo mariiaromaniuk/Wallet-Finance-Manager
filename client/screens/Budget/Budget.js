@@ -30,57 +30,6 @@ const chartConfig = {
   useShadowColorFromDataset: false // optional
 };
 
-const data = [
-  {
-    name: "Food / Drink",
-    amount: 35,
-    color: "#EF4C22",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-  },
-  {
-    name: "Travel",
-    amount: 10,
-    color: "#f1dd6a",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-  },
-  {
-    name: "Recreation",
-    amount: 15,
-    color: "#D4F2D2",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-  },
-  {
-    name: "Healthcare",
-    amount: 10,
-    color: "#B776B2",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-  },
-  {
-    name: "Service",
-    amount: 10,
-    color: "#84A59D",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-  },
-  {
-    name: "Community",
-    amount: 10,
-    color: "#262560",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-  },
-  {
-    name: "Shops",
-    amount: 10,
-    color: "#4F5DA9",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-  }
-];
 
 class Budget extends Component {
   constructor(props) {
@@ -88,7 +37,6 @@ class Budget extends Component {
     this.state = {
       activeIndex: 0
     };
-    // this._onPieItemSelected = this._onPieItemSelected.bind(this);
     this.getData = this.getData.bind(this);
   }
 
@@ -110,24 +58,33 @@ class Budget extends Component {
       'travel'
     ];
 
+    const pieColors = [
+      "#EF4C22",
+      "#f1dd6a",
+      "#D4F2D2",
+      "#B776B2",
+      "#84A59D",
+      "#262560",
+      "#4F5DA9"
+    ];
+
+    let i = 0;
     for (let key in budget) {
       if (categories.includes(key)) {
-        console.log(key)
         pieData.push({ 
           name: key,
           amount: budget[key],
-          color: "#4F5DA9",
+          color: pieColors[i],
           legendFontColor: "#7F7F7F",
-          legendFontSize: 15 });
+          legendFontSize: 15 
+        });
+        i++;
       }
     }
-
-    console.log("DATA", pieData);
     return pieData;
   }
 
   render() {
-    console.log('TOKEN2', this.props.token);
     return (
       <View style={styles.container}>
         <Text style={styles.text}>Budget</Text>
@@ -144,7 +101,7 @@ class Budget extends Component {
 
           <Button
             block style={{ margin: 40, marginTop: 40 }} danger
-            title={`EDIT BUDGET`} 
+            title='EDIT BUDGET'
             onPress={() => {
               this.props.navigation.navigate('BudgetSetup', {
                 title: 'BudgetSetup'
