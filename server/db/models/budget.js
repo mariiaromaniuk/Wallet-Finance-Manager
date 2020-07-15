@@ -2,18 +2,18 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 
 const Budget = db.define("budget", {
-  income: {
-    type: Sequelize.INTEGER,
-  },
-  static_costs: {
-    type: Sequelize.INTEGER,
-  },
-  savings: {
-    type: Sequelize.INTEGER,
-  },
-  spending_budget: {
-    type: Sequelize.INTEGER,
-  },
+  // income: {
+  //   type: Sequelize.INTEGER,
+  // },
+  // static_costs: {
+  //   type: Sequelize.INTEGER,
+  // },
+  // savings: {
+  //   type: Sequelize.INTEGER,
+  // },
+  // spending_budget: {
+  //   type: Sequelize.INTEGER,
+  // },
   foodAndDrink: {
     type: Sequelize.INTEGER,
     defaultValue: 35,

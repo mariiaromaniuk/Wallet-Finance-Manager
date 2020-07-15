@@ -98,7 +98,8 @@ class Budget extends Component {
 
   getData() {
     console.log('PROPS', this.props.budget)
-    const { budget } = this.props;
+    const { budget } = this.props.budget;
+
     let pieData = [];
     let categories = [
       'foodAndDrink',
