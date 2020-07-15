@@ -7,3 +7,5 @@ export { default as DummyPage } from "./OnBoard/DummyPage";
 
 //Main
 export { default as Profile } from "./Main/Profile";
+export { default as Settings } from "./Main/Settings";
+export { default as ResetPassword } from "./Main/ResetPassword";
