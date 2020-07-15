@@ -3,6 +3,7 @@ import { server } from "../index";
 
 // Action Types
 const GET_INFO = "GET_INFO";
+const GET_TRANSACTIONS = "GET_TRANSACTIONS";
 const UPDATE_INFO = "UPDATE_INFO";
 
 // Action Creators
@@ -13,9 +14,9 @@ const updateInfo = (info) => ({ type: UPDATE_INFO, info });
 export const fetchInfo = () => {
   return async (dispatch) => {
     try {
-      console.log("We are in the dashboard store");
+      //   console.log("We are in the dashboard store");
       const res = await axios.get(`${server}/api/accounts/`);
-      console.log(res.data);
+      //   console.log(res.data);
       dispatch(getInfo(res.data));
     } catch (err) {
       console.log("Error fetching info: ", err.message);
@@ -26,9 +27,9 @@ export const fetchInfo = () => {
 export const fetchTransactions = () => {
   return async (dispatch) => {
     try {
-      console.log("We are in the dashboard store");
+      //   console.log("We are in the dashboard store");
       const res = await axios.get(`${server}/api/transactions/`);
-      console.log(res.data);
+      //   console.log(res.data);
       dispatch(getTransactions(res.data));
     } catch (err) {
       console.log("Error fetching info: ", err.message);
@@ -47,14 +48,14 @@ export const setInfo = (info) => {
   };
 };
 
-const initialState = {};
+const initialState = { transactions: [], accounts: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_INFO:
-      return action.info;
+      return { ...state, accounts: action.info };
     case GET_TRANSACTIONS:
-      return action.info;
+      return { ...state, transactions: action.info };
     case UPDATE_INFO:
       return action.info;
     default:
