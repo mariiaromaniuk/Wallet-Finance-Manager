@@ -13,6 +13,7 @@ import {
   Initial,
   DummyPage,
   Profile,
+  Spending,
 } from "./client/screens";
 import { Root } from "native-base";
 const Stack = createStackNavigator();
@@ -69,6 +70,18 @@ export default class App extends Component {
             },
           }}
         />
+        <Tabs.Screen
+          name="Transactions"
+          component={Spending}
+          options={{
+            tabBarLabel: "Transactions",
+            tabBarIcon: ({ color, size }) => {
+              return (
+                <FontAwesome5 name="chart-area" size={size} color={color} />
+              );
+            },
+          }}
+        />
       </Tabs.Navigator>
     );
   };
@@ -108,6 +121,13 @@ export default class App extends Component {
           options={{
             headerShown: false,
             headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="Transactions"
+          component={Spending}
+          options={{
+            title: "Transactions",
           }}
         />
       </Stack.Navigator>

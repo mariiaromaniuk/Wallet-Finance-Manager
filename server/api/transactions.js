@@ -1,19 +1,17 @@
 const router = require("express").Router();
-const { Transaction, Account, User } = require("../db/models");
+const { Transaction, Account, User, Session } = require("../db/models");
 module.exports = router;
 
-router.get("/", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
-    console.log("USER", req.user);
-    if (req.user) {
-      const data = await Transaction.findAll({
-        where: {
-          userId: req.user.dataValues.id,
-        },
-      });
-      res.status(200).json(data);
+    const userId = req.params.id;
+    if (userId) {
+      const data = await Transaction.findAll({ where: { userId: userId } });
+      if (data) {
+        res.status(200).json(data);
+      }
     } else {
-      res.sendStatus(404);
+      res.sendStatus(500);
     }
   } catch (error) {
     next(error);
