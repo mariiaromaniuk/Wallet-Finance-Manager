@@ -4,7 +4,6 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import user from "./store/user";
 import token from "./store/token";
-import dashboard from "./store/Dashboard";
 import transactions from "./store/spending";
 import accounts from "./store/accounts";
 import budget from "./store/budget";
@@ -13,7 +12,6 @@ const reducer = combineReducers({
   user,
   token,
   budget,
-  dashboard,
   transactions,
   accounts,
 });
