@@ -13,8 +13,15 @@ import {
   Link,
   Initial,
   DummyPage,
+  Dashboard,
   Profile,
+  Budget, 
+  BudgetSetup,
+  EditCategories,
   Spending,
+  Settings,
+  Budget,
+  BudgetSetup,
 } from "./client/screens";
 import { Root } from "native-base";
 const Stack = createStackNavigator();
@@ -32,8 +39,8 @@ export default class App extends Component {
         }}
       >
         <Tabs.Screen
-          name="Dummy1"
-          component={DummyPage}
+          name="Dashboard"
+          component={Dashboard}
           options={{
             tabBarLabel: "Dashboard",
             tabBarIcon: ({ color }) => {
@@ -145,6 +152,27 @@ export default class App extends Component {
           component={Spending}
           options={{
             title: "Transactions",
+          }}
+        />
+        <Stack.Screen
+          name="Budget"
+          component={Budget}
+          options={{
+            title: "Budget",
+          }}
+        />
+        <Stack.Screen
+          name="BudgetSetup"
+          component={BudgetSetup}
+          options={{
+            title: "Budget Setup",
+          }}
+        />
+        <Stack.Screen
+          name="EditCategories"
+          component={EditCategories}
+          options={{
+            title: "Edit Categories",
           }}
         />
       </Stack.Navigator>
