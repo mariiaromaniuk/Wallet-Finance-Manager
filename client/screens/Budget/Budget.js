@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import { View } from 'react-native';
 import { Text } from "native-base";
 import { Button } from 'react-native-elements';
-import { createStackNavigator } from 'react-navigation';
-import BudgetSetup from './BudgetSetup';
 import { fetchBudget } from "../../store/budget";
-import { styles, pieColors, deviceWidth } from '../../styles';
+import { styles, pieColors } from '../../styles';
 // import Pie from './Pie';
 
 import {

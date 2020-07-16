@@ -8,6 +8,7 @@ import {
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { setBudget } from '../../store/budget';
+import { styles } from '../../styles';
 
 class BudgetSetup extends Component {
   constructor() {
@@ -23,7 +24,7 @@ class BudgetSetup extends Component {
 
   render() {
     const question1 = (
-      <View style={styles.container}>
+      <View style={styles.container1}>
         <Text>
           What is your monthly income? ($)
         </Text>
@@ -45,7 +46,7 @@ class BudgetSetup extends Component {
     );
 
     const question2 = (
-      <View style={styles.container}>
+      <View style={styles.container1}>
         <Text>
           What are your monthly static costs? ($)
           ex: rent, utilities, insurance, etc.
@@ -69,7 +70,7 @@ class BudgetSetup extends Component {
     );
 
     const question3 = (
-      <View style={styles.container}>
+      <View style={styles.container1}>
         <Text>
           How much would you like to save each month? ($)
         </Text>
@@ -119,25 +120,3 @@ const mapDispatch = dispatch => {
 };
 
 export default connect(mapState, mapDispatch)(BudgetSetup);
-
-
-const styles = {
-  container: {
-    flexGrow: 1,
-    paddingTop: 40,
-    // alignItems: 'center',
-  },
-  title: {
-    color: "white",
-    fontWeight: 'bold',
-    position: 'absolute',
-  },
-  text: {
-    alignSelf: 'center',
-    paddingTop: 15,
-    padding: 8,
-    color: "#D16C58",
-    fontWeight: 'bold',
-    fontSize: 30,
-  }
-};

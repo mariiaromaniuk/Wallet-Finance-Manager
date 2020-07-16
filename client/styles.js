@@ -29,6 +29,10 @@ export const styles = StyleSheet.create({
    alignItems: 'center',
    backgroundColor: "white"
  },
+ container1: {
+  flexGrow: 1,
+  paddingTop: 40,
+},
  logo: {
    width: 150,
    height: 108,
@@ -43,6 +47,21 @@ export const styles = StyleSheet.create({
    fontWeight: 'bold',
    position: 'absolute',
  },
+ introInfo: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  paddingHorizontal: 40
+ },
+ introIntroSmall: { 
+   fontSize: 20, 
+   color: '#ffffff', 
+   textAlign: 'center' 
+ },
+ introInfoBig: { 
+   fontSize: 40, 
+   color: '#ffffff', 
+   textAlign: 'center' 
+  },
  slider: {
    marginLeft: 25,
    marginRight: 25,
@@ -101,14 +120,6 @@ export const styles = StyleSheet.create({
    justifyContent: 'space-around',
    paddingTop: 10,
  },
- budgetSetupText: {
-   color: '#000000',
-   fontWeight: 'bold',
-   fontSize: 20,
-   paddingTop: 10,
-   width: '80%',
-   textAlign: 'center',
- },
  formContainer: {
    width: '80%',
    marginVertical: 10,
@@ -125,7 +136,7 @@ export const styles = StyleSheet.create({
    marginTop: 10,
    paddingLeft: 40,
  },
- busgetSetupContainer: {
+ budgetSetupContainer: {
    width: deviceWidth - 40,
    position: 'absolute',
    top: 50,

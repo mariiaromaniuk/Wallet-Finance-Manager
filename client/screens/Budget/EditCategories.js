@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchBudget, setBudget } from '../../store/budget';
-import { styles, deviceWidth } from '../../styles';
 import Slider from 'react-native-slider';
+import { styles } from '../../styles';
+
 
 class EditCategories extends React.Component {
   constructor(props) {
@@ -95,7 +96,7 @@ class EditCategories extends React.Component {
                 <Text style={styles.headerText}>
                   Edit Your Budget
                 </Text>
-                <View style={[categoryStyles.introInfo, { paddingTop: 40 }]}>
+                <View style={[styles.introInfo, { paddingTop: 40 }]}>
                   <Text style={styles.headerText}>
                     {this.state.remaining}%
                   </Text>
@@ -106,7 +107,7 @@ class EditCategories extends React.Component {
                   </Text>
                 </View>
 
-                <View style={[categoryStyles.introInfo, { paddingBottom: 10 }]}>
+                <View style={[styles.introInfo, { paddingBottom: 10 }]}>
                   <Text style={styles.smallerText}>
                     remaining
                   </Text>
@@ -223,17 +224,4 @@ const mapDispatch = dispatch => {
   };
 };
 
-const categoryStyles = StyleSheet.create({
-  introInfo: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 40
-  },
-  introIntroSmall: { fontSize: 20, color: '#ffffff', textAlign: 'center' },
-  introInfoBig: { fontSize: 40, color: '#ffffff', textAlign: 'center' }
-});
-
-export default connect(
-  mapState,
-  mapDispatch
-)(EditCategories);
+export default connect(mapState,mapDispatch)(EditCategories);
