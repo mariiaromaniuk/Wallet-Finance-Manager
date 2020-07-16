@@ -6,9 +6,12 @@ import user from "./store/user";
 import token from "./store/token";
 import transactions from "./store/spending";
 import accounts from './store/accounts'
+import budget from "./store/budget";
+
 const reducer = combineReducers({
   user,
   token,
+  budget,
   transactions,
   accounts
 });
