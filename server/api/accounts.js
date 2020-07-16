@@ -18,12 +18,34 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
+
+router.get('/user/:id', async (req, res, next) => {
+  try {
+    const userId = req.params.id
+    const data = await Account.findAll({
+      where: {
+        userId: userId
+      }
+    })
+    if(!data){
+      res.sendStatus(404)
+    } else {
+      res.status(200).json({
+        message: "received all accounts for this user",
+        data
+      })
+    }
+  } catch (error) {
+    next(error)
+  }
+})
 router.get("/:id", async (req, res, next) => {
   try {
     // console.log(req.user.dataValues.id);
+    // console.log("req.params", req.params);
     const accountId = req.params.id;
     const account = await Account.findOne({
-      where: { id: accountId, userId: req.user.dataValues.id },
+      where: { userId: req.user.dataValues.id },
     });
     if (accountId && req.user && account) {
       res.status(200).json(account);

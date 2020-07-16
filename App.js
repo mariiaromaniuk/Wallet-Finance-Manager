@@ -13,7 +13,12 @@ import {
   Link,
   Initial,
   DummyPage,
+  Dashboard,
   Profile,
+  Budget, 
+  BudgetSetup,
+  EditCategories,
+  Spending,
   Settings,
   Budget,
   BudgetSetup,
@@ -34,8 +39,8 @@ export default class App extends Component {
         }}
       >
         <Tabs.Screen
-          name="Dummy1"
-          component={DummyPage}
+          name="Dashboard"
+          component={Dashboard}
           options={{
             tabBarLabel: "Dashboard",
             tabBarIcon: ({ color }) => {
@@ -69,6 +74,18 @@ export default class App extends Component {
                   size={30}
                   color={color}
                 />
+              );
+            },
+          }}
+        />
+        <Tabs.Screen
+          name="Transactions"
+          component={Spending}
+          options={{
+            tabBarLabel: "Transactions",
+            tabBarIcon: ({ color, size }) => {
+              return (
+                <FontAwesome5 name="chart-area" size={size} color={color} />
               );
             },
           }}
@@ -131,6 +148,13 @@ export default class App extends Component {
           }}
         />
         <Stack.Screen
+          name="Transactions"
+          component={Spending}
+          options={{
+            title: "Transactions",
+          }}
+        />
+        <Stack.Screen
           name="Budget"
           component={Budget}
           options={{
@@ -142,6 +166,13 @@ export default class App extends Component {
           component={BudgetSetup}
           options={{
             title: "Budget Setup",
+          }}
+        />
+        <Stack.Screen
+          name="EditCategories"
+          component={EditCategories}
+          options={{
+            title: "Edit Categories",
           }}
         />
       </Stack.Navigator>

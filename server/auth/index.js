@@ -10,7 +10,7 @@ router.post("/login", (req, res, next) => {
         res.status(401).send("Wrong username and/or password");
       } else {
         let currentDate = new Date();
-        user.update({ lastLogin: currentDate });
+        user.update({ lastLogin: currentDate.toDateString() });
         req.login(user, (err) => (err ? next(err) : res.json(user)));
       }
     })
