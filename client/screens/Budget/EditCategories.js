@@ -87,6 +87,7 @@ class EditCategories extends React.Component {
   }
 
   render() {
+    console.log("BUDGET", this.state.spendingBudget)
     return (
       <ScrollView>
         <View>
@@ -96,7 +97,7 @@ class EditCategories extends React.Component {
                 <Text style={styles.headerText}>
                   Edit Your Budget
                 </Text>
-                <View style={[styles.introInfo, { paddingTop: 40 }]}>
+                <View style={[styles.introInfo, { paddingTop: 10 }]}>
                   <Text style={styles.headerText}>
                     {this.state.remaining}%
                   </Text>
@@ -122,7 +123,7 @@ class EditCategories extends React.Component {
               {this.state.categories &&
                 this.state.categories.map(category => {
                   return (
-                    <Card key={category.name} containerStyle={{ margin: 20 }}>
+                    <Card key={category.name} containerStyle={{ margin: 19, borderRadius: 6 }}>
                       <View>
                         <View style={{ padding: 5, width: '100%' }} />
                         <View
@@ -150,6 +151,8 @@ class EditCategories extends React.Component {
                           style={styles.slider}
                           value={category.percentage}
                           onSlidingComplete={value => {
+                              console.log("NEW VALUE", value)
+                              console.log("REMINING", this.state.remaining)
                             this.setState(prevState => {
                               const remaining =
                                 prevState.remaining +
@@ -197,6 +200,7 @@ class EditCategories extends React.Component {
                     community: this.state.categories[5].percentage,
                     shops: this.state.categories[6].percentage
                   });
+                  console.log("categories", this.state.categories[0].percentage)
                   this.props.navigation.navigate('Budget', { title: 'Budget' });
                 }}
               >

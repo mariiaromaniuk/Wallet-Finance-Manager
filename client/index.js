@@ -20,3 +20,4 @@ const store = createStore(reducer, middleware);
 export default store;
 
 export * from "./store/user";
+export * from './store/budget';

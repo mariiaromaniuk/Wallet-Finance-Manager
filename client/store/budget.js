@@ -28,6 +28,7 @@ export const setBudget = budget => {
       dispatch(updateBudget(res.data));
     } catch (err) {
       console.log('Error setting budget: ', err.message);
+      console.log("!!!", budget)
     }
   };
 };

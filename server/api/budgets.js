@@ -34,7 +34,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/:id", async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
     const user = req.user;
     const budget = await Budget.findOne({
