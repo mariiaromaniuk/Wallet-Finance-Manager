@@ -1,5 +1,5 @@
 import axios from "axios";
-import { server } from "../index";
+import { server } from "../server";
 
 // Action Types
 const SEND_PUBLIC_TOKEN = "SEND_PUBLIC_TOKEN";

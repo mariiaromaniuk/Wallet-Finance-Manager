@@ -1,5 +1,5 @@
 import axios from "axios";
-import { server } from "../index";
+import { server } from "../server";
 
 //ACTION TYPES
 
@@ -37,16 +37,17 @@ export const signup = (userInput, navigation) => {
       dispatch(getUser(user.data));
       navigation.navigate("Link");
     } catch (error) {
-      console.error("There was an Error", error);
+      return error;
     }
   };
 };
 
-export const logout = () => {
+export const logout = (navigation) => {
   return async (dispatch) => {
     try {
       await axios.post(`${server}/auth/logout`);
       dispatch(removeUser());
+      navigation.navigate("initial");
     } catch (error) {
       console.error(error);
     }

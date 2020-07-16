@@ -31,7 +31,6 @@ router.post("/plaid_exchange", async (req, res, next) => {
   try {
     /*-----------get public token fron frontend------------------*/
     let publicToken = req.body.public_token;
-
     /*--------exchange public token for accesstoken and itemID-----------*/
     await plaidClient.exchangePublicToken(
       publicToken,
@@ -72,7 +71,6 @@ router.post("/plaid_exchange", async (req, res, next) => {
                 console.log(err.toString());
               }
             }
-
             //saving  ACCOUNT to our database
             transactionResponse.accounts.map(async (account) => {
               await Account.create({
@@ -86,15 +84,19 @@ router.post("/plaid_exchange", async (req, res, next) => {
 
             //saving  TRANSACTION to our database
             transactionResponse.transactions.map(async (transaction) => {
-              await Transaction.create({
-                amount: transaction.amount,
-                name: transaction.name,
-                date: transaction.date,
-                accountId: transaction.account_id,
-                userId: user.id,
-                category1: transaction.category[0],
-                category2: transaction.category[1],
-              });
+              try {
+                await Transaction.create({
+                  amount: transaction.amount,
+                  name: transaction.name,
+                  date: transaction.date,
+                  accountId: transaction.account_id,
+                  userId: user.id,
+                  category1: transaction.category[0],
+                  category2: transaction.category[1],
+                });
+              } catch (error) {
+                console.log(error);
+              }
             });
           }
         );

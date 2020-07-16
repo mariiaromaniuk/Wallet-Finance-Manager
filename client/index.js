@@ -5,9 +5,12 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import user from "./store/user";
 import token from "./store/token";
 import dashboard from "./store/Dashboard";
+import budget from "./store/budget";
+
 const reducer = combineReducers({
   user,
   token,
+  budget,
   dashboard,
 });
 
@@ -15,8 +18,6 @@ const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
 const store = createStore(reducer, middleware);
-
-export const server = "http://localhost:8080";
 
 export default store;
 

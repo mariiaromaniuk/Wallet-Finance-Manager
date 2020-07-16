@@ -8,12 +8,18 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   Signup,
+  ResetPassword,
   Login,
   Link,
   Initial,
   DummyPage,
   Dashboard,
+  Profile,
+  Settings,
+  Budget,
+  BudgetSetup,
 } from "./client/screens";
+import { Root } from "native-base";
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
@@ -22,7 +28,10 @@ export default class App extends Component {
     return (
       <Tabs.Navigator
         tabBarOptions={{
-          activeTintColor: "red",
+          activeTintColor: "#eb6383",
+          style: {
+            backgroundColor: "#222831",
+          },
         }}
       >
         <Tabs.Screen
@@ -30,18 +39,18 @@ export default class App extends Component {
           component={Dashboard}
           options={{
             tabBarLabel: "Dashboard",
-            tabBarIcon: ({ color, size }) => {
+            tabBarIcon: ({ color }) => {
               return (
-                <MaterialCommunityIcons name="home" size={size} color={color} />
+                <MaterialCommunityIcons name="home" size={30} color={color} />
               );
             },
           }}
         />
         <Tabs.Screen
-          name="Dummy2"
-          component={DummyPage}
+          name="Budget"
+          component={Budget}
           options={{
-            tabBarLabel: "Budgets",
+            tabBarLabel: "Budget",
             tabBarIcon: ({ color, size }) => {
               return (
                 <FontAwesome5 name="piggy-bank" size={size} color={color} />
@@ -50,15 +59,15 @@ export default class App extends Component {
           }}
         />
         <Tabs.Screen
-          name="Dummy3"
-          component={DummyPage}
+          name="Profile"
+          component={Profile}
           options={{
             tabBarLabel: "Profile",
-            tabBarIcon: ({ color, size }) => {
+            tabBarIcon: ({ color }) => {
               return (
                 <MaterialCommunityIcons
                   name="account"
-                  size={size}
+                  size={30}
                   color={color}
                 />
               );
@@ -75,9 +84,7 @@ export default class App extends Component {
         <Stack.Screen
           name="Initial"
           component={Initial}
-          options={{
-            title: "Welcome",
-          }}
+          options={{ headerShown: false, headerLeft: () => {} }}
         />
         <Stack.Screen
           name="Signup"
@@ -101,10 +108,41 @@ export default class App extends Component {
           }}
         />
         <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            headerShown: false,
+            headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="PasswordReset"
+          component={ResetPassword}
+          options={{
+            headerShown: false,
+            headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
           name="Dashboard"
           component={this.createTabs}
           options={{
+            headerShown: false,
             headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="Budget"
+          component={Budget}
+          options={{
+            title: "Budget",
+          }}
+        />
+        <Stack.Screen
+          name="BudgetSetup"
+          component={BudgetSetup}
+          options={{
+            title: "Budget Setup",
           }}
         />
       </Stack.Navigator>

@@ -26,6 +26,7 @@ class Signup extends Component {
           <InputGroup>
             <Icon name="ios-person" />
             <Input
+              autoCorrect={false}
               placeholder="First Name"
               onChangeText={(text) => this.setState({ firstName: text })}
             />
@@ -33,6 +34,7 @@ class Signup extends Component {
           <InputGroup>
             <Icon name="ios-person" />
             <Input
+              autoCorrect={false}
               placeholder="Last Name"
               onChangeText={(text) => this.setState({ lastName: text })}
             />
@@ -41,6 +43,8 @@ class Signup extends Component {
             <Icon name="ios-mail" />
             <Input
               placeholder="EMAIL"
+              autoCapitalize="none"
+              autoCorrect={false}
               keyboardType={"email-address"}
               onChangeText={(text) => this.setState({ email: text })}
             />
@@ -49,6 +53,8 @@ class Signup extends Component {
             <Icon name="ios-unlock" />
             <Input
               placeholder="PASSWORD"
+              autoCapitalize="none"
+              autoCorrect={false}
               secureTextEntry
               onChangeText={(text) => this.setState({ password: text })}
             />
