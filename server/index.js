@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "test") {
 }
 // debug statement
 app.use((req, res, next) => {
-  console.log("hello");
+  console.log("debug statement in server/index");
   next();
 });
 

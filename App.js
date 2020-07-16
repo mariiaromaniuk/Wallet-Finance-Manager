@@ -8,18 +8,22 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   Signup,
+  ResetPassword,
   Login,
   Link,
   Initial,
   DummyPage,
+  Dashboard,
   Profile,
   Budget, 
   BudgetSetup,
-  EditCategories
+  EditCategories,
+  Spending,
+  Settings,
+  Budget,
+  BudgetSetup,
 } from "./client/screens";
 import { Root } from "native-base";
-
-
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
@@ -35,8 +39,8 @@ export default class App extends Component {
         }}
       >
         <Tabs.Screen
-          name="Dummy1"
-          component={DummyPage}
+          name="Dashboard"
+          component={Dashboard}
           options={{
             tabBarLabel: "Dashboard",
             tabBarIcon: ({ color }) => {
@@ -70,6 +74,18 @@ export default class App extends Component {
                   size={30}
                   color={color}
                 />
+              );
+            },
+          }}
+        />
+        <Tabs.Screen
+          name="Transactions"
+          component={Spending}
+          options={{
+            tabBarLabel: "Transactions",
+            tabBarIcon: ({ color, size }) => {
+              return (
+                <FontAwesome5 name="chart-area" size={size} color={color} />
               );
             },
           }}
@@ -108,11 +124,34 @@ export default class App extends Component {
           }}
         />
         <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            headerShown: false,
+            headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="PasswordReset"
+          component={ResetPassword}
+          options={{
+            headerShown: false,
+            headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
           name="Dashboard"
           component={this.createTabs}
           options={{
             headerShown: false,
             headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="Transactions"
+          component={Spending}
+          options={{
+            title: "Transactions",
           }}
         />
         <Stack.Screen
