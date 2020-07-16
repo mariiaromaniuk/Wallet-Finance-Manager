@@ -31,6 +31,7 @@ import axios from "axios";
 import { server } from "../../server";
 import { featurePolicy } from "helmet";
 import { fetchAccounts } from "../../store/accounts";
+import { cos } from "react-native-reanimated";
 
 const netCash = 30000;
 
@@ -43,7 +44,8 @@ export class SpendingScreen extends React.Component {
     // this.fetchData = this.fetchData.bind(this);
     this.calculateNetTotal = this.calculateNetTotal.bind(this);
     this.calculateAccountTotal = this.calculateAccountTotal.bind(this);
-    this.getAmountsPerTransaction = this.getAmountsPerTransaction.bind(this);
+    // this.getAmountsPerTransaction = this.getAmountsPerTransaction.bind(this);
+    this.onHandleChange = this.onHandleChange.bind(this);
   }
 
   componentDidMount() {
@@ -51,7 +53,7 @@ export class SpendingScreen extends React.Component {
     this.props.fetchTransactions(this.props.user.id);
   }
 
-  onValueChange(value) {
+  onHandleChange(value) {
     this.setState({
       selectedAccount: value,
     });
@@ -73,27 +75,42 @@ export class SpendingScreen extends React.Component {
     return total;
   }
 
-  getAmountsPerTransaction(array) {}
+  // getAmountsPerTransaction(array) {}
   render() {
+    let accountInfo = [];
+    if (this.props.accounts.data) {
+      accountInfo = this.props.accounts.data.map((el) => {
+        return el.name;
+      });
+    }
+    console.log("ACCOUNTINFO", accountInfo);
+    const name = accountInfo.find((el) => {
+      return el === this.state.selectedAccount;
+    });
+
+    console.log("NAME", name, "STATE", this.state.selectedAccount);
+
     const info = this.props.transactions.filter((el) => {
-      return el.accountId === this.state.selectedAccount;
+      return el.name === this.state.selectedAccount;
     });
     console.log("INFO", info);
+    // console.log("ACCOUNTS", this.props.accounts.data);
+    // console.log("STATE", this.state);
     if (this.props.transactions.length) {
       return (
         <Container style={{ fontFamily: "Roboto" }}>
           <Header />
           <Text style={{ fontSize: 30 }}>
             Total Available Balance: $
-            {/* {this.calculateNetTotal(this.props.accounts.data)} */}
+            {this.calculateNetTotal(this.props.accounts.data)}
           </Text>
 
           <Form>
             <Picker
-              style={{backgroundColor: 'green'}}
+              style={{ backgroundColor: "green" }}
               mode="dropdown"
-              style={{ width: 120 }}
-              onValueChange={this.onValueChange.bind(this)}
+              style={{ width: 120, height: 40 }}
+              onValueChange={this.onHandleChange.bind(this)}
             >
               <Picker.item
                 label="choose account"
@@ -103,17 +120,17 @@ export class SpendingScreen extends React.Component {
               {this.props.accounts.data.length
                 ? this.props.accounts.data.map((account) => {
                     return (
-                      <Picker.Item
-                        label={account.account_id}
-                        value={account.account_id}
-                      />
+                      <Picker.Item label={account.name} value={account.name} />
                     );
                   })
                 : null}
             </Picker>
           </Form>
           <View>
-            <Text>Account Balance:</Text>
+            <Text>
+              Account Balance:
+              {this.calculateAccountTotal(this.props.accounts.data)}
+            </Text>
             <Text>Transactions for Account</Text>
             {info.length ? (
               <LineChart
@@ -181,7 +198,7 @@ export class SpendingScreen extends React.Component {
                     backgroundColor: "lightgray",
                     width: Dimensions.get("window").width,
                     borderBottomWidth: 1,
-                    marginBottom: 5
+                    marginBottom: 5,
                   }}
                 >
                   <Text>{item.name}</Text>

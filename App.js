@@ -15,13 +15,11 @@ import {
   DummyPage,
   Dashboard,
   Profile,
-  Budget, 
+  Budget,
   BudgetSetup,
   EditCategories,
   Spending,
   Settings,
-  Budget,
-  BudgetSetup,
 } from "./client/screens";
 import { Root } from "native-base";
 const Stack = createStackNavigator();
