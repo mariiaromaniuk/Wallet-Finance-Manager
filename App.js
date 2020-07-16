@@ -8,6 +8,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   Signup,
+  ResetPassword,
   Login,
   Link,
   Initial,
@@ -43,10 +44,10 @@ export default class App extends Component {
           }}
         />
         <Tabs.Screen
-          name="Dummy2"
-          component={DummyPage}
+          name="Budget"
+          component={Budget}
           options={{
-            tabBarLabel: "Budgets",
+            tabBarLabel: "Budget",
             tabBarIcon: ({ color, size }) => {
               return (
                 <FontAwesome5 name="piggy-bank" size={size} color={color} />
@@ -112,6 +113,22 @@ export default class App extends Component {
           name="Link"
           component={Link}
           options={{
+            headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            headerShown: false,
+            headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="PasswordReset"
+          component={ResetPassword}
+          options={{
+            headerShown: false,
             headerLeft: () => {},
           }}
         />
