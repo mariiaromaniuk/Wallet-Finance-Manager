@@ -6,6 +6,7 @@ import { Button } from 'react-native-elements';
 import { createStackNavigator } from 'react-navigation';
 import BudgetSetup from './BudgetSetup';
 import { fetchBudget } from "../../store/budget";
+import { styles, pieColors, deviceWidth } from '../../styles';
 // import Pie from './Pie';
 
 import {
@@ -59,16 +60,6 @@ class Budget extends Component {
       'travel'
     ];
 
-    const pieColors = [
-      "#EF4C22",
-      "#f1dd6a",
-      "#D4F2D2",
-      "#B776B2",
-      "#84A59D",
-      "#262560",
-      "#4F5DA9"
-    ];
-
     let i = 0;
     for (let key in budget) {
       if (categories.includes(key)) {
@@ -88,7 +79,7 @@ class Budget extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Budget</Text>
+        <Text style={styles.headerText}>Budget</Text>
           <PieChart
             data={this.getData()}
             width={screenWidth}
@@ -129,24 +120,3 @@ const mapDispatch = (dispatch) => {
 
 export default connect(mapState, mapDispatch)(Budget);
 
-
-const styles = {
-  container: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    color: "white",
-    fontWeight: 'bold',
-    position: 'absolute',
-  },
-  text: {
-    alignSelf: 'center',
-    paddingTop: 15,
-    padding: 8,
-    color: "#D16C58",
-    fontWeight: 'bold',
-    fontSize: 30,
-  }
-};

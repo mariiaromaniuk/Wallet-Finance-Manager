@@ -3,8 +3,8 @@ import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchBudget, setBudget } from '../../store/budget';
+import { styles, deviceWidth } from '../../styles';
 import Slider from 'react-native-slider';
-
 
 class EditCategories extends React.Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class EditCategories extends React.Component {
     };
     this.toTitle = this.toTitle.bind(this);
   }
-  
+
   componentDidMount() {
     this.props.fetchBudget(this.props.user.id);
   }
@@ -92,45 +92,61 @@ class EditCategories extends React.Component {
           {this.props.budget.id && (
             <View>
               <View>
-                <Text>
+                <Text style={styles.headerText}>
                   Edit Your Budget
                 </Text>
-                <View>
-                  <Text>
+                <View style={[categoryStyles.introInfo, { paddingTop: 40 }]}>
+                  <Text style={styles.headerText}>
                     {this.state.remaining}%
                   </Text>
-                  <Text>
+                  <Text style={styles.headerText}>
                     ${(this.props.budget.spendingBudget *
                       this.state.remaining) /
                       100}
                   </Text>
                 </View>
 
-                <View>
-                  <Text>
-                    remaining of ${this.props.budget.spendingBudget}
+                <View style={[categoryStyles.introInfo, { paddingBottom: 10 }]}>
+                  <Text style={styles.smallerText}>
+                    remaining
+                  </Text>
+                  <Text style={styles.smallerText}>
+                    of ${this.props.budget.spendingBudget}
                   </Text>
                 </View>
               </View>
-              <View/>
+              <View style={{ paddingLeft: 5, paddingRight: 5 }} />
+              {/* All Categories */}
+
               {this.state.categories &&
                 this.state.categories.map(category => {
                   return (
-                    <Card>
+                    <Card key={category.name} containerStyle={{ margin: 20 }}>
                       <View>
-                        <View/>
-                        <View>
-                          <Text>
+                        <View style={{ padding: 5, width: '100%' }} />
+                        <View
+                          style={{
+                            paddingLeft: 20,
+                            paddingEnd: 20,
+                            flexDirection: 'row',
+                            justifyContent: 'space-between'
+                          }}
+                        >
+                          <Text style={styles.categoryText}>
                             {this.toTitle(category.name)}
                           </Text>
 
-                          <Text>
+                          <Text style={styles.categoryText}>
                             {category.percentage}%
                           </Text>
                         </View>
 
                         <Slider
+                          trackStyle={styles.track}
+                          thumbStyle={styles.thumb}
+                          minimumTrackTintColor="#D16C58"
                           maximumTrackTintColor="#b7b7b7"
+                          style={styles.slider}
                           value={category.percentage}
                           onSlidingComplete={value => {
                             this.setState(prevState => {
@@ -161,9 +177,12 @@ class EditCategories extends React.Component {
                   );
                 })}
 
+              {/* Button */}
               <Button
                 raised
                 disabled={this.state.remaining >= 0 ? false : true}
+                type="outline"
+                block style={{ margin: 100, marginTop: 40 }} 
                 textStyle={{ textAlign: 'center' }}
                 title={`Finished`}
                 onPress={() => {
@@ -204,5 +223,17 @@ const mapDispatch = dispatch => {
   };
 };
 
+const categoryStyles = StyleSheet.create({
+  introInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 40
+  },
+  introIntroSmall: { fontSize: 20, color: '#ffffff', textAlign: 'center' },
+  introInfoBig: { fontSize: 40, color: '#ffffff', textAlign: 'center' }
+});
 
-export default connect(mapState,mapDispatch)(EditCategories);
+export default connect(
+  mapState,
+  mapDispatch
+)(EditCategories);
