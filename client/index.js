@@ -5,6 +5,8 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import user from "./store/user";
 import token from "./store/token";
 import dashboard from "./store/Dashboard";
+import transactions from "./store/spending";
+import accounts from "./store/accounts";
 import budget from "./store/budget";
 
 const reducer = combineReducers({
@@ -12,6 +14,8 @@ const reducer = combineReducers({
   token,
   budget,
   dashboard,
+  transactions,
+  accounts,
 });
 
 const middleware = composeWithDevTools(
@@ -22,3 +26,5 @@ const store = createStore(reducer, middleware);
 export default store;
 
 export * from "./store/user";
+export * from "./store/spending";
+export * from "./store/accounts";

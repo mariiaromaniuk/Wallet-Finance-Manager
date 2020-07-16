@@ -15,6 +15,7 @@ import {
   DummyPage,
   Dashboard,
   Profile,
+  Spending,
   Settings,
   Budget,
   BudgetSetup,
@@ -74,6 +75,18 @@ export default class App extends Component {
             },
           }}
         />
+        <Tabs.Screen
+          name="Transactions"
+          component={Spending}
+          options={{
+            tabBarLabel: "Transactions",
+            tabBarIcon: ({ color, size }) => {
+              return (
+                <FontAwesome5 name="chart-area" size={size} color={color} />
+              );
+            },
+          }}
+        />
       </Tabs.Navigator>
     );
   };
@@ -129,6 +142,13 @@ export default class App extends Component {
           options={{
             headerShown: false,
             headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="Transactions"
+          component={Spending}
+          options={{
+            title: "Transactions",
           }}
         />
         <Stack.Screen
