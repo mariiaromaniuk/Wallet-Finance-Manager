@@ -12,7 +12,8 @@ const updateBudget = budget => ({ type: UPDATE_BUDGET, budget });
 export const fetchBudget = userId => {
   return async dispatch => {
     try {
-      const res = await axios.get(`${server}/api/budget/${userId}`);
+      const res = await axios.get(`http://localhost:8080/api/budget/${userId}`);
+      console.log("DATA", res.data)
       dispatch(getBudget(res.data));
     } catch (err) {
       console.log('Error fetching budget: ', err.message);
@@ -23,7 +24,7 @@ export const fetchBudget = userId => {
 export const setBudget = budget => {
   return async dispatch => {
     try {
-      const res = await axios.put(`${server}/api/budget`, budget);
+      const res = await axios.put(`http://localhost:8080/api/budget`, budget);
       dispatch(updateBudget(res.data));
     } catch (err) {
       console.log('Error setting budget: ', err.message);

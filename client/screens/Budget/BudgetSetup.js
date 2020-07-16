@@ -5,9 +5,10 @@ import {
   TextInput,
   Image
 } from 'react-native';
-import { Button} from "native-base";
+import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { setBudget } from '../../store/budget';
+import { styles } from '../../styles';
 
 class BudgetSetup extends Component {
   constructor() {
@@ -23,7 +24,7 @@ class BudgetSetup extends Component {
 
   render() {
     const question1 = (
-      <View>
+      <View style={styles.container1}>
         <Text>
           What is your monthly income? ($)
         </Text>
@@ -33,6 +34,8 @@ class BudgetSetup extends Component {
             placeholder="Income"
           />
           <Button
+            type="outline"
+            block style={{ margin: 100, marginTop: 40 }} bordered danger
             title={"Next"}
             onPress={() => {
               this.setState({ question: 2 });
@@ -43,7 +46,7 @@ class BudgetSetup extends Component {
     );
 
     const question2 = (
-      <View>
+      <View style={styles.container1}>
         <Text>
           What are your monthly static costs? ($)
           ex: rent, utilities, insurance, etc.
@@ -55,6 +58,8 @@ class BudgetSetup extends Component {
             placeholder="Static Costs"
           />
           <Button
+            type="outline"
+            block style={{ margin: 100, marginTop: 40 }} bordered danger
             title={"Next"}
             onPress={() => {
               this.setState({ question: 3 });
@@ -65,7 +70,7 @@ class BudgetSetup extends Component {
     );
 
     const question3 = (
-      <View>
+      <View style={styles.container1}>
         <Text>
           How much would you like to save each month? ($)
         </Text>
@@ -75,13 +80,15 @@ class BudgetSetup extends Component {
             placeholder="Savings"
           />
           <Button
+            type="outline"
+            block style={{ margin: 100, marginTop: 40 }} bordered danger
             title={"Next"}
             onPress={() => {
               const spendingBudget =
                 this.state.income - this.state.staticCosts - this.state.savings;
               this.props.setBudget({ ...this.state, spendingBudget });
-              this.props.navigation.navigate('Budget', {
-                title: 'Budget'
+              this.props.navigation.navigate('EditCategories', {
+                title: 'Edit Categories'
               });
             }}
           />

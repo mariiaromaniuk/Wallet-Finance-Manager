@@ -14,4 +14,5 @@ export { default as ResetPassword } from "./Main/ResetPassword";
 
 // Budget
 export { default as Budget } from "./Budget/Budget";
-export { default as BudgetSetup } from "./Budget/BudgetSetup";
+export { default as BudgetSetup } from './Budget/BudgetSetup';
+export { default as EditCategories } from './Budget/EditCategories';

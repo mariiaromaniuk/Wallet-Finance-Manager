@@ -15,6 +15,9 @@ import {
   DummyPage,
   Dashboard,
   Profile,
+  Budget, 
+  BudgetSetup,
+  EditCategories,
   Spending,
   Settings,
   Budget,
@@ -163,6 +166,13 @@ export default class App extends Component {
           component={BudgetSetup}
           options={{
             title: "Budget Setup",
+          }}
+        />
+        <Stack.Screen
+          name="EditCategories"
+          component={EditCategories}
+          options={{
+            title: "Edit Categories",
           }}
         />
       </Stack.Navigator>

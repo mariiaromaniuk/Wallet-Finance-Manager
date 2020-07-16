@@ -116,13 +116,14 @@ router.post("/plaid_exchange", async (req, res, next) => {
       },
     });
 
-    const budget = await Budget.findAll({
-      where: {
-        userId: user.id,
-      },
-    });
+    // const budget = await Budget.findAll({
+    //   where: {
+    //     userId: user.id,
+    //   },
+    // });
 
-    res.json({ accounts, trans, budget });
+    // res.json({ accounts, trans, budget });
+    res.json({ accounts, trans });
   } catch (err) {
     // Indicates plaid API error
     console.log("Exchange token returned an error", {
