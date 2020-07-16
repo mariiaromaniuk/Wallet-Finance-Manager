@@ -5,13 +5,7 @@ import {
   TextInput,
   Image
 } from 'react-native';
-import {
-  Container,
-  Content,
-  Button,
-  Header,
-  Body
-} from "native-base";
+import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { setBudget } from '../../store/budget';
 
@@ -39,7 +33,8 @@ class BudgetSetup extends Component {
             placeholder="Income"
           />
           <Button
-            block style={{ marginTop: 20 }}  bordered danger
+            type="outline"
+            block style={{ margin: 100, marginTop: 40 }} bordered danger
             title={"Next"}
             onPress={() => {
               this.setState({ question: 2 });
@@ -62,7 +57,8 @@ class BudgetSetup extends Component {
             placeholder="Static Costs"
           />
           <Button
-            block style={{ marginTop: 20 }}  bordered danger
+            type="outline"
+            block style={{ margin: 100, marginTop: 40 }} bordered danger
             title={"Next"}
             onPress={() => {
               this.setState({ question: 3 });
@@ -83,14 +79,15 @@ class BudgetSetup extends Component {
             placeholder="Savings"
           />
           <Button
-            block style={{ marginTop: 20 }}  bordered danger
+            type="outline"
+            block style={{ margin: 100, marginTop: 40 }} bordered danger
             title={"Next"}
             onPress={() => {
               const spendingBudget =
                 this.state.income - this.state.staticCosts - this.state.savings;
               this.props.setBudget({ ...this.state, spendingBudget });
-              this.props.navigation.navigate('Budget', {
-                title: 'Budget'
+              this.props.navigation.navigate('EditCategories', {
+                title: 'Edit Categories'
               });
             }}
           />

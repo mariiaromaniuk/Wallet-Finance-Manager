@@ -14,7 +14,8 @@ import {
   DummyPage,
   Profile,
   Budget, 
-  BudgetSetup
+  BudgetSetup,
+  EditCategories
 } from "./client/screens";
 import { Root } from "native-base";
 
@@ -126,6 +127,13 @@ export default class App extends Component {
           component={BudgetSetup}
           options={{
             title: "Budget Setup",
+          }}
+        />
+        <Stack.Screen
+          name="EditCategories"
+          component={EditCategories}
+          options={{
+            title: "Edit Categories",
           }}
         />
       </Stack.Navigator>

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { View } from 'react-native';
-import { Button, Text } from "native-base";
+import { Text } from "native-base";
+import { Button } from 'react-native-elements';
 import { createStackNavigator } from 'react-navigation';
 import BudgetSetup from './BudgetSetup';
 import { fetchBudget } from "../../store/budget";
@@ -98,14 +99,10 @@ class Budget extends Component {
             paddingLeft="15"
             absolute
           />
-          <Button bordered danger>
-            <Text>Edit Budget</Text>
-            
-          </Button>
-
           <Button
-            block style={{ margin: 100, marginTop: 40 }} bordered danger
-            title={'EDIT BUDGET'}
+            type="outline"
+            block style={{ margin: 100, marginTop: 40 }} 
+            title={'Edit Budget'}
             onPress={() => {
               this.props.navigation.navigate('BudgetSetup', {
                 title: 'BudgetSetup'
