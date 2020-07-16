@@ -15,8 +15,6 @@ import {
   DummyPage,
   Dashboard,
   Profile,
-  Budget, 
-  BudgetSetup,
   EditCategories,
   Spending,
   Settings,
