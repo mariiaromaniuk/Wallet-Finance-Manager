@@ -13,6 +13,7 @@ import {
   Link,
   Initial,
   DummyPage,
+  Dashboard,
   Profile,
   Spending,
   Settings,
@@ -35,8 +36,8 @@ export default class App extends Component {
         }}
       >
         <Tabs.Screen
-          name="Dummy1"
-          component={DummyPage}
+          name="Dashboard"
+          component={Dashboard}
           options={{
             tabBarLabel: "Dashboard",
             tabBarIcon: ({ color }) => {
