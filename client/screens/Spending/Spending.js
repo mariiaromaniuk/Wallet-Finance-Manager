@@ -26,12 +26,7 @@ import { View, FlatList, Button, Dimensions } from "react-native";
 
 import { connect } from "react-redux";
 import { fetchTransactions } from "../../store/spending";
-import {} from "../../store/accounts";
-import axios from "axios";
-import { server } from "../../server";
-import { featurePolicy } from "helmet";
 import { fetchAccounts } from "../../store/accounts";
-import { cos } from "react-native-reanimated";
 
 const netCash = 30000;
 
@@ -77,23 +72,17 @@ export class SpendingScreen extends React.Component {
 
   // getAmountsPerTransaction(array) {}
   render() {
-    let accountInfo = [];
-    if (this.props.accounts.data) {
-      accountInfo = this.props.accounts.data.map((el) => {
-        return el.name;
-      });
-    }
-    console.log("ACCOUNTINFO", accountInfo);
-    const name = accountInfo.find((el) => {
-      return el === this.state.selectedAccount;
-    });
-
-    console.log("NAME", name, "STATE", this.state.selectedAccount);
-
-    const info = this.props.transactions.filter((el) => {
-      return el.name === this.state.selectedAccount;
-    });
-    console.log("INFO", info);
+    // const info = this.props.accounts.data.filter((el) => {
+    //   return el.name === this.state.selectedAccount;
+    // });
+    //   if(this.props.accounts.data){
+    // const data = this.props.transactions.filter((el) => {
+    //   return el.accountId === this.props.account.data.accountId;
+    // });
+    // console.log("JRLKADJLKSFASD", data);
+    // }
+    // console.log("INFO", info);
+    console.log("TRANS", this.props.transactions);
     // console.log("ACCOUNTS", this.props.accounts.data);
     // console.log("STATE", this.state);
     if (this.props.transactions.length) {
@@ -109,8 +98,8 @@ export class SpendingScreen extends React.Component {
             <Picker
               style={{ backgroundColor: "green" }}
               mode="dropdown"
-              style={{ width: 120, height: 40 }}
-              onValueChange={this.onHandleChange.bind(this)}
+              style={{ width: 120, height: 60 }}
+              onValueChange={this.onHandleChange}
             >
               <Picker.item
                 label="choose account"
@@ -126,7 +115,7 @@ export class SpendingScreen extends React.Component {
                 : null}
             </Picker>
           </Form>
-          <View>
+          {/* <View>
             <Text>
               Account Balance:
               {this.calculateAccountTotal(this.props.accounts.data)}
@@ -207,7 +196,7 @@ export class SpendingScreen extends React.Component {
                 </View>
               );
             })}
-          </Content>
+          </Content> */}
         </Container>
       );
     } else {
