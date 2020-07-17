@@ -91,6 +91,7 @@ class BudgetSetup extends Component {
             onPress={() => {
               const spendingBudget =
                 this.state.income - this.state.staticCosts - this.state.savings;
+                this.setState({ ...this.state, spendingBudget });
               this.props.setBudget({ ...this.state, spendingBudget });
               this.props.navigation.navigate('EditCategories', {
                 title: 'Edit Categories'
