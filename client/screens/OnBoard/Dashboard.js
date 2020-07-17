@@ -67,12 +67,48 @@ class Dashboard extends Component {
     const transactionsByMonths = this.state.transactionsByMonths;
     const moneyEarned = renderPosTransactionsByMonths(transactionsByMonths);
     const moneySpent = renderNegTransactionsByMonths(transactionsByMonths);
+
     return (
       <Container>
         <Text style={{ fontSize: 50, margin: 0, padding: 0 }}>
           Hello {userFirstName}
         </Text>
         {renderAccountAndBalances(accountsAndBalances).map((comp) => comp)}
+
+        <ProgressChart
+          // each value represents a goal ring in Progress chart
+          data={{
+            labels: ["Swim", "Bike", "Run", "etc", "more stuff"], // optional
+            data: [
+              Math.random(),
+              Math.random(),
+              Math.random(),
+              Math.random(),
+              Math.random(),
+            ],
+          }}
+          width={Dimensions.get("window").width} // from react-native
+          height={220}
+          strokeWidth={16}
+          radius={32}
+          chartConfig={{
+            backgroundColor: "#e26a00",
+            backgroundGradientFrom: "#fb8c00",
+            backgroundGradientTo: "#ffa726",
+            decimalPlaces: 2, // optional, defaults to 2dp
+            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            style: {
+              borderRadius: 16,
+            },
+            propsForDots: {
+              r: "6",
+              strokeWidth: "2",
+              stroke: "#ffa726",
+            },
+          }}
+          hideLegend={false}
+        />
 
         {/* ============= MONEY EARNED ON A MONTHLY BASIS ============= */}
         <Text>Monthy Earnings</Text>
