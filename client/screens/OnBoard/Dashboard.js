@@ -69,6 +69,10 @@ class Dashboard extends Component {
     const transactionsByMonths = this.state.transactionsByMonths;
     const moneyEarned = renderPosTransactionsByMonths(transactionsByMonths);
     const moneySpent = renderNegTransactionsByMonths(transactionsByMonths);
+    const budgets = this.props.budget;
+    console.log(budgets);
+    const progress = budgetProgress(budgets);
+    console.log("asfasfdasdf", progress);
 
     return (
       <Container>
@@ -80,24 +84,14 @@ class Dashboard extends Component {
         <ProgressChart
           // each value represents a goal ring in Progress chart
           data={{
-            labels: [
-              "foodAndDrink",
-              "community",
-              "healthcare",
-              "recreation",
-              "service",
-              "shops",
-              "travel",
-            ], // optional
-            data: [
-              Math.random(),
-              Math.random(),
-              Math.random(),
-              Math.random(),
-              Math.random(),
-              Math.random(),
-              Math.random(),
-            ],
+            labels: Object.keys(budgets).filter(
+              (label) =>
+                label !== "id" &&
+                label !== "userId" &&
+                label !== "updatedAt" &&
+                label !== "createdAt"
+            ), // all budgets, dynamic
+            data: progress.length ? progress : [0, 0, 0, 0, 0, 0, 0],
           }}
           width={Dimensions.get("window").width} // from react-native
           height={220}
@@ -375,4 +369,20 @@ async function organizeTransactionsByMonths(
   } catch (error) {
     console.error("organizeTransactionsByMonths ERROR", error);
   }
+}
+
+function budgetProgress(obj) {
+  const retArr = [];
+  for (const [key, value] of Object.entries(obj)) {
+    if (
+      key !== "id" &&
+      key !== "userId" &&
+      key !== "updatedAt" &&
+      key !== "createdAt"
+    ) {
+      retArr.push(value / 100);
+    }
+  }
+
+  return retArr;
 }
