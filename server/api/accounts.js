@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Account, User } = require("../db/models");
+const { Account, Transaction } = require("../db/models");
 module.exports = router;
 
 router.get("/", async (req, res, next) => {
@@ -19,26 +19,26 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get('/user/:id', async (req, res, next) => {
+router.get("/user/:id", async (req, res, next) => {
   try {
-    const userId = req.params.id
+    const userId = req.params.id;
     const data = await Account.findAll({
       where: {
-        userId: userId
-      }
-    })
-    if(!data){
-      res.sendStatus(404)
+        userId: userId,
+      },
+    });
+    if (!data) {
+      res.sendStatus(404);
     } else {
       res.status(200).json({
         message: "received all accounts for this user",
-        data
-      })
+        data,
+      });
     }
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 router.get("/:id", async (req, res, next) => {
   try {
     // console.log(req.user.dataValues.id);
