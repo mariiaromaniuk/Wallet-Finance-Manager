@@ -29,9 +29,6 @@ import { View, FlatList, Button, Dimensions } from "react-native";
 import { connect } from "react-redux";
 import { fetchTransactions } from "../../store/spending";
 import { fetchAccounts } from "../../store/accounts";
-import { acc } from "react-native-reanimated";
-
-const netCash = 30000;
 
 export class SpendingScreen extends React.Component {
   constructor(props) {
@@ -39,7 +36,6 @@ export class SpendingScreen extends React.Component {
     this.state = {
       selectedAccount: this.props.accounts.data[0].name,
     };
-    // this.fetchData = this.fetchData.bind(this);
     this.calculateNetTotal = this.calculateNetTotal.bind(this);
     this.calculateAccountTotal = this.calculateAccountTotal.bind(this);
     // this.getAmountsPerTransaction = this.getAmountsPerTransaction.bind(this);
