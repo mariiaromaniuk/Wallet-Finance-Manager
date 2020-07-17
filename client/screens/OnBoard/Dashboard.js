@@ -81,41 +81,6 @@ class Dashboard extends Component {
         </Text>
         {renderAccountAndBalances(accountsAndBalances).map((comp) => comp)}
 
-        <ProgressChart
-          // each value represents a goal ring in Progress chart
-          data={{
-            labels: Object.keys(budgets).filter(
-              (label) =>
-                label !== "id" &&
-                label !== "userId" &&
-                label !== "updatedAt" &&
-                label !== "createdAt"
-            ), // all budgets, dynamic
-            data: progress.length ? progress : [0, 0, 0, 0, 0, 0, 0],
-          }}
-          width={Dimensions.get("window").width} // from react-native
-          height={220}
-          strokeWidth={16}
-          radius={32}
-          chartConfig={{
-            backgroundColor: "#e26a00",
-            backgroundGradientFrom: "#fb8c00",
-            backgroundGradientTo: "#ffa726",
-            decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            style: {
-              borderRadius: 16,
-            },
-            propsForDots: {
-              r: "6",
-              strokeWidth: "2",
-              stroke: "#ffa726",
-            },
-          }}
-          hideLegend={false}
-        />
-
         {/* ============= MONEY EARNED ON A MONTHLY BASIS ============= */}
         <Text>Monthy Earnings</Text>
         <LineChart
@@ -198,6 +163,42 @@ class Dashboard extends Component {
             marginVertical: 8,
             borderRadius: 16,
           }}
+        />
+
+        {/* ============= BUDGET PROGRESSION ============= */}
+        <ProgressChart
+          // each value represents a goal ring in Progress chart
+          data={{
+            labels: Object.keys(budgets).filter(
+              (label) =>
+                label !== "id" &&
+                label !== "userId" &&
+                label !== "updatedAt" &&
+                label !== "createdAt"
+            ), // all budgets, dynamic
+            data: progress.length ? progress : [0, 0, 0, 0, 0, 0, 0],
+          }}
+          width={Dimensions.get("window").width} // from react-native
+          height={220}
+          strokeWidth={16}
+          radius={32}
+          chartConfig={{
+            backgroundColor: "#e26a00",
+            backgroundGradientFrom: "#fb8c00",
+            backgroundGradientTo: "#ffa726",
+            decimalPlaces: 2, // optional, defaults to 2dp
+            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            style: {
+              borderRadius: 16,
+            },
+            propsForDots: {
+              r: "6",
+              strokeWidth: "2",
+              stroke: "#ffa726",
+            },
+          }}
+          hideLegend={false}
         />
       </Container>
     );
