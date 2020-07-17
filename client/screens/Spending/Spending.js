@@ -12,6 +12,8 @@ import {
   Right,
   Form,
   Picker,
+  Card,
+  CardItem,
 } from "native-base";
 import {
   LineChart,
@@ -35,7 +37,7 @@ export class SpendingScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedAccount: "",
+      selectedAccount: this.props.accounts.data[0].name,
     };
     // this.fetchData = this.fetchData.bind(this);
     this.calculateNetTotal = this.calculateNetTotal.bind(this);
@@ -55,12 +57,8 @@ export class SpendingScreen extends React.Component {
     });
   }
 
-  calculateNetTotal(items) {
-    let total = 0;
-    items.forEach((account) => {
-      total += account.available_balance;
-    });
-    return total;
+  calculateNetTotal(account) {
+      return account.available_balance;
   }
 
   calculateAccountTotal(items) {
@@ -75,9 +73,6 @@ export class SpendingScreen extends React.Component {
   render() {
     const accounts = this.props.accounts.data;
     const transactions = this.props.transactions;
-    // console.log("TRANS", transactions);
-    // console.log("ACCOUNTS", accounts);
-    // console.log("STATE", this.state);
     let id = "";
     const acctInfo = accounts.filter((el) => {
       return el.name === this.state.selectedAccount;
@@ -85,16 +80,9 @@ export class SpendingScreen extends React.Component {
     for (let i = 0; i < acctInfo.length; i++) {
       id = acctInfo[i].account_id;
     }
-    console.log("IDDDD", id);
-    // console.log("VALUES", Object.values(acctInfo[0]));
     const info = transactions.filter((account) => {
       return account.accountId === id;
     });
-    console.log("INFOOOOO", info);
-
-    //"qP79qRJJ1Qhgwq9LpdBlcNeJKMokQzCdkgE7G"
-
-    // console.log("TRANSINFO", acctInfo);
     if (this.props.transactions.length) {
       return (
         <Container style={{ fontFamily: "Roboto" }}>
@@ -125,13 +113,13 @@ export class SpendingScreen extends React.Component {
                 : null}
             </Picker>
           </Form>
-          <View>
+          <View style={{ marginTop: -15 }}>
             <Text>
               Account Balance:
-              {this.calculateAccountTotal(this.props.accounts.data)}
+              {this.calculateAccountTotal(transactions)}
             </Text>
             <Text>Transactions for Account</Text>
-            {info.length ? (
+            
               <LineChart
                 data={{
                   labels: ["MAY", "JUNE", "JULY"],
@@ -170,22 +158,7 @@ export class SpendingScreen extends React.Component {
                   borderRadius: 16,
                 }}
               />
-            ) : (
-              <View
-                style={{
-                  width: Dimensions.get("window").width,
-                  height: 220,
-                  backgroundColor: "#e26a00",
-                  backgroundGradientFrom: "#fb8c00",
-                  backgroundGradientTo: "#ffa726",
-                  color: "#ffffff",
-                  justifyContent: "center",
-                  alignContent: "center",
-                }}
-              >
-                <Text>Please Select an Account</Text>
-              </View>
-            )}
+            
           </View>
           <Content style={{ alignSelf: "center", marginTop: 1 }}>
             <Text style={{ alignSelf: "center" }}>All Transactions</Text>
@@ -194,15 +167,21 @@ export class SpendingScreen extends React.Component {
                 <View
                   style={{
                     alignContent: "center",
-                    backgroundColor: "lightgray",
+                    backgroundColor: "",
                     width: Dimensions.get("window").width,
-                    borderBottomWidth: 1,
                     marginBottom: 5,
                   }}
                 >
-                  <Text>{item.name}</Text>
-                  <Text>{item.amount * -1}</Text>
-                  <Text>{item.date}</Text>
+                  <Card>
+                    <CardItem>
+                      <Body>
+                        <Text>${this.props.amount}</Text>
+                        <Text>{item.name}</Text>
+                        <Text>{item.amount}</Text>
+                        <Text>{item.date}</Text>
+                      </Body>
+                    </CardItem>
+                  </Card>
                 </View>
               );
             })}
