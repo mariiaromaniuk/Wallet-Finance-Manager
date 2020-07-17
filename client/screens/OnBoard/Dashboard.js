@@ -49,7 +49,7 @@ class Dashboard extends Component {
       accounts,
       transactions
     );
-    console.log("transactionsByMonths part 3", transactionsByMonths);
+    // console.log("transactionsByMonths part 3", transactionsByMonths);
 
     this.setState({
       ...this.state,
@@ -119,7 +119,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProp = (state) => {
-  console.log("mapstatetoprops", state);
+  // console.log("mapstatetoprops", state);
   return {
     firstName: state.user.firstName,
     transactions: state.transactions,
@@ -142,7 +142,7 @@ function renderAccountAndBalances(map) {
   const retArr = [];
   let id = 0;
   for (let key of map.keys()) {
-    console.log("inside the loop", key);
+    // console.log("inside the loop", key);
     retArr.push(
       <Banner key={id++} header={key} amount={map.get(key)}></Banner>
     );
@@ -179,7 +179,7 @@ async function organizeTransactionsByMonths(
         transactionsByMonths.set(currentMonth, [0, 0]);
       }
     }
-    console.log("transactionsByMonths", transactionsByMonths);
+    // console.log("transactionsByMonths", transactionsByMonths);
 
     // partitioning money spent/earned by months where index 0 => money spent & index 1 => incoming money
     // console.log("TRANSACTIONS ARRAY: ", transactions);

@@ -23,6 +23,8 @@ class BudgetSetup extends Component {
   }
 
   render() {
+    console.log("PROPS", this.props)
+    const userId = this.props.userId
     const question1 = (
       <View style={styles.container1}>
         <Text style={styles.categoryText}>
@@ -92,7 +94,7 @@ class BudgetSetup extends Component {
               const spendingBudget =
                 this.state.income - this.state.staticCosts - this.state.savings;
                 this.setState({ ...this.state, spendingBudget });
-              this.props.setBudget({ ...this.state, spendingBudget });
+              this.props.setBudget({ ...this.state, spendingBudget }, userId);
               this.props.navigation.navigate('EditCategories', {
                 title: 'Edit Categories'
               });
@@ -113,13 +115,14 @@ class BudgetSetup extends Component {
 
 const mapState = state => {
   return {
-    budget: state.budget
+    budget: state.budget,
+    userId: state.user.id
   };
 };
 
 const mapDispatch = dispatch => {
   return {
-    setBudget: budget => dispatch(setBudget(budget))
+    setBudget: (budget, userId) => dispatch(setBudget(budget, userId))
   };
 };
 

@@ -19,6 +19,7 @@ class EditCategories extends React.Component {
 
   componentDidMount() {
     this.props.fetchBudget(this.props.user.id);
+    console.log("REMINING2", this.state.remaining)
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -87,7 +88,7 @@ class EditCategories extends React.Component {
   }
 
   render() {
-    console.log("BUDGET", this.state.spendingBudget)
+    const userId = this.props.user.id
     return (
       <ScrollView>
         <View>
@@ -153,9 +154,10 @@ class EditCategories extends React.Component {
                           onSlidingComplete={value => {
                               console.log("NEW VALUE", value)
                               console.log("REMINING", this.state.remaining)
-                            this.setState(prevState => {
-                              const remaining =
-                                prevState.remaining +
+                            this.setState(
+                                prevState => {
+                              const remainingNew =
+                                this.state.remaining +
                                 (category.percentage - value);
                               return {
                                 categories: [...prevState.categories].map(
@@ -167,11 +169,11 @@ class EditCategories extends React.Component {
                                       return elem;
                                     }
                                   }
-                                ),
-                                remaining: remaining
+                                ), 
+                                remaining: this.state.remaining,
                               };
                             });
-                          }}
+                          }} 
                           step={5}
                           minimumValue={0}
                           maximumValue={100}
@@ -199,7 +201,7 @@ class EditCategories extends React.Component {
                     service: this.state.categories[4].percentage,
                     community: this.state.categories[5].percentage,
                     shops: this.state.categories[6].percentage
-                  });
+                  }, userId);
                   console.log("categories", this.state.categories[0].percentage)
                   this.props.navigation.navigate('Budget', { title: 'Budget' });
                 }}
@@ -224,7 +226,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     fetchBudget: userId => dispatch(fetchBudget(userId)),
-    setBudget: budget => dispatch(setBudget(budget)),
+    setBudget: (budget, userId) => dispatch(setBudget(budget, userId)),
   };
 };
 
