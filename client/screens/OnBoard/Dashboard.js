@@ -37,7 +37,7 @@ class Dashboard extends Component {
     const accounts = this.props.accounts;
 
     transactions.map((transaction) => {
-      transaction.amount = transaction.amount * -1;
+      transaction.amount = Math.trunc(transaction.amount) * -1;
     });
 
     const transactionsByMonths = new Map();
@@ -68,6 +68,9 @@ class Dashboard extends Component {
     // console.log(this.props);
     const userFirstName = this.props.firstName;
     const accountsAndBalances = this.state.accountsAndBalances;
+    let transactionsByMonths = this.state.transactionsByMonths;
+    transactionsByMonths = renderTransactionsByMonths(transactionsByMonths);
+    console.log(transactionsByMonths);
     return (
       <Container>
         <Text style={{ fontSize: 50, margin: 0, padding: 0 }}>
@@ -81,7 +84,9 @@ class Dashboard extends Component {
             // insert in order total amount of income from last three months
             datasets: [
               {
-                data: [4, 5],
+                data: transactionsByMonths.length
+                  ? transactionsByMonths
+                  : [0, 0, 0, 0],
               },
             ],
           }}
@@ -150,6 +155,20 @@ function renderAccountAndBalances(map) {
   return retArr;
 }
 
+// ...{transactionsByMonths.keys().map(month => transactionsByMonths.get(month)[1] )}
+
+function renderTransactionsByMonths(map) {
+  // console.log("renderAccountAndBalances func environment", map);
+  const retArr = [];
+  let id = 0;
+  for (let key of map.keys()) {
+    console.log("inside the loop", key);
+    console.log(map.get(key)[1]);
+    retArr.push(map.get(key)[1]);
+  }
+  return retArr;
+}
+
 async function organizeTransactionsByMonths(
   transactionsByMonths,
   accountsAndBalances,
@@ -179,31 +198,23 @@ async function organizeTransactionsByMonths(
         transactionsByMonths.set(currentMonth, [0, 0]);
       }
     }
-    console.log("transactionsByMonths", transactionsByMonths);
+    // console.log("transactionsByMonths", transactionsByMonths);
 
     // partitioning money spent/earned by months where index 0 => money spent & index 1 => incoming money
-    // console.log("TRANSACTIONS ARRAY: ", transactions);
     for (let i = 0; i < transactions.length; i++) {
-      // console.log("transactionsByMonths part 2", transactionsByMonths);
       const currentTransaction = transactions[i];
+
       const currentTransactionMonth =
         Number(currentTransaction.date.slice(5, 7)) - 1;
+
       const moneySpent = transactionsByMonths.get(
         months[currentTransactionMonth]
       )[0];
-      // console.log(
-      //   "STRUGGLINGINIDNAGADSGG",
-      //   transactionsByMonths.get(months[currentTransactionMonth])
-      // );
+
       const moneyEarned = transactionsByMonths.get(
         months[currentTransactionMonth]
       )[1];
-      // console.log(
-      //   "BALHBALHBALBHABLHABBBABLLAAAHHHHHHH",
-      //   currentTransactionMonth,
-      //   months[currentTransactionMonth],
-      //   currentTransaction
-      // );
+
       if (currentTransaction.amount < 0) {
         transactionsByMonths.set(months[currentTransactionMonth], [
           moneySpent + currentTransaction.amount,
@@ -230,30 +241,39 @@ async function organizeTransactionsByMonths(
     // ============ Accounts ============
     // NETWORTH: Get all available balances - all current balance
     accountsAndBalances.set("Networth", 0);
+
     for (let i = 0; i < accounts.length; i++) {
       const account = accounts[i];
+
       accountsAndBalances.set(
         "Networth",
         accountsAndBalances.get("Networth") + account.available_balance
       );
+
       accountsAndBalances.set(
         "Networth",
         accountsAndBalances.get("Networth") - account.current_balance
       );
     }
+
     // CASH: Get all available balances
     accountsAndBalances.set("Cash", 0);
+
     for (let i = 0; i < accounts.length; i++) {
       const account = accounts[i];
+
       accountsAndBalances.set(
         "Cash",
         accountsAndBalances.get("Cash") + account.available_balance
       );
     }
+
     // CREDIT CARDS: Get all credit card debt
     accountsAndBalances.set("Credit Cards", 0);
+
     for (let i = 0; i < accounts.length; i++) {
       const account = accounts[i];
+
       if (account.name.toLowerCase().includes("credit card")) {
         accountsAndBalances.set(
           "Credit Cards",
@@ -261,7 +281,6 @@ async function organizeTransactionsByMonths(
         );
       }
     }
-    // console.log("accountsAndBalances", accountsAndBalances);
   } catch (error) {
     console.error("organizeTransactionsByMonths ERROR", error);
   }
