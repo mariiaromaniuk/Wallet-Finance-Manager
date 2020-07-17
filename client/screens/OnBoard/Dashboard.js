@@ -5,6 +5,7 @@ import { View, Dimensions } from "react-native";
 // import { fetchInfo, fetchTransactions } from "../../store/Dashboard";
 import { fetchTransactions } from "../../store/spending";
 import { fetchAccounts } from "../../store/accounts";
+import { fetchBudget } from "../../store/budget";
 
 import {
   LineChart,
@@ -32,6 +33,7 @@ class Dashboard extends Component {
     const userId = this.props.userId;
     await this.props.handleRetrieval(userId);
     await this.props.handleRetrievalOfTransactions(userId);
+    await this.props.fetchBudget(userId);
 
     const transactions = this.props.transactions;
     const accounts = this.props.accounts;
@@ -78,8 +80,18 @@ class Dashboard extends Component {
         <ProgressChart
           // each value represents a goal ring in Progress chart
           data={{
-            labels: ["Swim", "Bike", "Run", "etc", "more stuff"], // optional
+            labels: [
+              "foodAndDrink",
+              "community",
+              "healthcare",
+              "recreation",
+              "service",
+              "shops",
+              "travel",
+            ], // optional
             data: [
+              Math.random(),
+              Math.random(),
               Math.random(),
               Math.random(),
               Math.random(),
@@ -205,6 +217,7 @@ const mapStateToProp = (state) => {
     transactions: state.transactions,
     accounts: state.accounts.data,
     userId: state.user.id,
+    budget: state.budget,
   };
 };
 
@@ -212,6 +225,7 @@ const mapDispatch = (dispatch) => {
   return {
     handleRetrieval: (id) => dispatch(fetchAccounts(id)),
     handleRetrievalOfTransactions: (id) => dispatch(fetchTransactions(id)),
+    fetchBudget: (id) => dispatch(fetchBudget(id)),
   };
 };
 
