@@ -3,26 +3,23 @@ import {
   Container,
   Header,
   Content,
-  List,
+  Icon,
   Button,
-  Title,
   Text,
-  Left,
   Body,
-  Right,
   Form,
   Picker,
   Card,
   CardItem,
-  Icon,
 } from "native-base";
 import { LineChart } from "react-native-chart-kit";
 
-import { View, FlatList, Dimensions } from "react-native";
+import { Dimensions } from "react-native";
 
 import { connect } from "react-redux";
 import { fetchTransactions } from "../../store/spending";
 import { fetchAccounts } from "../../store/accounts";
+import { ThemeConsumer } from "react-native-elements";
 
 export class SpendingScreen extends React.Component {
   constructor(props) {
@@ -30,6 +27,7 @@ export class SpendingScreen extends React.Component {
     this.state = {
       selectedAccount: this.props.accounts.data[0].name,
       loaded: false,
+      currentAccount: "",
     };
     this.calculateNetTotal = this.calculateNetTotal.bind(this);
     this.calculateAccountTotal = this.calculateAccountTotal.bind(this);
@@ -80,38 +78,36 @@ export class SpendingScreen extends React.Component {
         <Header
           iosBarStyle
           androidStatusBarColor
-          span
-          style={{ backgroundColor: "#222831" }}
+          style={{ backgroundColor: "#222831", height: 125 }}
         >
           <Body>
             <Text
-              style={{ marginTop: 10, alignSelf: "center", marginBottom: 20 }}
+              style={{
+                color: "#fc5185",
+                alignSelf: "center",
+                fontSize: 25,
+                fontWeight: "bold",
+              }}
             >
-              <Text style={{ fontSize: 30, color: "white" }}>
+              {this.state.selectedAccount}
+            </Text>
+            <Text style={{ alignSelf: "center" }}>
+              <Text style={{ fontSize: 20, color: "white" }}>
                 Available Balance:{" "}
               </Text>
               <Text
-                style={{ color: "green", fontSize: 25, fontWeight: "bold" }}
+                style={{ color: "#d3dbff", fontSize: 20, fontWeight: "bold" }}
               >
                 ${this.calculateNetTotal(accounts)}
               </Text>
             </Text>
-          </Body>
-        </Header>
-
-        <Content style={{ padding: 20 }}>
-          {/* <Form>
+            <Form style={{ alignSelf: "center" }}>
               <Picker
-                style={{ backgroundColor: "green" }}
                 mode="dropdown"
-                style={{ width: 100, height: 60 }}
+                iosIcon={<Icon style={{ color: "white" }} name="arrow-down" />}
+                placeholder="Check transactions for other accounts"
                 onValueChange={this.onHandleChange}
               >
-                <Picker.item
-                  label="choose account"
-                  value="Please choose an account"
-                  enabled={false}
-                />
                 {this.props.accounts.data.length
                   ? this.props.accounts.data.map((account) => {
                       return (
@@ -123,7 +119,11 @@ export class SpendingScreen extends React.Component {
                     })
                   : null}
               </Picker>
-            </Form> */}
+            </Form>
+          </Body>
+        </Header>
+
+        <Content style={{ padding: 20 }}>
           <LineChart
             data={{
               labels: ["MAY", "JUNE", "JULY"],
