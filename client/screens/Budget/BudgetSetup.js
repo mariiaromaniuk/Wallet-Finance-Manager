@@ -25,11 +25,12 @@ class BudgetSetup extends Component {
   render() {
     const question1 = (
       <View style={styles.container1}>
-        <Text>
+        <Text style={styles.categoryText}>
           What is your monthly income? ($)
         </Text>
         <View>
           <TextInput
+            style={styles.budgetInput}
             onChangeText={income => this.setState({ income: +income })}
             placeholder="Income"
           />
@@ -44,15 +45,17 @@ class BudgetSetup extends Component {
         </View>
       </View>
     );
+    console.log("INCOME", this.state.income)
 
     const question2 = (
       <View style={styles.container1}>
-        <Text>
+        <Text style={styles.categoryText}>
           What are your monthly static costs? ($)
           ex: rent, utilities, insurance, etc.
         </Text>
         <View>
           <TextInput
+            style={styles.budgetInput}
             onChangeText={staticCosts =>
               this.setState({ staticCosts: +staticCosts })}
             placeholder="Static Costs"
@@ -68,14 +71,16 @@ class BudgetSetup extends Component {
         </View>
       </View>
     );
+    console.log("STATIC", this.state.staticCosts)
 
     const question3 = (
       <View style={styles.container1}>
-        <Text>
+        <Text style={styles.categoryText}>
           How much would you like to save each month? ($)
         </Text>
         <View>
           <TextInput
+            style={styles.budgetInput}
             onChangeText={savings => this.setState({ savings: +savings })}
             placeholder="Savings"
           />
@@ -86,6 +91,7 @@ class BudgetSetup extends Component {
             onPress={() => {
               const spendingBudget =
                 this.state.income - this.state.staticCosts - this.state.savings;
+                this.setState({ ...this.state, spendingBudget });
               this.props.setBudget({ ...this.state, spendingBudget });
               this.props.navigation.navigate('EditCategories', {
                 title: 'Edit Categories'
@@ -95,8 +101,6 @@ class BudgetSetup extends Component {
         </View>
       </View>
     );
-
-    let question;
 
     if (this.state.question === 1) 
       return question1;
