@@ -19,7 +19,7 @@ import {
   Spending,
   Settings,
   Budget,
-  BudgetSetup,
+  BudgetSetup
 } from "./client/screens";
 import { Root } from "native-base";
 const Stack = createStackNavigator();

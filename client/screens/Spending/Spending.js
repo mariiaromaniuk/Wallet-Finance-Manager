@@ -26,11 +26,8 @@ import { View, FlatList, Button, Dimensions } from "react-native";
 
 import { connect } from "react-redux";
 import { fetchTransactions } from "../../store/spending";
-import {} from "../../store/accounts";
-import axios from "axios";
-import { server } from "../../server";
-import { featurePolicy } from "helmet";
 import { fetchAccounts } from "../../store/accounts";
+import { acc } from "react-native-reanimated";
 
 const netCash = 30000;
 
@@ -43,7 +40,8 @@ export class SpendingScreen extends React.Component {
     // this.fetchData = this.fetchData.bind(this);
     this.calculateNetTotal = this.calculateNetTotal.bind(this);
     this.calculateAccountTotal = this.calculateAccountTotal.bind(this);
-    this.getAmountsPerTransaction = this.getAmountsPerTransaction.bind(this);
+    // this.getAmountsPerTransaction = this.getAmountsPerTransaction.bind(this);
+    this.onHandleChange = this.onHandleChange.bind(this);
   }
 
   componentDidMount() {
@@ -51,7 +49,7 @@ export class SpendingScreen extends React.Component {
     this.props.fetchTransactions(this.props.user.id);
   }
 
-  onValueChange(value) {
+  onHandleChange(value) {
     this.setState({
       selectedAccount: value,
     });
@@ -73,27 +71,45 @@ export class SpendingScreen extends React.Component {
     return total;
   }
 
-  getAmountsPerTransaction(array) {}
+  // getAmountsPerTransaction(array) {}
   render() {
-    const info = this.props.transactions.filter((el) => {
-      return el.accountId === this.state.selectedAccount;
+    const accounts = this.props.accounts.data;
+    const transactions = this.props.transactions;
+    // console.log("TRANS", transactions);
+    // console.log("ACCOUNTS", accounts);
+    // console.log("STATE", this.state);
+    let id = "";
+    const acctInfo = accounts.filter((el) => {
+      return el.name === this.state.selectedAccount;
     });
-    console.log("INFO", info);
+    for (let i = 0; i < acctInfo.length; i++) {
+      id = acctInfo[i].account_id;
+    }
+    console.log("IDDDD", id);
+    // console.log("VALUES", Object.values(acctInfo[0]));
+    const info = transactions.filter((account) => {
+      return account.accountId === id;
+    });
+    console.log("INFOOOOO", info);
+
+    //"qP79qRJJ1Qhgwq9LpdBlcNeJKMokQzCdkgE7G"
+
+    // console.log("TRANSINFO", acctInfo);
     if (this.props.transactions.length) {
       return (
         <Container style={{ fontFamily: "Roboto" }}>
           <Header />
           <Text style={{ fontSize: 30 }}>
             Total Available Balance: $
-            {/* {this.calculateNetTotal(this.props.accounts.data)} */}
+            {this.calculateNetTotal(this.props.accounts.data)}
           </Text>
 
           <Form>
             <Picker
-              style={{backgroundColor: 'green'}}
+              style={{ backgroundColor: "green" }}
               mode="dropdown"
-              style={{ width: 120 }}
-              onValueChange={this.onValueChange.bind(this)}
+              style={{ width: 120, height: 60 }}
+              onValueChange={this.onHandleChange}
             >
               <Picker.item
                 label="choose account"
@@ -103,17 +119,17 @@ export class SpendingScreen extends React.Component {
               {this.props.accounts.data.length
                 ? this.props.accounts.data.map((account) => {
                     return (
-                      <Picker.Item
-                        label={account.account_id}
-                        value={account.account_id}
-                      />
+                      <Picker.Item label={account.name} value={account.name} />
                     );
                   })
                 : null}
             </Picker>
           </Form>
           <View>
-            <Text>Account Balance:</Text>
+            <Text>
+              Account Balance:
+              {this.calculateAccountTotal(this.props.accounts.data)}
+            </Text>
             <Text>Transactions for Account</Text>
             {info.length ? (
               <LineChart
@@ -181,7 +197,7 @@ export class SpendingScreen extends React.Component {
                     backgroundColor: "lightgray",
                     width: Dimensions.get("window").width,
                     borderBottomWidth: 1,
-                    marginBottom: 5
+                    marginBottom: 5,
                   }}
                 >
                   <Text>{item.name}</Text>
