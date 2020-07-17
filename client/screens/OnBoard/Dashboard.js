@@ -62,21 +62,20 @@ class Dashboard extends Component {
   }
 
   render() {
-    // console.log("This is the state");
-    // console.log(this.state);
-    // console.log("This is the props");
-    // console.log(this.props);
     const userFirstName = this.props.firstName;
     const accountsAndBalances = this.state.accountsAndBalances;
-    let transactionsByMonths = this.state.transactionsByMonths;
-    transactionsByMonths = renderTransactionsByMonths(transactionsByMonths);
-    console.log(transactionsByMonths);
+    const transactionsByMonths = this.state.transactionsByMonths;
+    const moneyEarned = renderPosTransactionsByMonths(transactionsByMonths);
+    const moneySpent = renderNegTransactionsByMonths(transactionsByMonths);
     return (
       <Container>
         <Text style={{ fontSize: 50, margin: 0, padding: 0 }}>
           Hello {userFirstName}
         </Text>
         {renderAccountAndBalances(accountsAndBalances).map((comp) => comp)}
+
+        {/* ============= MONEY EARNED ON A MONTHLY BASIS ============= */}
+        <Text>Monthy Earnings</Text>
         <LineChart
           data={{
             // get last three months pulled from Plaid api
@@ -84,9 +83,49 @@ class Dashboard extends Component {
             // insert in order total amount of income from last three months
             datasets: [
               {
-                data: transactionsByMonths.length
-                  ? transactionsByMonths
-                  : [0, 0, 0, 0],
+                data: moneyEarned.length ? moneyEarned : [0, 0, 0, 0],
+              },
+            ],
+          }}
+          width={Dimensions.get("window").width} // from react-native
+          height={220}
+          yAxisLabel="$"
+          yAxisSuffix="k"
+          yAxisInterval={1} // optional, defaults to 1
+          // Chart's configurations i.e styles, precision, etc.
+          chartConfig={{
+            backgroundColor: "#e26a00",
+            backgroundGradientFrom: "#fb8c00",
+            backgroundGradientTo: "#ffa726",
+            decimalPlaces: 2, // optional, defaults to 2dp
+            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            style: {
+              borderRadius: 16,
+            },
+            propsForDots: {
+              r: "6",
+              strokeWidth: "2",
+              stroke: "#ffa726",
+            },
+          }}
+          bezier
+          style={{
+            marginVertical: 8,
+            borderRadius: 16,
+          }}
+        />
+
+        {/* ============= MONEY SPENT ON A MONTHLY BASIS ============= */}
+        <Text>Monthy Expenditures</Text>
+        <LineChart
+          data={{
+            // get last three months pulled from Plaid api
+            labels: this.state.months,
+            // insert in order total amount of income from last three months
+            datasets: [
+              {
+                data: moneySpent.length ? moneySpent : [0, 0, 0, 0],
               },
             ],
           }}
@@ -143,7 +182,6 @@ const mapDispatch = (dispatch) => {
 export default connect(mapStateToProp, mapDispatch)(Dashboard);
 
 function renderAccountAndBalances(map) {
-  // console.log("renderAccountAndBalances func environment", map);
   const retArr = [];
   let id = 0;
   for (let key of map.keys()) {
@@ -155,16 +193,20 @@ function renderAccountAndBalances(map) {
   return retArr;
 }
 
-// ...{transactionsByMonths.keys().map(month => transactionsByMonths.get(month)[1] )}
-
-function renderTransactionsByMonths(map) {
-  // console.log("renderAccountAndBalances func environment", map);
+function renderPosTransactionsByMonths(map) {
   const retArr = [];
-  let id = 0;
+  for (let key of map.keys()) {
+    retArr.push(map.get(key)[1]);
+  }
+  return retArr;
+}
+
+function renderNegTransactionsByMonths(map) {
+  const retArr = [];
   for (let key of map.keys()) {
     console.log("inside the loop", key);
-    console.log(map.get(key)[1]);
-    retArr.push(map.get(key)[1]);
+    console.log(map.get(key)[0]);
+    retArr.push(map.get(key)[0]);
   }
   return retArr;
 }
@@ -198,7 +240,6 @@ async function organizeTransactionsByMonths(
         transactionsByMonths.set(currentMonth, [0, 0]);
       }
     }
-    // console.log("transactionsByMonths", transactionsByMonths);
 
     // partitioning money spent/earned by months where index 0 => money spent & index 1 => incoming money
     for (let i = 0; i < transactions.length; i++) {
