@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from "react";
 import { View, Text, ScrollView } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import Slider from 'react-native-slider';
 import { styles } from '../../styles';
 
 
-class EditCategories extends React.Component {
+class EditCategories extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,6 +16,12 @@ class EditCategories extends React.Component {
     };
     this.toTitle = this.toTitle.bind(this);
   }
+
+//   setStateFunction(newRemaining) {
+//     this.setState({
+//         remaining:newRemaining
+//     })
+//   }
 
   componentDidMount() {
     this.props.fetchBudget(this.props.user.id);
@@ -145,38 +151,60 @@ class EditCategories extends React.Component {
                         </View>
 
                         <Slider
-                          trackStyle={styles.track}
-                          thumbStyle={styles.thumb}
-                          minimumTrackTintColor="#D16C58"
-                          maximumTrackTintColor="#b7b7b7"
-                          style={styles.slider}
-                          value={category.percentage}
-                          onSlidingComplete={value => {
-                              console.log("NEW VALUE", value)
-                              console.log("REMINING", this.state.remaining)
-                            this.setState(
-                                prevState => {
-                              const remainingNew =
-                                this.state.remaining +
-                                (category.percentage - value);
-                              return {
-                                categories: [...prevState.categories].map(
-                                  elem => {
-                                    if (elem.name === category.name) {
-                                      elem.percentage = value;
-                                      return elem;
-                                    } else {
-                                      return elem;
-                                    }
-                                  }
-                                ), 
-                                remaining: this.state.remaining,
-                              };
-                            });
-                          }} 
-                          step={5}
-                          minimumValue={0}
-                          maximumValue={100}
+                            trackStyle={styles.track}
+                            thumbStyle={styles.thumb}
+                            minimumTrackTintColor="#D16C58"
+                            maximumTrackTintColor="#b7b7b7"
+                            style={styles.slider}
+                            value={category.percentage}
+
+                            onSlidingComplete={value => {
+
+                                const remainingNew =
+                                  this.state.remaining +
+                                  (category.percentage - value);
+                                  console.log("NEW REMINING", remainingNew)
+
+                                //   const categoriesNew = this.state.catigories.map(
+                                //     elem => {
+                                //       if (elem.name === category.name) {
+                                //         elem.percentage = value;
+                                //         return elem;
+                                //       } else {
+                                //         return elem;
+                                //       }
+                                //     })
+                                // console.log("NEW REMINING", categoriesNew)
+
+                                  this.state.remaining = remainingNew
+                                //   this.state.categories = categoriesNew
+
+
+                            //   this.setState(prevState => {
+                            //     const remainingNew =
+                            //       prevState.remaining +
+                            //       (category.percentage - value);
+                            //       console.log("NEW REMINING", remainingNew)
+                            //     return {
+                            //       categories: [...prevState.categories].map(
+                            //         elem => {
+                            //           if (elem.name === category.name) {
+                            //             elem.percentage = value;
+                            //             return elem;
+                            //           } else {
+                            //             return elem;
+                            //           }
+                            //         }
+                            //       ),
+                            //       remaining: remainingNew
+                            //     };
+                            //   });
+                              console.log("STATE REMINING", this.state.remaining)
+                              console.log("STATE REMINING", this.state.categories)
+                            }}
+                            step={5}
+                            minimumValue={0}
+                            maximumValue={100}
                         />
                       </View>
                     </Card>
