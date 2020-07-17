@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const { Account,User } = require("../db/models");
+const { Account, Transaction } = require("../db/models");
 module.exports = router;
 
-router.get("/", async (req, res, next) => { 
+router.get("/", async (req, res, next) => {
   try {
     if (req.user) {
       const data = await Account.findAll({
@@ -56,7 +56,6 @@ router.get("/:id", async (req, res, next) => {
     next(error);
   }
 });
-
 
 router.post("/", async (req, res, next) => {
   try {

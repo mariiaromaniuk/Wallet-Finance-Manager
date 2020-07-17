@@ -27,6 +27,7 @@ import { View, FlatList, Button, Dimensions } from "react-native";
 import { connect } from "react-redux";
 import { fetchTransactions } from "../../store/spending";
 import { fetchAccounts } from "../../store/accounts";
+import { acc } from "react-native-reanimated";
 
 const netCash = 30000;
 
@@ -72,19 +73,28 @@ export class SpendingScreen extends React.Component {
 
   // getAmountsPerTransaction(array) {}
   render() {
-    // const info = this.props.accounts.data.filter((el) => {
-    //   return el.name === this.state.selectedAccount;
-    // });
-    //   if(this.props.accounts.data){
-    // const data = this.props.transactions.filter((el) => {
-    //   return el.accountId === this.props.account.data.accountId;
-    // });
-    // console.log("JRLKADJLKSFASD", data);
-    // }
-    // console.log("INFO", info);
-    console.log("TRANS", this.props.transactions);
-    // console.log("ACCOUNTS", this.props.accounts.data);
+    const accounts = this.props.accounts.data;
+    const transactions = this.props.transactions;
+    // console.log("TRANS", transactions);
+    // console.log("ACCOUNTS", accounts);
     // console.log("STATE", this.state);
+    let id = "";
+    const acctInfo = accounts.filter((el) => {
+      return el.name === this.state.selectedAccount;
+    });
+    for (let i = 0; i < acctInfo.length; i++) {
+      id = acctInfo[i].account_id;
+    }
+    console.log("IDDDD", id);
+    // console.log("VALUES", Object.values(acctInfo[0]));
+    const info = transactions.filter((account) => {
+      return account.accountId === id;
+    });
+    console.log("INFOOOOO", info);
+
+    //"qP79qRJJ1Qhgwq9LpdBlcNeJKMokQzCdkgE7G"
+
+    // console.log("TRANSINFO", acctInfo);
     if (this.props.transactions.length) {
       return (
         <Container style={{ fontFamily: "Roboto" }}>
@@ -115,7 +125,7 @@ export class SpendingScreen extends React.Component {
                 : null}
             </Picker>
           </Form>
-          {/* <View>
+          <View>
             <Text>
               Account Balance:
               {this.calculateAccountTotal(this.props.accounts.data)}
@@ -196,7 +206,7 @@ export class SpendingScreen extends React.Component {
                 </View>
               );
             })}
-          </Content> */}
+          </Content>
         </Container>
       );
     } else {
