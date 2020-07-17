@@ -6,7 +6,7 @@ import { View, Dimensions } from "react-native";
 import { fetchTransactions } from "../../store/spending";
 import { fetchAccounts } from "../../store/accounts";
 import { fetchBudget } from "../../store/budget";
-
+import { ScrollView } from "react-native";
 import {
   LineChart,
   BarChart,
@@ -76,130 +76,133 @@ class Dashboard extends Component {
 
     return (
       <Container>
-        <Text style={{ fontSize: 50, margin: 0, padding: 0 }}>
-          Hello {userFirstName}
-        </Text>
-        {renderAccountAndBalances(accountsAndBalances).map((comp) => comp)}
+        <ScrollView>
+          <Text style={{ fontSize: 50, margin: 0, padding: 0 }}>
+            Hello {userFirstName}
+          </Text>
+          {renderAccountAndBalances(accountsAndBalances).map((comp) => comp)}
 
-        {/* ============= MONEY EARNED ON A MONTHLY BASIS ============= */}
-        <Text>Monthy Earnings</Text>
-        <LineChart
-          data={{
-            // get last three months pulled from Plaid api
-            labels: this.state.months,
-            // insert in order total amount of income from last three months
-            datasets: [
-              {
-                data: moneyEarned.length ? moneyEarned : [0, 0, 0, 0],
+          {/* ============= MONEY EARNED ON A MONTHLY BASIS ============= */}
+          <Text>Monthy Earnings</Text>
+          <LineChart
+            data={{
+              // get last three months pulled from Plaid api
+              labels: this.state.months,
+              // insert in order total amount of income from last three months
+              datasets: [
+                {
+                  data: moneyEarned.length ? moneyEarned : [0, 0, 0, 0],
+                },
+              ],
+            }}
+            width={Dimensions.get("window").width} // from react-native
+            height={220}
+            yAxisLabel="$"
+            yAxisSuffix="k"
+            yAxisInterval={1} // optional, defaults to 1
+            // Chart's configurations i.e styles, precision, etc.
+            chartConfig={{
+              backgroundColor: "#e26a00",
+              backgroundGradientFrom: "#fb8c00",
+              backgroundGradientTo: "#ffa726",
+              decimalPlaces: 2, // optional, defaults to 2dp
+              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              style: {
+                borderRadius: 16,
               },
-            ],
-          }}
-          width={Dimensions.get("window").width} // from react-native
-          height={220}
-          yAxisLabel="$"
-          yAxisSuffix="k"
-          yAxisInterval={1} // optional, defaults to 1
-          // Chart's configurations i.e styles, precision, etc.
-          chartConfig={{
-            backgroundColor: "#e26a00",
-            backgroundGradientFrom: "#fb8c00",
-            backgroundGradientTo: "#ffa726",
-            decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            style: {
-              borderRadius: 16,
-            },
-            propsForDots: {
-              r: "6",
-              strokeWidth: "2",
-              stroke: "#ffa726",
-            },
-          }}
-          bezier
-          style={{
-            marginVertical: 8,
-            borderRadius: 16,
-          }}
-        />
-
-        {/* ============= MONEY SPENT ON A MONTHLY BASIS ============= */}
-        <Text>Monthy Expenditures</Text>
-        <LineChart
-          data={{
-            // get last three months pulled from Plaid api
-            labels: this.state.months,
-            // insert in order total amount of income from last three months
-            datasets: [
-              {
-                data: moneySpent.length ? moneySpent : [0, 0, 0, 0],
+              propsForDots: {
+                r: "6",
+                strokeWidth: "2",
+                stroke: "#ffa726",
               },
-            ],
-          }}
-          width={Dimensions.get("window").width} // from react-native
-          height={220}
-          yAxisLabel="$"
-          yAxisSuffix="k"
-          yAxisInterval={1} // optional, defaults to 1
-          // Chart's configurations i.e styles, precision, etc.
-          chartConfig={{
-            backgroundColor: "#e26a00",
-            backgroundGradientFrom: "#fb8c00",
-            backgroundGradientTo: "#ffa726",
-            decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            style: {
+            }}
+            bezier
+            style={{
+              marginVertical: 8,
               borderRadius: 16,
-            },
-            propsForDots: {
-              r: "6",
-              strokeWidth: "2",
-              stroke: "#ffa726",
-            },
-          }}
-          bezier
-          style={{
-            marginVertical: 8,
-            borderRadius: 16,
-          }}
-        />
+            }}
+          />
 
-        {/* ============= BUDGET PROGRESSION ============= */}
-        <ProgressChart
-          // each value represents a goal ring in Progress chart
-          data={{
-            labels: Object.keys(budgets).filter(
-              (label) =>
-                label !== "id" &&
-                label !== "userId" &&
-                label !== "updatedAt" &&
-                label !== "createdAt"
-            ), // all budgets, dynamic
-            data: progress.length ? progress : [0, 0, 0, 0, 0, 0, 0],
-          }}
-          width={Dimensions.get("window").width} // from react-native
-          height={220}
-          strokeWidth={16}
-          radius={32}
-          chartConfig={{
-            backgroundColor: "#e26a00",
-            backgroundGradientFrom: "#fb8c00",
-            backgroundGradientTo: "#ffa726",
-            decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            style: {
+          {/* ============= MONEY SPENT ON A MONTHLY BASIS ============= */}
+          <Text>Monthy Expenditures</Text>
+          <LineChart
+            data={{
+              // get last three months pulled from Plaid api
+              labels: this.state.months,
+              // insert in order total amount of income from last three months
+              datasets: [
+                {
+                  data: moneySpent.length ? moneySpent : [0, 0, 0, 0],
+                },
+              ],
+            }}
+            width={Dimensions.get("window").width} // from react-native
+            height={220}
+            yAxisLabel="$"
+            yAxisSuffix="k"
+            yAxisInterval={1} // optional, defaults to 1
+            // Chart's configurations i.e styles, precision, etc.
+            chartConfig={{
+              backgroundColor: "#e26a00",
+              backgroundGradientFrom: "#fb8c00",
+              backgroundGradientTo: "#ffa726",
+              decimalPlaces: 2, // optional, defaults to 2dp
+              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              style: {
+                borderRadius: 16,
+              },
+              propsForDots: {
+                r: "6",
+                strokeWidth: "2",
+                stroke: "#ffa726",
+              },
+            }}
+            bezier
+            style={{
+              marginVertical: 8,
               borderRadius: 16,
-            },
-            propsForDots: {
-              r: "6",
-              strokeWidth: "2",
-              stroke: "#ffa726",
-            },
-          }}
-          hideLegend={false}
-        />
+            }}
+          />
+
+          {/* ============= BUDGET PROGRESSION ============= */}
+          <Text>Budget Progression</Text>
+          <ProgressChart
+            // each value represents a goal ring in Progress chart
+            data={{
+              labels: Object.keys(budgets).filter(
+                (label) =>
+                  label !== "id" &&
+                  label !== "userId" &&
+                  label !== "updatedAt" &&
+                  label !== "createdAt"
+              ), // all budgets, dynamic
+              data: progress.length ? progress : [0, 0, 0, 0, 0, 0, 0],
+            }}
+            width={Dimensions.get("window").width} // from react-native
+            height={220}
+            strokeWidth={16}
+            radius={32}
+            chartConfig={{
+              backgroundColor: "#e26a00",
+              backgroundGradientFrom: "#fb8c00",
+              backgroundGradientTo: "#ffa726",
+              decimalPlaces: 2, // optional, defaults to 2dp
+              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              style: {
+                borderRadius: 16,
+              },
+              propsForDots: {
+                r: "6",
+                strokeWidth: "2",
+                stroke: "#ffa726",
+              },
+            }}
+            hideLegend={false}
+          />
+        </ScrollView>
       </Container>
     );
   }
