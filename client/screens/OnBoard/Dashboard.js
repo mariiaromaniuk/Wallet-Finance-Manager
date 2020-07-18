@@ -186,7 +186,7 @@ class Dashboard extends Component {
             }}
             width={Dimensions.get("window").width} // from react-native
             height={220}
-            strokeWidth={16}
+            strokeWidth={7}
             radius={32}
             chartConfig={{
               backgroundColor: "#e26a00",
