@@ -37,8 +37,7 @@ class Profile extends React.Component {
         <Header
           iosBarStyle
           androidStatusBarColor
-          span
-          style={{ backgroundColor: "#222831", height: 175 }}
+          style={{ backgroundColor: "#222831", height: 100 }}
         >
           <Body
             style={{
@@ -86,17 +85,6 @@ class Profile extends React.Component {
             block
             onPress={() => this.props.navigation.navigate("Settings")}
             primary
-            style={{
-              margin: 10,
-            }}
-          >
-            <Text style={{ fontWeight: "bold" }}>User Settings</Text>
-          </Button>
-          <Button
-            large
-            block
-            secondary
-            onPress={() => this.props.navigation.navigate("Link")}
             style={{
               margin: 10,
             }}
