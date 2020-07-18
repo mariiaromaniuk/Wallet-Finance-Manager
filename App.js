@@ -19,7 +19,7 @@ import {
   Spending,
   Settings,
   Budget,
-  BudgetSetup
+  BudgetSetup,
 } from "./client/screens";
 import { Root } from "native-base";
 const Stack = createStackNavigator();
@@ -61,6 +61,18 @@ export default class App extends Component {
           }}
         />
         <Tabs.Screen
+          name="Transactions"
+          component={Spending}
+          options={{
+            tabBarLabel: "Transactions",
+            tabBarIcon: ({ color, size }) => {
+              return (
+                <FontAwesome5 name="chart-area" size={size} color={color} />
+              );
+            },
+          }}
+        />
+        <Tabs.Screen
           name="Profile"
           component={Profile}
           options={{
@@ -72,18 +84,6 @@ export default class App extends Component {
                   size={30}
                   color={color}
                 />
-              );
-            },
-          }}
-        />
-        <Tabs.Screen
-          name="Transactions"
-          component={Spending}
-          options={{
-            tabBarLabel: "Transactions",
-            tabBarIcon: ({ color, size }) => {
-              return (
-                <FontAwesome5 name="chart-area" size={size} color={color} />
               );
             },
           }}
