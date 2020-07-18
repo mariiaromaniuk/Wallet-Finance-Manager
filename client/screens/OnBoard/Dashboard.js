@@ -1,8 +1,19 @@
 import React, { Component } from "react";
-import { Container, Text, Item, Form, Input, Button, Label } from "native-base";
+import {
+  Container,
+  Header,
+  Text,
+  Picker,
+  Icon,
+  Body,
+  Item,
+  Form,
+  Input,
+  Button,
+  Label,
+} from "native-base";
 import { connect } from "react-redux";
 import { View, Dimensions } from "react-native";
-// import { fetchInfo, fetchTransactions } from "../../store/Dashboard";
 import { fetchTransactions } from "../../store/spending";
 import { fetchAccounts } from "../../store/accounts";
 import { fetchBudget } from "../../store/budget";
@@ -51,7 +62,6 @@ class Dashboard extends Component {
       accounts,
       transactions
     );
-    // console.log("transactionsByMonths part 3", transactionsByMonths);
 
     this.setState({
       ...this.state,
@@ -70,20 +80,38 @@ class Dashboard extends Component {
     const moneyEarned = renderPosTransactionsByMonths(transactionsByMonths);
     const moneySpent = renderNegTransactionsByMonths(transactionsByMonths);
     const budgets = this.props.budget;
-    console.log(budgets);
     const progress = budgetProgress(budgets);
-    console.log("asfasfdasdf", progress);
+    const chartWidth = Dimensions.get("window").width - 40;
 
     return (
       <Container>
-        <ScrollView>
+        <Header
+          iosBarStyle
+          androidStatusBarColor
+          style={{ backgroundColor: "#222831", height: 60 }}
+        >
+          <Body>
+            <Text
+              style={{
+                color: "#ffff",
+                alignSelf: "center",
+                fontSize: 20,
+                fontWeight: "bold",
+                paddingBottom: 15,
+              }}
+            >
+              Overview
+            </Text>
+          </Body>
+        </Header>
+        <ScrollView style={{ padding: 20 }}>
           <Text style={{ fontSize: 50, margin: 0, padding: 0 }}>
             Hello {userFirstName}
           </Text>
           {renderAccountAndBalances(accountsAndBalances).map((comp) => comp)}
 
           {/* ============= MONEY EARNED ON A MONTHLY BASIS ============= */}
-          <Text>Monthy Earnings</Text>
+          <Text style={{ alignSelf: "center" }}>Monthy Earnings</Text>
           <LineChart
             data={{
               // get last three months pulled from Plaid api
@@ -95,7 +123,7 @@ class Dashboard extends Component {
                 },
               ],
             }}
-            width={Dimensions.get("window").width} // from react-native
+            width={chartWidth} // from react-native
             height={220}
             yAxisLabel="$"
             yAxisSuffix="k"
@@ -125,7 +153,7 @@ class Dashboard extends Component {
           />
 
           {/* ============= MONEY SPENT ON A MONTHLY BASIS ============= */}
-          <Text>Monthy Expenditures</Text>
+          <Text style={{ alignSelf: "center" }}>Monthy Expenditures</Text>
           <LineChart
             data={{
               // get last three months pulled from Plaid api
@@ -137,7 +165,7 @@ class Dashboard extends Component {
                 },
               ],
             }}
-            width={Dimensions.get("window").width} // from react-native
+            width={chartWidth} // from react-native
             height={220}
             yAxisLabel="$"
             yAxisSuffix="k"
@@ -167,7 +195,9 @@ class Dashboard extends Component {
           />
 
           {/* ============= BUDGET PROGRESSION ============= */}
-          <Text>Budget Progression</Text>
+          <Text style={{ alignSelf: "center", paddingBottom: 8 }}>
+            Budget Progression
+          </Text>
           <ProgressChart
             // each value represents a goal ring in Progress chart
             data={{
@@ -184,10 +214,10 @@ class Dashboard extends Component {
               ), // all budgets, dynamic
               data: progress.length ? progress : [0, 0, 0, 0, 0, 0, 0],
             }}
-            width={Dimensions.get("window").width} // from react-native
+            width={chartWidth} // from react-native
             height={220}
             strokeWidth={7}
-            radius={32}
+            radius={20}
             chartConfig={{
               backgroundColor: "#e26a00",
               backgroundGradientFrom: "#fb8c00",
