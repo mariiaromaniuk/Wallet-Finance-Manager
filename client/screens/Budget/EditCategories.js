@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from "react";
 import { View, Text, ScrollView } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import Slider from 'react-native-slider';
 import { styles } from '../../styles';
 
 
-class EditCategories extends React.Component {
+class EditCategories extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,6 +22,8 @@ class EditCategories extends React.Component {
   }
 
   static getDerivedStateFromProps(props, state) {
+      console.log("PROPS", props)
+      console.log("STATE", state)
     if (props.budget && props.budget.foodAndDrink !== state.categories.name) {
       return {
         categories: [
@@ -87,7 +89,7 @@ class EditCategories extends React.Component {
   }
 
   render() {
-    console.log("BUDGET", this.state.spendingBudget)
+    const userId = this.props.user.id
     return (
       <ScrollView>
         <View>
@@ -118,8 +120,8 @@ class EditCategories extends React.Component {
                 </View>
               </View>
               <View style={{ paddingLeft: 5, paddingRight: 5 }} />
-              {/* All Categories */}
 
+              {/* All Categories */}
               {this.state.categories &&
                 this.state.categories.map(category => {
                   return (
@@ -144,37 +146,33 @@ class EditCategories extends React.Component {
                         </View>
 
                         <Slider
-                          trackStyle={styles.track}
-                          thumbStyle={styles.thumb}
-                          minimumTrackTintColor="#D16C58"
-                          maximumTrackTintColor="#b7b7b7"
-                          style={styles.slider}
-                          value={category.percentage}
-                          onSlidingComplete={value => {
-                              console.log("NEW VALUE", value)
-                              console.log("REMINING", this.state.remaining)
-                            this.setState(prevState => {
-                              const remaining =
-                                prevState.remaining +
-                                (category.percentage - value);
-                              return {
-                                categories: [...prevState.categories].map(
-                                  elem => {
-                                    if (elem.name === category.name) {
-                                      elem.percentage = value;
-                                      return elem;
-                                    } else {
-                                      return elem;
-                                    }
-                                  }
-                                ),
-                                remaining: remaining
-                              };
-                            });
-                          }}
-                          step={5}
-                          minimumValue={0}
-                          maximumValue={100}
+                            trackStyle={styles.track}
+                            thumbStyle={styles.thumb}
+                            minimumTrackTintColor="#D16C58"
+                            maximumTrackTintColor="#b7b7b7"
+                            style={styles.slider}
+                            value={category.percentage}
+                            onSlidingComplete={value => {
+                                const remainingNew =
+                                  this.state.remaining +
+                                  (category.percentage - value);
+                                this.state.categories = [...this.state.categories].map(
+                                    elem => {
+                                      if (elem.name === category.name) {
+                                        elem.percentage = value;
+                                        return elem;
+                                      } else {
+                                        return elem;
+                                      }
+                                    })
+                                  this.state.remaining = remainingNew;
+
+                              console.log("STATE REMINING", this.state.remaining)
+                              console.log("STATE CATEGORIES", this.state.categories)
+                            }}
+                            step={5}
+                            minimumValue={0}
+                            maximumValue={100}
                         />
                       </View>
                     </Card>
@@ -184,7 +182,7 @@ class EditCategories extends React.Component {
               {/* Button */}
               <Button
                 raised
-                disabled={this.state.remaining >= 0 ? false : true}
+                // disabled={this.state.remaining >= 0 ? false : true}
                 type="outline"
                 block style={{ margin: 100, marginTop: 40 }} 
                 textStyle={{ textAlign: 'center' }}
@@ -199,7 +197,7 @@ class EditCategories extends React.Component {
                     service: this.state.categories[4].percentage,
                     community: this.state.categories[5].percentage,
                     shops: this.state.categories[6].percentage
-                  });
+                  }, userId);
                   console.log("categories", this.state.categories[0].percentage)
                   this.props.navigation.navigate('Budget', { title: 'Budget' });
                 }}
@@ -224,7 +222,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     fetchBudget: userId => dispatch(fetchBudget(userId)),
-    setBudget: budget => dispatch(setBudget(budget)),
+    setBudget: (budget, userId) => dispatch(setBudget(budget, userId)),
   };
 };
 

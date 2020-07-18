@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
    backgroundColor: "white"
  },
  container1: {
+  marginTop: 30,
   flexGrow: 1,
   paddingTop: 40,
 },

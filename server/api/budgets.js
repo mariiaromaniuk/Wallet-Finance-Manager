@@ -37,7 +37,6 @@ router.post("/", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   try {
     // const user = req.user;
-    console.log("@@@", req.params.id)
     const budget = await Budget.findOne({
       where: {
         // userId: user.id
