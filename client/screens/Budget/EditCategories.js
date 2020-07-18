@@ -29,6 +29,8 @@ class EditCategories extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
+      console.log("PROPS", props)
+      console.log("STATE", state)
     if (props.budget && props.budget.foodAndDrink !== state.categories.name) {
       return {
         categories: [
@@ -125,8 +127,8 @@ class EditCategories extends Component {
                 </View>
               </View>
               <View style={{ paddingLeft: 5, paddingRight: 5 }} />
+              
               {/* All Categories */}
-
               {this.state.categories &&
                 this.state.categories.map(category => {
                   return (
@@ -157,50 +159,23 @@ class EditCategories extends Component {
                             maximumTrackTintColor="#b7b7b7"
                             style={styles.slider}
                             value={category.percentage}
-
                             onSlidingComplete={value => {
-
                                 const remainingNew =
                                   this.state.remaining +
                                   (category.percentage - value);
-                                  console.log("NEW REMINING", remainingNew)
+                                this.state.categories = [...this.state.categories].map(
+                                    elem => {
+                                      if (elem.name === category.name) {
+                                        elem.percentage = value;
+                                        return elem;
+                                      } else {
+                                        return elem;
+                                      }
+                                    })
+                                  this.state.remaining = remainingNew;
 
-                                //   const categoriesNew = this.state.catigories.map(
-                                //     elem => {
-                                //       if (elem.name === category.name) {
-                                //         elem.percentage = value;
-                                //         return elem;
-                                //       } else {
-                                //         return elem;
-                                //       }
-                                //     })
-                                // console.log("NEW REMINING", categoriesNew)
-
-                                  this.state.remaining = remainingNew
-                                //   this.state.categories = categoriesNew
-
-
-                            //   this.setState(prevState => {
-                            //     const remainingNew =
-                            //       prevState.remaining +
-                            //       (category.percentage - value);
-                            //       console.log("NEW REMINING", remainingNew)
-                            //     return {
-                            //       categories: [...prevState.categories].map(
-                            //         elem => {
-                            //           if (elem.name === category.name) {
-                            //             elem.percentage = value;
-                            //             return elem;
-                            //           } else {
-                            //             return elem;
-                            //           }
-                            //         }
-                            //       ),
-                            //       remaining: remainingNew
-                            //     };
-                            //   });
-                              console.log("STATE REMINING", this.state.remaining)
-                              console.log("STATE REMINING", this.state.categories)
+                            //   console.log("STATE REMINING", this.state.remaining)
+                            //   console.log("STATE CATEGORIES", this.state.categories)
                             }}
                             step={5}
                             minimumValue={0}
