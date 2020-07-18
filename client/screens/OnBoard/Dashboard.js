@@ -172,11 +172,15 @@ class Dashboard extends Component {
             // each value represents a goal ring in Progress chart
             data={{
               labels: Object.keys(budgets).filter(
-                (label) =>
-                  label !== "id" &&
-                  label !== "userId" &&
-                  label !== "updatedAt" &&
-                  label !== "createdAt"
+                (key) =>
+                  key !== "id" &&
+                  key !== "userId" &&
+                  key !== "updatedAt" &&
+                  key !== "createdAt" &&
+                  key !== "income" &&
+                  key !== "staticCosts" &&
+                  key !== "savings" &&
+                  key !== "spendingBudget"
               ), // all budgets, dynamic
               data: progress.length ? progress : [0, 0, 0, 0, 0, 0, 0],
             }}
@@ -377,12 +381,17 @@ async function organizeTransactionsByMonths(
 
 function budgetProgress(obj) {
   const retArr = [];
+  console.log(obj);
   for (const [key, value] of Object.entries(obj)) {
     if (
       key !== "id" &&
       key !== "userId" &&
       key !== "updatedAt" &&
-      key !== "createdAt"
+      key !== "createdAt" &&
+      key !== "income" &&
+      key !== "staticCosts" &&
+      key !== "savings" &&
+      key !== "spendingBudget"
     ) {
       retArr.push(value / 100);
     }
