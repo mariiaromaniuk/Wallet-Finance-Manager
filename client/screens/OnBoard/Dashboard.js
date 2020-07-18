@@ -105,8 +105,8 @@ class Dashboard extends Component {
           </Body>
         </Header>
         <ScrollView style={{ padding: 20 }}>
-          <Text style={{ fontSize: 50, margin: 0, padding: 0 }}>
-            Hello {userFirstName}
+          <Text style={{ fontSize: 20, margin: 10, padding: 5 }}>
+            Hello {userFirstName}, here's your account overview!
           </Text>
           {renderAccountAndBalances(accountsAndBalances).map((comp) => comp)}
 
