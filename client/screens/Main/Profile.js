@@ -47,17 +47,6 @@ class Profile extends React.Component {
               alignItems: "center",
             }}
           >
-            <Thumbnail
-              style={{
-                width: 70,
-                height: 70,
-                margin: 5,
-              }}
-              source={{
-                uri:
-                  "https://cdn.shopify.com/shopifycloud/hatchful-web/assets/6fcc76cfd1c59f44d43a485167fb3139.png",
-              }}
-            />
             <Text
               style={{
                 fontSize: 30,
