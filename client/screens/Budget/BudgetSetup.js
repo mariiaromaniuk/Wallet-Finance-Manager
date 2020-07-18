@@ -42,6 +42,8 @@ class BudgetSetup extends Component {
       <View style={styles.container1}>
         <Text style={styles.categoryText}>
           What are your monthly static costs? ($)
+        </Text>
+        <Text style={styles.categoryText}>
           ex: rent, utilities, insurance, etc.
         </Text>
         <View>
@@ -56,7 +58,10 @@ class BudgetSetup extends Component {
 
       <View style={styles.container1}>
         <Text style={styles.categoryText}>
-          How much would you like to save each month? ($)
+          How much would you like 
+        </Text>
+        <Text style={styles.categoryText}>
+          to save each month? ($)
         </Text>
         <View>
           <TextInput
@@ -66,7 +71,7 @@ class BudgetSetup extends Component {
           />
           <Button
             type="outline"
-            block style={{ margin: 100, marginTop: 40 }} bordered danger
+            block style={{ margin: 100, marginTop: 95 }} bordered danger
             title={"Next"}
             onPress={() => {
               const spendingBudget =

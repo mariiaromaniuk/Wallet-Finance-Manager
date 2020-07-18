@@ -17,15 +17,8 @@ class EditCategories extends Component {
     this.toTitle = this.toTitle.bind(this);
   }
 
-//   setStateFunction(newRemaining) {
-//     this.setState({
-//         remaining:newRemaining
-//     })
-//   }
-
   componentDidMount() {
     this.props.fetchBudget(this.props.user.id);
-    console.log("REMINING2", this.state.remaining)
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -127,7 +120,7 @@ class EditCategories extends Component {
                 </View>
               </View>
               <View style={{ paddingLeft: 5, paddingRight: 5 }} />
-              
+
               {/* All Categories */}
               {this.state.categories &&
                 this.state.categories.map(category => {
@@ -174,8 +167,8 @@ class EditCategories extends Component {
                                     })
                                   this.state.remaining = remainingNew;
 
-                            //   console.log("STATE REMINING", this.state.remaining)
-                            //   console.log("STATE CATEGORIES", this.state.categories)
+                              console.log("STATE REMINING", this.state.remaining)
+                              console.log("STATE CATEGORIES", this.state.categories)
                             }}
                             step={5}
                             minimumValue={0}
@@ -189,7 +182,7 @@ class EditCategories extends Component {
               {/* Button */}
               <Button
                 raised
-                disabled={this.state.remaining >= 0 ? false : true}
+                // disabled={this.state.remaining >= 0 ? false : true}
                 type="outline"
                 block style={{ margin: 100, marginTop: 40 }} 
                 textStyle={{ textAlign: 'center' }}
