@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     padding: 8,
     color: "#D16C58",
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 22,
  },
  container: {
    flexGrow: 1,
@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
    backgroundColor: "white"
  },
  container1: {
+  marginTop: 30,
   flexGrow: 1,
   paddingTop: 40,
 },
@@ -104,7 +105,7 @@ export const styles = StyleSheet.create({
  categoryText: {
   alignSelf: 'center',
   color: '#000000',
-  fontWeight: 'bold',
+  fontWeight: 'normal',
   fontSize: 16,
 },
  editCategoryView: {
@@ -143,14 +144,15 @@ export const styles = StyleSheet.create({
    alignItems: 'center',
  },
  budgetInput: {
-   padding: 10,
-   width: '60%',
-   height: 50,
-   borderColor: "blue",
-   backgroundColor: '#3947ad',
-   borderWidth: 2,
-   color: "white",
+   padding: 0,
+   width: '52%',
+   height: 45,
+   borderColor: "grey",
+   borderWidth: 1,
+   color: "black",
    fontSize: 18,
+   alignSelf: "center",
+   borderRadius: 4,
  },
 
 });

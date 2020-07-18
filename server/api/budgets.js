@@ -36,10 +36,11 @@ router.post("/", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
-    const user = req.user;
+    // const user = req.user;
     const budget = await Budget.findOne({
       where: {
-        userId: user.id
+        // userId: user.id
+        userId: req.params.id
       }
     });
     if (!budget) res.sendStatus(404);

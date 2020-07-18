@@ -51,7 +51,7 @@ class Dashboard extends Component {
       accounts,
       transactions
     );
-    console.log("transactionsByMonths part 3", transactionsByMonths);
+    // console.log("transactionsByMonths part 3", transactionsByMonths);
 
     this.setState({
       ...this.state,
@@ -209,7 +209,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProp = (state) => {
-  console.log("mapstatetoprops", state);
+  // console.log("mapstatetoprops", state);
   return {
     firstName: state.user.firstName,
     transactions: state.transactions,
@@ -233,7 +233,7 @@ function renderAccountAndBalances(map) {
   const retArr = [];
   let id = 0;
   for (let key of map.keys()) {
-    console.log("inside the loop", key);
+    // console.log("inside the loop", key);
     retArr.push(
       <Banner key={id++} header={key} amount={map.get(key)}></Banner>
     );

@@ -21,13 +21,14 @@ export const fetchBudget = userId => {
   };
 };
 
-export const setBudget = budget => {
+export const setBudget = (budget, userId) => {
   return async dispatch => {
     try {
-      const res = await axios.put(`http://localhost:8080/api/budget`, budget);
+      const res = await axios.put(`http://localhost:8080/api/budget/${userId}`, budget);
       dispatch(updateBudget(res.data));
     } catch (err) {
       console.log('Error setting budget: ', err.message);
+      // console.log("!!!", budget)
     }
   };
 };

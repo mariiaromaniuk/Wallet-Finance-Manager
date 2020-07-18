@@ -26,3 +26,4 @@ export default store;
 export * from "./store/user";
 export * from "./store/spending";
 export * from "./store/accounts";
+export * from './store/budget';
