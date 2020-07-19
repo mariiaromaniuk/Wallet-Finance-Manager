@@ -37,8 +37,8 @@ class Profile extends React.Component {
         <Header
           iosBarStyle
           androidStatusBarColor
+          style={{ backgroundColor: "#222831", height: 100 }}
           span
-          style={{ backgroundColor: "#222831", height: 125 }}
         >
           <Body
             style={{
@@ -86,17 +86,8 @@ class Profile extends React.Component {
             onPress={() => this.props.navigation.navigate("Settings")}
             primary
             style={{
-              margin: 10,backgroundColor: "#6CBDC3",
-            }}
-          >
-            <Text style={{ fontWeight: "bold" }}>User Settings</Text>
-          </Button>
-          <Button
-            block
-            secondary
-            onPress={() => this.props.navigation.navigate("Link")}
-            style={{
-              margin: 10, backgroundColor: "#6CBDC3",
+              margin: 10,
+              backgroundColor: "#6CBDC3",
             }}
           >
             <Text style={{ fontWeight: "bold" }}>Link Bank Account</Text>
@@ -106,7 +97,8 @@ class Profile extends React.Component {
             primary
             onPress={() => this.props.navigation.navigate("PasswordReset")}
             style={{
-              margin: 10,backgroundColor: "#6CBDC3",
+              margin: 10,
+              backgroundColor: "#6CBDC3",
             }}
           >
             <Text style={{ fontWeight: "bold" }}>Change Password</Text>

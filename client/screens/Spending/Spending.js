@@ -144,6 +144,7 @@ export class SpendingScreen extends React.Component {
                   ? this.props.accounts.data.map((account) => {
                       return (
                         <Picker.Item
+                          key={account.id}
                           label={account.name}
                           value={account.name}
                         />
@@ -206,10 +207,12 @@ export class SpendingScreen extends React.Component {
           {info.length
             ? info.map((item, index) => {
                 return (
-                  <Card style={{ borderRadius: 8 }}>
+                  <Card key={index} style={{ borderRadius: 8 }}>
                     <CardItem style={{ borderRadius: 8 }}>
                       <Body>
-                        <Text style={{ fontWeight: "500", borderRadius: 20 }}>{item.name}</Text>
+                        <Text style={{ fontWeight: "500", borderRadius: 20 }}>
+                          {item.name}
+                        </Text>
                         <Text style={{ alignSelf: "flex-end" }}>
                           <Text>{item.date}</Text>
                         </Text>
