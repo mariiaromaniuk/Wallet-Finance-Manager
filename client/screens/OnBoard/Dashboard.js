@@ -28,14 +28,14 @@ import {
 } from "react-native-chart-kit";
 import Banner from "./Card";
 
-import {
-  Header,
-  Content,
-  Body,
-  Picker,
-  Card,
-  CardItem,
-} from "native-base";
+// import {
+//   Header,
+//   Content,
+//   Body,
+//   Picker,
+//   Card,
+//   CardItem,
+// } from "native-base";
 
 
 class Dashboard extends Component {
@@ -142,23 +142,24 @@ class Dashboard extends Component {
             yAxisInterval={1} // optional, defaults to 1
             // Chart's configurations i.e styles, precision, etc.
             chartConfig={{
-              backgroundColor: "#e26a00",
-              backgroundGradientFrom: "#82E0AA",
+              backgroundColor: "#6CBDC3",
+              backgroundGradientFrom: "#6CBDC3",
               backgroundGradientTo: "#82E0AA",
               decimalPlaces: 0, // optional, defaults to 2dp
-              color: (opacity = 1) => `rgba(35, 155, 86, ${opacity})`,
+              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               style: {
-                borderRadius: 16,
+                borderRadius: 10,
               },
               propsForDots: {
-                r: "5",
-                strokeWidth: "1",
-                stroke: "#2ECC71",
+                r: "6",
+                strokeWidth: "2",
+                stroke: "#ffa726",
               },
             }}
             bezier
             style={{
+              padding: 20,
               marginVertical: 8,
               borderRadius: 16,
             }}
@@ -183,25 +184,26 @@ class Dashboard extends Component {
             yAxisInterval={1} // optional, defaults to 1
             // Chart's configurations i.e styles, precision, etc.
             chartConfig={{
-              backgroundColor: "#e26a00",
-              backgroundGradientFrom: "#F1948A",
-              backgroundGradientTo: "#F1948A",
+              backgroundColor: "#6CBDC3",
+              backgroundGradientFrom: "#6CBDC3",
+              backgroundGradientTo: "#82E0AA",
               decimalPlaces: 0, // optional, defaults to 2dp
-              color: (opacity = 1) => `rgba(203, 67, 53, ${opacity})`,
+              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               style: {
-                borderRadius: 16,
+                borderRadius: 10,
               },
               propsForDots: {
-                r: "5",
-                strokeWidth: "1",
-                stroke: "#E74C3C",
+                r: "6",
+                strokeWidth: "2",
+                stroke: "#ffa726",
               },
             }}
             bezier
             style={{
+              padding: 20,
               marginVertical: 8,
-              borderRadius: 16,
+              borderRadius: 10,
             }}
           />
 
@@ -230,9 +232,9 @@ class Dashboard extends Component {
             strokeWidth={7}
             radius={20}
             chartConfig={{
-              backgroundColor: "#e26a00",
-              backgroundGradientFrom: "#7FB3D5",
-              backgroundGradientTo: "#7FB3D5",
+              backgroundColor: "#6CBDC3",
+              backgroundGradientFrom: "#6CBDC3",
+              backgroundGradientTo: "#82E0AA",
               decimalPlaces: 2, // optional, defaults to 2dp
               color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -247,6 +249,7 @@ class Dashboard extends Component {
             }}
             hideLegend={false}
             style={{
+              padding: 20,
               marginVertical: 8,
               borderRadius: 16,
             }}

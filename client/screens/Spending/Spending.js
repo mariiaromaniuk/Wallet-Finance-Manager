@@ -172,14 +172,14 @@ export class SpendingScreen extends React.Component {
             yAxisLabel="$"
             yAxisInterval={1} // optional, defaults to 1
             chartConfig={{
-              backgroundColor: "#e26a00",
-              backgroundGradientFrom: "#fb8c00",
-              backgroundGradientTo: "#ffa726",
+              backgroundColor: "#6CBDC3",
+              backgroundGradientFrom: "#6CBDC3",
+              backgroundGradientTo: "#82E0AA",
               decimalPlaces: 2, // optional, defaults to 2dp
               color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               style: {
-                borderRadius: 16,
+                borderRadius: 10,
               },
               propsForDots: {
                 r: "6",
@@ -206,10 +206,10 @@ export class SpendingScreen extends React.Component {
           {info.length
             ? info.map((item, index) => {
                 return (
-                  <Card>
-                    <CardItem>
+                  <Card style={{ borderRadius: 8 }}>
+                    <CardItem style={{ borderRadius: 8 }}>
                       <Body>
-                        <Text style={{ fontWeight: "500" }}>{item.name}</Text>
+                        <Text style={{ fontWeight: "500", borderRadius: 20 }}>{item.name}</Text>
                         <Text style={{ alignSelf: "flex-end" }}>
                           <Text>{item.date}</Text>
                         </Text>
