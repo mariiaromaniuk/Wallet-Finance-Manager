@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Container, Header, Button, Text, Body, } from "native-base";
 import { fetchBudget } from "../../store/budget";
 import { styles, pieColors } from '../../styles';
 // import Pie from './Pie';
@@ -14,19 +14,6 @@ import {
   ContributionGraph,
   StackedBarChart
 } from "react-native-chart-kit";
-
-import {
-  Container,
-  Header,
-  Content,
-  Icon,
-  Text,
-  Body,
-  Form,
-  Picker,
-  Card,
-  CardItem,
-} from "native-base";
 
 import { Dimensions } from "react-native";
 const screenWidth = Dimensions.get("window").width;
@@ -129,15 +116,19 @@ class Budget extends Component {
           absolute
         />
         <Button
-          type="outline"
-          block style={{ margin: 100, marginTop: 40 }}
-          title={'Edit Budget'}
-          onPress={() => {
-            this.props.navigation.navigate('BudgetSetup', {
-              title: 'BudgetSetup'
-            });
-          }}
-        />
+            block
+            onPress={() => {
+              this.props.navigation.navigate('BudgetSetup', {
+                title: 'BudgetSetup'
+              });
+            }}
+            primary
+            style={{
+              margin: 10,backgroundColor: "#6CBDC3",
+            }}
+          >
+            <Text style={{ fontWeight: "bold" }}>Edit Budget</Text>
+          </Button>
       </Container>
     );
   }

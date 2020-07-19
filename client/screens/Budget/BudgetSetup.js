@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import {
   View,
-  Text,
   TextInput,
   Image
 } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Text } from "native-base";
 import { connect } from 'react-redux';
 import { setBudget } from '../../store/budget';
 import { styles } from '../../styles';
@@ -58,10 +57,7 @@ class BudgetSetup extends Component {
 
       <View style={styles.container1}>
         <Text style={styles.categoryText}>
-          How much would you like 
-        </Text>
-        <Text style={styles.categoryText}>
-          to save each month? ($)
+          How much would you like to save each month? ($)
         </Text>
         <View>
           <TextInput
@@ -69,10 +65,8 @@ class BudgetSetup extends Component {
             onChangeText={savings => this.setState({ savings: +savings })}
             placeholder="Savings"
           />
-          <Button
-            type="outline"
-            block style={{ margin: 100, marginTop: 95 }} bordered danger
-            title={"Next"}
+        <Button
+            block
             onPress={() => {
               const spendingBudget =
                 this.state.income - this.state.staticCosts - this.state.savings;
@@ -82,7 +76,13 @@ class BudgetSetup extends Component {
                 title: 'Edit Categories'
               });
             }}
-          />
+            primary
+            style={{
+              margin: 10, marginTop: 100, backgroundColor: "#6CBDC3",
+            }}
+          >
+            <Text style={{ fontWeight: "bold" }}>Next</Text>
+          </Button>
         </View>
       </View>
       </View>

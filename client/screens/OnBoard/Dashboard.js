@@ -17,6 +17,16 @@ import {
 } from "react-native-chart-kit";
 import Banner from "./Card";
 
+import {
+  Header,
+  Content,
+  Body,
+  Picker,
+  Card,
+  CardItem,
+} from "native-base";
+
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -77,9 +87,31 @@ class Dashboard extends Component {
     return (
       <Container>
         <ScrollView>
-          <Text style={{ fontSize: 50, margin: 0, padding: 0 }}>
-            Hello {userFirstName}
-          </Text>
+
+        <Header
+          iosBarStyle
+          androidStatusBarColor
+          style={{ backgroundColor: "#222831", height: 125 }}
+        >
+          <Body>
+            <Text
+              style={{
+                color: "#fc5185",
+                alignSelf: "center",
+                fontSize: 25,
+                fontWeight: "bold",
+              }}
+            >
+              Hello {userFirstName}!
+            </Text>
+            <Text style={{ alignSelf: "center" }}>
+              <Text style={{ fontSize: 20, color: "white" }}>
+                Your Finances Overview
+              </Text>
+            </Text>
+          </Body>
+        </Header>
+
           {renderAccountAndBalances(accountsAndBalances).map((comp) => comp)}
 
           {/* ============= MONEY EARNED ON A MONTHLY BASIS ============= */}
