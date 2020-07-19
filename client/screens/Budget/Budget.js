@@ -4,7 +4,6 @@ import { View } from 'react-native';
 import { Container, Header, Button, Text, Body, } from "native-base";
 import { fetchBudget } from "../../store/budget";
 import { styles, pieColors } from '../../styles';
-// import Pie from './Pie';
 
 import {
   LineChart,
