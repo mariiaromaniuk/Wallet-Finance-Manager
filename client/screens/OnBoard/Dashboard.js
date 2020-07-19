@@ -172,7 +172,7 @@ class Dashboard extends Component {
             yAxisInterval={1} // optional, defaults to 1
             // Chart's configurations i.e styles, precision, etc.
             chartConfig={{
-              backgroundColor: "#e26a00",
+              backgroundColor: "#f5b7b1",
               backgroundGradientFrom: "#fb8c00",
               backgroundGradientTo: "#ffa726",
               decimalPlaces: 2, // optional, defaults to 2dp
@@ -243,7 +243,6 @@ class Dashboard extends Component {
 }
 
 const mapStateToProp = (state) => {
-  // console.log("mapstatetoprops", state);
   return {
     firstName: state.user.firstName,
     transactions: state.transactions,
@@ -267,7 +266,6 @@ function renderAccountAndBalances(map) {
   const retArr = [];
   let id = 0;
   for (let key of map.keys()) {
-    // console.log("inside the loop", key);
     retArr.push(
       <Banner key={id++} header={key} amount={map.get(key)}></Banner>
     );
@@ -286,8 +284,6 @@ function renderPosTransactionsByMonths(map) {
 function renderNegTransactionsByMonths(map) {
   const retArr = [];
   for (let key of map.keys()) {
-    console.log("inside the loop", key);
-    console.log(map.get(key)[0]);
     retArr.push(map.get(key)[0]);
   }
   return retArr;
@@ -411,7 +407,6 @@ async function organizeTransactionsByMonths(
 
 function budgetProgress(obj) {
   const retArr = [];
-  console.log(obj);
   for (const [key, value] of Object.entries(obj)) {
     if (
       key !== "id" &&
