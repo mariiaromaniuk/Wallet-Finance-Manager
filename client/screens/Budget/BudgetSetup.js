@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import {
   View,
-  Text,
   TextInput,
   Image
 } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Text } from "native-base";
 import { connect } from 'react-redux';
 import { setBudget } from '../../store/budget';
 import { styles } from '../../styles';
@@ -14,7 +13,6 @@ class BudgetSetup extends Component {
   constructor() {
     super();
     this.state = {
-      question: 1,
       income: 0,
       staticCosts: 0,
       savings: 0,
@@ -23,99 +21,85 @@ class BudgetSetup extends Component {
   }
 
   render() {
-    const question1 = (
+    // console.log("PROPS", this.props)
+    const userId = this.props.userId
+    return (
+      <View>
       <View style={styles.container1}>
-        <Text>
+        <Text style={styles.categoryText}>
           What is your monthly income? ($)
         </Text>
         <View>
           <TextInput
+            style={styles.budgetInput}
             onChangeText={income => this.setState({ income: +income })}
             placeholder="Income"
           />
-          <Button
-            type="outline"
-            block style={{ margin: 100, marginTop: 40 }} bordered danger
-            title={"Next"}
-            onPress={() => {
-              this.setState({ question: 2 });
-            }}
-          />
         </View>
       </View>
-    );
 
-    const question2 = (
       <View style={styles.container1}>
-        <Text>
+        <Text style={styles.categoryText}>
           What are your monthly static costs? ($)
+        </Text>
+        <Text style={styles.categoryText}>
           ex: rent, utilities, insurance, etc.
         </Text>
         <View>
           <TextInput
+            style={styles.budgetInput}
             onChangeText={staticCosts =>
               this.setState({ staticCosts: +staticCosts })}
             placeholder="Static Costs"
           />
-          <Button
-            type="outline"
-            block style={{ margin: 100, marginTop: 40 }} bordered danger
-            title={"Next"}
-            onPress={() => {
-              this.setState({ question: 3 });
-            }}
-          />
         </View>
       </View>
-    );
 
-    const question3 = (
       <View style={styles.container1}>
-        <Text>
+        <Text style={styles.categoryText}>
           How much would you like to save each month? ($)
         </Text>
         <View>
           <TextInput
+            style={styles.budgetInput}
             onChangeText={savings => this.setState({ savings: +savings })}
             placeholder="Savings"
           />
-          <Button
-            type="outline"
-            block style={{ margin: 100, marginTop: 40 }} bordered danger
-            title={"Next"}
+        <Button
+            block
             onPress={() => {
               const spendingBudget =
                 this.state.income - this.state.staticCosts - this.state.savings;
-              this.props.setBudget({ ...this.state, spendingBudget });
+              this.setState({ ...this.state, spendingBudget });
+              this.props.setBudget({ ...this.state, spendingBudget }, userId);
               this.props.navigation.navigate('EditCategories', {
                 title: 'Edit Categories'
               });
             }}
-          />
+            primary
+            style={{
+              margin: 10, marginTop: 100, backgroundColor: "#6CBDC3",
+            }}
+          >
+            <Text style={{ fontWeight: "bold" }}>Next</Text>
+          </Button>
         </View>
       </View>
-    );
-
-    let question;
-
-    if (this.state.question === 1) 
-      return question1;
-    else if (this.state.question === 2) 
-      return question2;
-    else 
-      return question3;
+      </View>
+    )
   }
 }
 
 const mapState = state => {
   return {
-    budget: state.budget
+    budget: state.budget,
+    userId: state.user.id
   };
 };
 
 const mapDispatch = dispatch => {
   return {
-    setBudget: budget => dispatch(setBudget(budget))
+    setBudget: (budget, userId) => dispatch(setBudget(budget, userId))
   };
 };
 

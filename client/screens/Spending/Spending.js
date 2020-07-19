@@ -73,6 +73,38 @@ export class SpendingScreen extends React.Component {
     const info = transactions.filter((account) => {
       return account.accountId === id;
     });
+
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    const monthByNums = info.map((el) => {
+      return Number(el.date.slice(5, 7) - 1);
+    });
+    const arr = [];
+    for (let i = 0; i < monthByNums.length; i++) {
+      let digit = monthByNums[i];
+      arr.push(months[digit]);
+    }
+    let newMonthArr = [arr[0]];
+    for (let i = 0; i < arr.length; i++) {
+      let current = arr[0];
+      if (arr[i] !== current) {
+        newMonthArr.push(arr[i]);
+        current = arr[i];
+      }
+    }
     return (
       <Container>
         <Header
@@ -127,7 +159,7 @@ export class SpendingScreen extends React.Component {
         <Content style={{ padding: 20 }}>
           <LineChart
             data={{
-              labels: ["MAY", "JUNE", "JULY"],
+              labels: newMonthArr,
               datasets: [
                 {
                   data: info.map((el) => {
@@ -141,14 +173,14 @@ export class SpendingScreen extends React.Component {
             yAxisLabel="$"
             yAxisInterval={1} // optional, defaults to 1
             chartConfig={{
-              backgroundColor: "#e26a00",
-              backgroundGradientFrom: "#fb8c00",
-              backgroundGradientTo: "#ffa726",
+              backgroundColor: "#6CBDC3",
+              backgroundGradientFrom: "#6CBDC3",
+              backgroundGradientTo: "#82E0AA",
               decimalPlaces: 2, // optional, defaults to 2dp
               color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               style: {
-                borderRadius: 16,
+                borderRadius: 10,
               },
               propsForDots: {
                 r: "6",
@@ -175,10 +207,12 @@ export class SpendingScreen extends React.Component {
           {info.length
             ? info.map((item, index) => {
                 return (
-                  <Card key={index}>
-                    <CardItem>
+                  <Card key={index} style={{ borderRadius: 8 }}>
+                    <CardItem style={{ borderRadius: 8 }}>
                       <Body>
-                        <Text style={{ fontWeight: "500" }}>{item.name}</Text>
+                        <Text style={{ fontWeight: "500", borderRadius: 20 }}>
+                          {item.name}
+                        </Text>
                         <Text style={{ alignSelf: "flex-end" }}>
                           <Text>{item.date}</Text>
                         </Text>

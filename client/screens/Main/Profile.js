@@ -38,6 +38,7 @@ class Profile extends React.Component {
           iosBarStyle
           androidStatusBarColor
           style={{ backgroundColor: "#222831", height: 100 }}
+          span
         >
           <Body
             style={{
@@ -81,33 +82,32 @@ class Profile extends React.Component {
             </Text>
           </Text>
           <Button
-            large
             block
             onPress={() => this.props.navigation.navigate("Settings")}
             primary
             style={{
               margin: 10,
+              backgroundColor: "#6CBDC3",
             }}
           >
             <Text style={{ fontWeight: "bold" }}>Link Bank Account</Text>
           </Button>
           <Button
-            large
             block
             primary
             onPress={() => this.props.navigation.navigate("PasswordReset")}
             style={{
               margin: 10,
+              backgroundColor: "#6CBDC3",
             }}
           >
             <Text style={{ fontWeight: "bold" }}>Change Password</Text>
           </Button>
           <Button
-            large
             block
             danger
             style={{
-              margin: 100,
+              margin: 10,
             }}
           >
             <FontAwesome name="power-off" size={24} color="white" />

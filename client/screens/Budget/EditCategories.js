@@ -1,13 +1,14 @@
-import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { Button, Card } from 'react-native-elements';
+import React, { Component } from "react";
+import { View, ScrollView } from 'react-native';
+import { Card } from 'react-native-elements';
+import { Button, Text } from "native-base";
 import { connect } from 'react-redux';
 import { fetchBudget, setBudget } from '../../store/budget';
 import Slider from 'react-native-slider';
 import { styles } from '../../styles';
 
 
-class EditCategories extends React.Component {
+class EditCategories extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,6 +23,8 @@ class EditCategories extends React.Component {
   }
 
   static getDerivedStateFromProps(props, state) {
+    //   console.log("PROPS", props)
+    //   console.log("STATE", state)
     if (props.budget && props.budget.foodAndDrink !== state.categories.name) {
       return {
         categories: [
@@ -87,6 +90,7 @@ class EditCategories extends React.Component {
   }
 
   render() {
+    const userId = this.props.user.id
     return (
       <ScrollView>
         <View>
@@ -96,7 +100,7 @@ class EditCategories extends React.Component {
                 <Text style={styles.headerText}>
                   Edit Your Budget
                 </Text>
-                <View style={[styles.introInfo, { paddingTop: 40 }]}>
+                <View style={[styles.introInfo, { paddingTop: 10 }]}>
                   <Text style={styles.headerText}>
                     {this.state.remaining}%
                   </Text>
@@ -117,12 +121,12 @@ class EditCategories extends React.Component {
                 </View>
               </View>
               <View style={{ paddingLeft: 5, paddingRight: 5 }} />
-              {/* All Categories */}
 
+              {/* All Categories */}
               {this.state.categories &&
                 this.state.categories.map(category => {
                   return (
-                    <Card key={category.name} containerStyle={{ margin: 20 }}>
+                    <Card key={category.name} containerStyle={{ margin: 19, borderRadius: 6 }}>
                       <View>
                         <View style={{ padding: 5, width: '100%' }} />
                         <View
@@ -143,35 +147,32 @@ class EditCategories extends React.Component {
                         </View>
 
                         <Slider
-                          trackStyle={styles.track}
-                          thumbStyle={styles.thumb}
-                          minimumTrackTintColor="#D16C58"
-                          maximumTrackTintColor="#b7b7b7"
-                          style={styles.slider}
-                          value={category.percentage}
-                          onSlidingComplete={value => {
-                            this.setState(prevState => {
-                              const remaining =
-                                prevState.remaining +
-                                (category.percentage - value);
-                              return {
-                                categories: [...prevState.categories].map(
-                                  elem => {
-                                    if (elem.name === category.name) {
-                                      elem.percentage = value;
-                                      return elem;
-                                    } else {
-                                      return elem;
-                                    }
-                                  }
-                                ),
-                                remaining: remaining
-                              };
-                            });
-                          }}
-                          step={5}
-                          minimumValue={0}
-                          maximumValue={100}
+                            trackStyle={styles.track}
+                            thumbStyle={styles.thumb}
+                            minimumTrackTintColor="#D16C58"
+                            maximumTrackTintColor="#b7b7b7"
+                            style={styles.slider}
+                            value={category.percentage}
+                            onSlidingComplete={value => {
+                                const remainingNew =
+                                  this.state.remaining +
+                                  (category.percentage - value);
+                                this.state.categories = [...this.state.categories].map(
+                                    elem => {
+                                      if (elem.name === category.name) {
+                                        elem.percentage = value;
+                                        return elem;
+                                      } else {
+                                        return elem;
+                                      }
+                                    })
+                                  this.state.remaining = remainingNew;
+                            //   console.log("STATE REMINING", this.state.remaining)
+                            //   console.log("STATE CATEGORIES", this.state.categories)
+                            }}
+                            step={5}
+                            minimumValue={0}
+                            maximumValue={100}
                         />
                       </View>
                     </Card>
@@ -180,27 +181,26 @@ class EditCategories extends React.Component {
 
               {/* Button */}
               <Button
-                raised
-                disabled={this.state.remaining >= 0 ? false : true}
-                type="outline"
-                block style={{ margin: 100, marginTop: 40 }} 
-                textStyle={{ textAlign: 'center' }}
-                title={`Finished`}
+                block
                 onPress={() => {
-                  this.props.setBudget({
-                    ...this.props.budget,
-                    foodAndDrink: this.state.categories[0].percentage,
-                    travel: this.state.categories[1].percentage,
-                    recreation: this.state.categories[2].percentage,
-                    healthcare: this.state.categories[3].percentage,
-                    service: this.state.categories[4].percentage,
-                    community: this.state.categories[5].percentage,
-                    shops: this.state.categories[6].percentage
-                  });
-                  this.props.navigation.navigate('Budget', { title: 'Budget' });
+                    this.props.setBudget({
+                      ...this.props.budget,
+                      foodAndDrink: this.state.categories[0].percentage,
+                      travel: this.state.categories[1].percentage,
+                      recreation: this.state.categories[2].percentage,
+                      healthcare: this.state.categories[3].percentage,
+                      service: this.state.categories[4].percentage,
+                      community: this.state.categories[5].percentage,
+                      shops: this.state.categories[6].percentage
+                    }, userId);
+                    this.props.navigation.navigate('Budget', { title: 'Budget' });
+                  }}
+                primary
+                style={{
+                  margin: 20, backgroundColor: "#6CBDC3",
                 }}
               >
-                Finished
+                <Text style={{ fontWeight: "bold" }}>Finished</Text>
               </Button>
             </View>
           )}
@@ -220,7 +220,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     fetchBudget: userId => dispatch(fetchBudget(userId)),
-    setBudget: budget => dispatch(setBudget(budget)),
+    setBudget: (budget, userId) => dispatch(setBudget(budget, userId)),
   };
 };
 
