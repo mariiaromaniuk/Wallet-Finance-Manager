@@ -126,23 +126,22 @@ class Dashboard extends Component {
             width={chartWidth} // from react-native
             height={220}
             yAxisLabel="$"
-            yAxisSuffix="k"
             yAxisInterval={1} // optional, defaults to 1
             // Chart's configurations i.e styles, precision, etc.
             chartConfig={{
               backgroundColor: "#e26a00",
-              backgroundGradientFrom: "#fb8c00",
-              backgroundGradientTo: "#ffa726",
-              decimalPlaces: 2, // optional, defaults to 2dp
-              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              backgroundGradientFrom: "#82E0AA",
+              backgroundGradientTo: "#82E0AA",
+              decimalPlaces: 0, // optional, defaults to 2dp
+              color: (opacity = 1) => `rgba(35, 155, 86, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               style: {
                 borderRadius: 16,
               },
               propsForDots: {
-                r: "6",
-                strokeWidth: "2",
-                stroke: "#ffa726",
+                r: "5",
+                strokeWidth: "1",
+                stroke: "#2ECC71",
               },
             }}
             bezier
@@ -168,23 +167,22 @@ class Dashboard extends Component {
             width={chartWidth} // from react-native
             height={220}
             yAxisLabel="$"
-            yAxisSuffix="k"
             yAxisInterval={1} // optional, defaults to 1
             // Chart's configurations i.e styles, precision, etc.
             chartConfig={{
-              backgroundColor: "#f5b7b1",
-              backgroundGradientFrom: "#fb8c00",
-              backgroundGradientTo: "#ffa726",
-              decimalPlaces: 2, // optional, defaults to 2dp
-              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              backgroundColor: "#e26a00",
+              backgroundGradientFrom: "#F1948A",
+              backgroundGradientTo: "#F1948A",
+              decimalPlaces: 0, // optional, defaults to 2dp
+              color: (opacity = 1) => `rgba(203, 67, 53, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               style: {
                 borderRadius: 16,
               },
               propsForDots: {
-                r: "6",
-                strokeWidth: "2",
-                stroke: "#ffa726",
+                r: "5",
+                strokeWidth: "1",
+                stroke: "#E74C3C",
               },
             }}
             bezier
@@ -220,8 +218,8 @@ class Dashboard extends Component {
             radius={20}
             chartConfig={{
               backgroundColor: "#e26a00",
-              backgroundGradientFrom: "#fb8c00",
-              backgroundGradientTo: "#ffa726",
+              backgroundGradientFrom: "#7FB3D5",
+              backgroundGradientTo: "#7FB3D5",
               decimalPlaces: 2, // optional, defaults to 2dp
               color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -235,6 +233,10 @@ class Dashboard extends Component {
               },
             }}
             hideLegend={false}
+            style={{
+              marginVertical: 8,
+              borderRadius: 16,
+            }}
           />
         </ScrollView>
       </Container>
