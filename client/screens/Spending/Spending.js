@@ -73,6 +73,38 @@ export class SpendingScreen extends React.Component {
     const info = transactions.filter((account) => {
       return account.accountId === id;
     });
+
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    const monthByNums = info.map((el) => {
+      return Number(el.date.slice(5, 7) - 1);
+    });
+    const arr = [];
+    for (let i = 0; i < monthByNums.length; i++) {
+      let digit = monthByNums[i];
+      arr.push(months[digit]);
+    }
+    let newMonthArr = [arr[0]];
+    for (let i = 0; i < arr.length; i++) {
+      let current = arr[0];
+      if (arr[i] !== current) {
+        newMonthArr.push(arr[i]);
+        current = arr[i];
+      }
+    }
     return (
       <Container>
         <Header
@@ -126,7 +158,7 @@ export class SpendingScreen extends React.Component {
         <Content style={{ padding: 20 }}>
           <LineChart
             data={{
-              labels: ["MAY", "JUNE", "JULY"],
+              labels: newMonthArr,
               datasets: [
                 {
                   data: info.map((el) => {

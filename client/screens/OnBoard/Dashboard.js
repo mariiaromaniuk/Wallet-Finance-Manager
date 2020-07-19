@@ -1,8 +1,19 @@
 import React, { Component } from "react";
-import { Container, Text, Item, Form, Input, Button, Label } from "native-base";
+import {
+  Container,
+  Header,
+  Text,
+  Picker,
+  Icon,
+  Body,
+  Item,
+  Form,
+  Input,
+  Button,
+  Label,
+} from "native-base";
 import { connect } from "react-redux";
 import { View, Dimensions } from "react-native";
-// import { fetchInfo, fetchTransactions } from "../../store/Dashboard";
 import { fetchTransactions } from "../../store/spending";
 import { fetchAccounts } from "../../store/accounts";
 import { fetchBudget } from "../../store/budget";
@@ -61,7 +72,6 @@ class Dashboard extends Component {
       accounts,
       transactions
     );
-    // console.log("transactionsByMonths part 3", transactionsByMonths);
 
     this.setState({
       ...this.state,
@@ -80,9 +90,8 @@ class Dashboard extends Component {
     const moneyEarned = renderPosTransactionsByMonths(transactionsByMonths);
     const moneySpent = renderNegTransactionsByMonths(transactionsByMonths);
     const budgets = this.props.budget;
-    console.log(budgets);
     const progress = budgetProgress(budgets);
-    console.log("asfasfdasdf", progress);
+    const chartWidth = Dimensions.get("window").width - 40;
 
     return (
       <Container>
@@ -115,7 +124,7 @@ class Dashboard extends Component {
           {renderAccountAndBalances(accountsAndBalances).map((comp) => comp)}
 
           {/* ============= MONEY EARNED ON A MONTHLY BASIS ============= */}
-          <Text>Monthy Earnings</Text>
+          <Text style={{ alignSelf: "center" }}>Monthy Earnings</Text>
           <LineChart
             data={{
               // get last three months pulled from Plaid api
@@ -127,26 +136,25 @@ class Dashboard extends Component {
                 },
               ],
             }}
-            width={Dimensions.get("window").width} // from react-native
+            width={chartWidth} // from react-native
             height={220}
             yAxisLabel="$"
-            yAxisSuffix="k"
             yAxisInterval={1} // optional, defaults to 1
             // Chart's configurations i.e styles, precision, etc.
             chartConfig={{
               backgroundColor: "#e26a00",
-              backgroundGradientFrom: "#fb8c00",
-              backgroundGradientTo: "#ffa726",
-              decimalPlaces: 2, // optional, defaults to 2dp
-              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              backgroundGradientFrom: "#82E0AA",
+              backgroundGradientTo: "#82E0AA",
+              decimalPlaces: 0, // optional, defaults to 2dp
+              color: (opacity = 1) => `rgba(35, 155, 86, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               style: {
                 borderRadius: 16,
               },
               propsForDots: {
-                r: "6",
-                strokeWidth: "2",
-                stroke: "#ffa726",
+                r: "5",
+                strokeWidth: "1",
+                stroke: "#2ECC71",
               },
             }}
             bezier
@@ -157,7 +165,7 @@ class Dashboard extends Component {
           />
 
           {/* ============= MONEY SPENT ON A MONTHLY BASIS ============= */}
-          <Text>Monthy Expenditures</Text>
+          <Text style={{ alignSelf: "center" }}>Monthy Expenditures</Text>
           <LineChart
             data={{
               // get last three months pulled from Plaid api
@@ -169,26 +177,25 @@ class Dashboard extends Component {
                 },
               ],
             }}
-            width={Dimensions.get("window").width} // from react-native
+            width={chartWidth} // from react-native
             height={220}
             yAxisLabel="$"
-            yAxisSuffix="k"
             yAxisInterval={1} // optional, defaults to 1
             // Chart's configurations i.e styles, precision, etc.
             chartConfig={{
               backgroundColor: "#e26a00",
-              backgroundGradientFrom: "#fb8c00",
-              backgroundGradientTo: "#ffa726",
-              decimalPlaces: 2, // optional, defaults to 2dp
-              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              backgroundGradientFrom: "#F1948A",
+              backgroundGradientTo: "#F1948A",
+              decimalPlaces: 0, // optional, defaults to 2dp
+              color: (opacity = 1) => `rgba(203, 67, 53, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               style: {
                 borderRadius: 16,
               },
               propsForDots: {
-                r: "6",
-                strokeWidth: "2",
-                stroke: "#ffa726",
+                r: "5",
+                strokeWidth: "1",
+                stroke: "#E74C3C",
               },
             }}
             bezier
@@ -199,27 +206,33 @@ class Dashboard extends Component {
           />
 
           {/* ============= BUDGET PROGRESSION ============= */}
-          <Text>Budget Progression</Text>
+          <Text style={{ alignSelf: "center", paddingBottom: 8 }}>
+            Budget Progression
+          </Text>
           <ProgressChart
             // each value represents a goal ring in Progress chart
             data={{
               labels: Object.keys(budgets).filter(
-                (label) =>
-                  label !== "id" &&
-                  label !== "userId" &&
-                  label !== "updatedAt" &&
-                  label !== "createdAt"
+                (key) =>
+                  key !== "id" &&
+                  key !== "userId" &&
+                  key !== "updatedAt" &&
+                  key !== "createdAt" &&
+                  key !== "income" &&
+                  key !== "staticCosts" &&
+                  key !== "savings" &&
+                  key !== "spendingBudget"
               ), // all budgets, dynamic
               data: progress.length ? progress : [0, 0, 0, 0, 0, 0, 0],
             }}
-            width={Dimensions.get("window").width} // from react-native
+            width={chartWidth} // from react-native
             height={220}
-            strokeWidth={16}
-            radius={32}
+            strokeWidth={7}
+            radius={20}
             chartConfig={{
               backgroundColor: "#e26a00",
-              backgroundGradientFrom: "#fb8c00",
-              backgroundGradientTo: "#ffa726",
+              backgroundGradientFrom: "#7FB3D5",
+              backgroundGradientTo: "#7FB3D5",
               decimalPlaces: 2, // optional, defaults to 2dp
               color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -233,6 +246,10 @@ class Dashboard extends Component {
               },
             }}
             hideLegend={false}
+            style={{
+              marginVertical: 8,
+              borderRadius: 16,
+            }}
           />
         </ScrollView>
       </Container>
@@ -241,7 +258,6 @@ class Dashboard extends Component {
 }
 
 const mapStateToProp = (state) => {
-  // console.log("mapstatetoprops", state);
   return {
     firstName: state.user.firstName,
     transactions: state.transactions,
@@ -265,7 +281,6 @@ function renderAccountAndBalances(map) {
   const retArr = [];
   let id = 0;
   for (let key of map.keys()) {
-    // console.log("inside the loop", key);
     retArr.push(
       <Banner key={id++} header={key} amount={map.get(key)}></Banner>
     );
@@ -284,9 +299,7 @@ function renderPosTransactionsByMonths(map) {
 function renderNegTransactionsByMonths(map) {
   const retArr = [];
   for (let key of map.keys()) {
-    console.log("inside the loop", key);
-    console.log(map.get(key)[0]);
-    retArr.push(map.get(key)[0]);
+    retArr.push(map.get(key)[0] * -1);
   }
   return retArr;
 }
@@ -414,7 +427,11 @@ function budgetProgress(obj) {
       key !== "id" &&
       key !== "userId" &&
       key !== "updatedAt" &&
-      key !== "createdAt"
+      key !== "createdAt" &&
+      key !== "income" &&
+      key !== "staticCosts" &&
+      key !== "savings" &&
+      key !== "spendingBudget"
     ) {
       retArr.push(value / 100);
     }
