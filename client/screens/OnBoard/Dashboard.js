@@ -286,7 +286,7 @@ function renderPosTransactionsByMonths(map) {
 function renderNegTransactionsByMonths(map) {
   const retArr = [];
   for (let key of map.keys()) {
-    retArr.push(map.get(key)[0]);
+    retArr.push(map.get(key)[0] * -1);
   }
   return retArr;
 }
