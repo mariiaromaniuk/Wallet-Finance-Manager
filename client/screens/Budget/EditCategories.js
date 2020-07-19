@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { View, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Button, Text } from "native-base";
@@ -8,7 +8,7 @@ import Slider from 'react-native-slider';
 import { styles } from '../../styles';
 
 
-class EditCategories extends Component {
+class EditCategories extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +20,14 @@ class EditCategories extends Component {
 
   componentDidMount() {
     this.props.fetchBudget(this.props.user.id);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps.someValue!==this.props.someValue){
+      //Perform some operation here
+      this.setState({someState: someValue});
+      this.classMethod();
+    }
   }
 
   static getDerivedStateFromProps(props, state) {

@@ -128,6 +128,21 @@ class Budget extends Component {
           >
             <Text style={{ fontWeight: "bold" }}>Edit Budget</Text>
           </Button>
+
+          <Button
+            block
+            onPress={() => {
+              this.props.navigation.navigate('EditCategories', {
+                title: 'EditCategories'
+              });
+            }}
+            primary
+            style={{
+              margin: 10,backgroundColor: "#6CBDC3",
+            }}
+          >
+            <Text style={{ fontWeight: "bold" }}>Edit Budget Categories</Text>
+          </Button>
       </Container>
     );
   }
