@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { View, Text, ScrollView } from 'react-native';
-import { Button, Card } from 'react-native-elements';
+import { View, ScrollView } from 'react-native';
+import { Card } from 'react-native-elements';
+import { Button, Text } from "native-base";
 import { connect } from 'react-redux';
 import { fetchBudget, setBudget } from '../../store/budget';
 import Slider from 'react-native-slider';
@@ -22,8 +23,8 @@ class EditCategories extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-      console.log("PROPS", props)
-      console.log("STATE", state)
+    //   console.log("PROPS", props)
+    //   console.log("STATE", state)
     if (props.budget && props.budget.foodAndDrink !== state.categories.name) {
       return {
         categories: [
@@ -166,9 +167,8 @@ class EditCategories extends Component {
                                       }
                                     })
                                   this.state.remaining = remainingNew;
-
-                              console.log("STATE REMINING", this.state.remaining)
-                              console.log("STATE CATEGORIES", this.state.categories)
+                            //   console.log("STATE REMINING", this.state.remaining)
+                            //   console.log("STATE CATEGORIES", this.state.categories)
                             }}
                             step={5}
                             minimumValue={0}
@@ -181,28 +181,26 @@ class EditCategories extends Component {
 
               {/* Button */}
               <Button
-                raised
-                // disabled={this.state.remaining >= 0 ? false : true}
-                type="outline"
-                block style={{ margin: 100, marginTop: 40 }} 
-                textStyle={{ textAlign: 'center' }}
-                title={`Finished`}
+                block
                 onPress={() => {
-                  this.props.setBudget({
-                    ...this.props.budget,
-                    foodAndDrink: this.state.categories[0].percentage,
-                    travel: this.state.categories[1].percentage,
-                    recreation: this.state.categories[2].percentage,
-                    healthcare: this.state.categories[3].percentage,
-                    service: this.state.categories[4].percentage,
-                    community: this.state.categories[5].percentage,
-                    shops: this.state.categories[6].percentage
-                  }, userId);
-                  console.log("categories", this.state.categories[0].percentage)
-                  this.props.navigation.navigate('Budget', { title: 'Budget' });
+                    this.props.setBudget({
+                      ...this.props.budget,
+                      foodAndDrink: this.state.categories[0].percentage,
+                      travel: this.state.categories[1].percentage,
+                      recreation: this.state.categories[2].percentage,
+                      healthcare: this.state.categories[3].percentage,
+                      service: this.state.categories[4].percentage,
+                      community: this.state.categories[5].percentage,
+                      shops: this.state.categories[6].percentage
+                    }, userId);
+                    this.props.navigation.navigate('Budget', { title: 'Budget' });
+                  }}
+                primary
+                style={{
+                  margin: 20, backgroundColor: "#6CBDC3",
                 }}
               >
-                Finished
+                <Text style={{ fontWeight: "bold" }}>Finished</Text>
               </Button>
             </View>
           )}

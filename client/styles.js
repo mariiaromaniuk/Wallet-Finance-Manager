@@ -145,7 +145,7 @@ export const styles = StyleSheet.create({
  },
  budgetInput: {
    padding: 0,
-   width: '52%',
+   width: '95%',
    height: 45,
    borderColor: "grey",
    borderWidth: 1,
