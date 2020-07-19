@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { View } from 'react-native';
-import { Text } from "native-base";
 import { Button } from 'react-native-elements';
 import { fetchBudget } from "../../store/budget";
 import { styles, pieColors } from '../../styles';
@@ -15,6 +14,19 @@ import {
   ContributionGraph,
   StackedBarChart
 } from "react-native-chart-kit";
+
+import {
+  Container,
+  Header,
+  Content,
+  Icon,
+  Text,
+  Body,
+  Form,
+  Picker,
+  Card,
+  CardItem,
+} from "native-base";
 
 import { Dimensions } from "react-native";
 const screenWidth = Dimensions.get("window").width;
@@ -61,12 +73,12 @@ class Budget extends Component {
     let i = 0;
     for (let key in budget) {
       if (categories.includes(key)) {
-        pieData.push({ 
+        pieData.push({
           name: key,
           amount: budget[key],
           color: pieColors[i],
           legendFontColor: "#7F7F7F",
-          legendFontSize: 15 
+          legendFontSize: 15
         });
         i++;
       }
@@ -76,29 +88,57 @@ class Budget extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.headerText}>Budget</Text>
-          <PieChart
-            data={this.getData()}
-            width={screenWidth}
-            height={220}
-            chartConfig={chartConfig}
-            accessor="amount"
-            backgroundColor="transparent"
-            paddingLeft="15"
-            absolute
-          />
-          <Button
-            type="outline"
-            block style={{ margin: 100, marginTop: 40 }} 
-            title={'Edit Budget'}
-            onPress={() => {
-              this.props.navigation.navigate('BudgetSetup', {
-                title: 'BudgetSetup'
-              });
-            }}
-          />
-      </View>
+      <Container>
+        <Header
+          iosBarStyle
+          androidStatusBarColor
+          style={{ backgroundColor: "#222831", height: 125 }}
+        >
+          <Body>
+            <Text
+              style={{
+                color: "#fc5185",
+                alignSelf: "center",
+                fontSize: 25,
+                fontWeight: "bold",
+              }}
+            >
+              Budget
+            </Text>
+            <Text style={{ alignSelf: "center" }}>
+              <Text style={{ fontSize: 20, color: "white" }}>
+                Spending Budget: {this.props.budget.spendingBudget}
+              </Text>
+              <Text
+                style={{ color: "#d3dbff", fontSize: 20, fontWeight: "bold" }}
+              >
+                $
+              </Text>
+            </Text>
+          </Body>
+        </Header>
+
+        <PieChart
+          data={this.getData()}
+          width={screenWidth}
+          height={220}
+          chartConfig={chartConfig}
+          accessor="amount"
+          backgroundColor="transparent"
+          paddingLeft="15"
+          absolute
+        />
+        <Button
+          type="outline"
+          block style={{ margin: 100, marginTop: 40 }}
+          title={'Edit Budget'}
+          onPress={() => {
+            this.props.navigation.navigate('BudgetSetup', {
+              title: 'BudgetSetup'
+            });
+          }}
+        />
+      </Container>
     );
   }
 }
@@ -117,4 +157,3 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(Budget);
-

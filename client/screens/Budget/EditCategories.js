@@ -22,8 +22,8 @@ class EditCategories extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-      console.log("PROPS", props)
-      console.log("STATE", state)
+    //   console.log("PROPS", props)
+    //   console.log("STATE", state)
     if (props.budget && props.budget.foodAndDrink !== state.categories.name) {
       return {
         categories: [
