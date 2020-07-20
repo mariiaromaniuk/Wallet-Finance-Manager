@@ -151,7 +151,7 @@ class EditCategories extends React.Component {
               {this.state.categories &&
                 this.state.categories.map(category => {
                   return (
-                    <Card key={category.name} containerStyle={{ margin: 19, borderRadius: 6 }}>
+                    <Card key={category.name} containerStyle={{ margin: 22, marginTop: 10, borderRadius: 6 }}>
                       <View>
                         <View style={{ padding: 1, width: '100%' }} />
                         <View
@@ -222,7 +222,7 @@ class EditCategories extends React.Component {
                   }}
                 primary
                 style={{
-                  margin: 20, marginBottom: 45, backgroundColor: "#6CBDC3",
+                  margin: 22, marginBottom: 40, backgroundColor: "#6CBDC3",
                 }}
               >
                 <Text style={{ fontWeight: "bold" }}>Finished</Text>
