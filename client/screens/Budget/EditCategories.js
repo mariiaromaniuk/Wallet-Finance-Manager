@@ -22,14 +22,6 @@ class EditCategories extends React.Component {
     this.props.fetchBudget(this.props.user.id);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if(prevProps.someValue!==this.props.someValue){
-      //Perform some operation here
-      this.setState({someState: someValue});
-      this.classMethod();
-    }
-  }
-
   static getDerivedStateFromProps(props, state) {
     //   console.log("PROPS", props)
     //   console.log("STATE", state)

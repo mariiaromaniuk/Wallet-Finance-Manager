@@ -1,31 +1,24 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { View } from 'react-native';
-import { Container, Header, Button, Text, Body, } from "native-base";
+import { Container, Content, Header, Button, Text, Body, Card, CardItem } from "native-base";
 import { fetchBudget } from "../../store/budget";
 import { styles, pieColors } from '../../styles';
-
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
-
+import { PieChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
-const screenWidth = Dimensions.get("window").width;
 
+
+const screenWidth = Dimensions.get("window").width;
 const chartConfig = {
+  cutoutPercentage: "50",
   backgroundGradientFrom: "#1E2923",
-  backgroundGradientFromOpacity: 0,
+  backgroundGradientFromOpacity: 0.5,
   backgroundGradientTo: "#08130D",
   backgroundGradientToOpacity: 0.5,
   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-  strokeWidth: 2, // optional, default 3
+  strokeWidth: 3, // optional, default 3
   barPercentage: 0.5,
-  useShadowColorFromDataset: false // optional
+  useShadowColorFromDataset: false, // optional
+  withVerticalLabels: true,
 };
 
 
@@ -104,17 +97,47 @@ class Budget extends Component {
           </Body>
         </Header>
 
+
+        <Content style={{ padding: 20 }}>
+        <Text
+            style={{
+              alignSelf: "center",
+              fontSize: 25,
+              marginTop: 20,
+              marginBottom: 10,
+            }}
+          >
+            Budget Categories
+          </Text>
+
         <PieChart
           data={this.getData()}
           width={screenWidth}
-          height={220}
+          height={250}
           chartConfig={chartConfig}
           accessor="amount"
           backgroundColor="transparent"
-          paddingLeft="15"
+          paddingLeft="10"
           absolute
         />
-        <Button
+        {this.getData().map((item, index) => {
+                return (
+                  <Card key={index} style={{ borderRadius: 8, padding: 8 }}>
+                    <CardItem style={{ borderRadius: 8 }}>
+                      <Body>
+                        <Text style={{ fontWeight: "500", borderRadius: 20 }}>
+                          {item.name}
+                        </Text>
+                        <Text style={{ color: "red", fontWeight: "bold" }}>
+                          {item.amount}%
+                        </Text>
+                      </Body>
+                    </CardItem>
+                  </Card>
+                );
+              })
+            }
+            <Button
             block
             onPress={() => {
               this.props.navigation.navigate('BudgetSetup', {
@@ -123,7 +146,7 @@ class Budget extends Component {
             }}
             primary
             style={{
-              margin: 10,backgroundColor: "#6CBDC3",
+              margin: 10, marginTop: 20, backgroundColor: "#6CBDC3",
             }}
           >
             <Text style={{ fontWeight: "bold" }}>Edit Budget</Text>
@@ -138,11 +161,12 @@ class Budget extends Component {
             }}
             primary
             style={{
-              margin: 10,backgroundColor: "#6CBDC3",
+              margin: 10, marginBottom: 50, backgroundColor: "#6CBDC3",
             }}
           >
             <Text style={{ fontWeight: "bold" }}>Edit Budget Categories</Text>
           </Button>
+        </Content>
       </Container>
     );
   }
