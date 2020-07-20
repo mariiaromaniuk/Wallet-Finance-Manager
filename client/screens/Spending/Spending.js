@@ -237,7 +237,7 @@ export class SpendingScreen extends React.Component {
               );
             })
           ) : (
-            <Text style={{ alignSelf: "center" }}>
+            <Text style={{ alignSelf: center }}>
               There are no transactions for this account
             </Text>
           )}
