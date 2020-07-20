@@ -83,7 +83,7 @@ class Profile extends React.Component {
           </Text>
           <Button
             block
-            onPress={() => this.props.navigation.navigate("Settings")}
+            onPress={() => this.props.navigation.navigate("Link")}
             primary
             style={{
               margin: 10,
