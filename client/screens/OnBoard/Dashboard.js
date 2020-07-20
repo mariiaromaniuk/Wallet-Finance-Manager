@@ -250,6 +250,7 @@ class Dashboard extends Component {
             hideLegend={false}
             style={{
               padding: 20,
+              paddingBottom: 250,
               marginVertical: 8,
               borderRadius: 16,
             }}

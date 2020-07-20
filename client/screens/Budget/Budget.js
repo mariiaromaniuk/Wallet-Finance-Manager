@@ -167,10 +167,10 @@ class Budget extends Component {
             }}
             primary
             style={{
-              margin: 10, marginTop: 20, backgroundColor: "#6CBDC3",
+              margin: 2, marginTop: 20, backgroundColor: "#6CBDC3",
             }}
           >
-            <Text style={{ fontWeight: "bold" }}>Edit Budget</Text>
+            <Text style={{ fontWeight: "bold" }}>Setup Your Budget</Text>
           </Button>
 
           <Button
@@ -182,7 +182,7 @@ class Budget extends Component {
             }}
             primary
             style={{
-              margin: 10, marginBottom: 50, backgroundColor: "#6CBDC3",
+              margin: 2, marginTop: 20, marginBottom: 50, backgroundColor: "#6CBDC3",
             }}
           >
             <Text style={{ fontWeight: "bold" }}>Edit Budget Categories</Text>

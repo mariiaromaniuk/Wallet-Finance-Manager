@@ -4,7 +4,7 @@ import {
   TextInput,
   Image
 } from 'react-native';
-import { Button, Text } from "native-base";
+import { Container, Content, Header, Button, Text, Body, Card, CardItem } from "native-base";
 import { connect } from 'react-redux';
 import { setBudget } from '../../store/budget';
 import { styles } from '../../styles';
@@ -25,6 +25,34 @@ class BudgetSetup extends Component {
     const userId = this.props.userId
     return (
       <View>
+                <Header
+          iosBarStyle
+          androidStatusBarColor
+          style={{ backgroundColor: "#222831", height: 125 }}
+        >
+          <Body>
+            <Text
+              style={{
+                color: "#fc5185",
+                alignSelf: "center",
+                fontSize: 25,
+                fontWeight: "bold",
+              }}
+            >
+              Budget Setup
+            </Text>
+            <Text style={{ alignSelf: "center" }}>
+              <Text style={{ fontSize: 20, color: "white" }}>
+                Spending Budget: {this.props.budget.spendingBudget}
+              </Text>
+              <Text
+                style={{ color: "#d3dbff", fontSize: 20, fontWeight: "bold" }}
+              >
+                $
+              </Text>
+            </Text>
+          </Body>
+        </Header>
       <View style={styles.container1}>
         <Text style={styles.categoryText}>
           What is your monthly income? ($)

@@ -156,14 +156,18 @@ export default class App extends Component {
           name="BudgetSetup"
           component={BudgetSetup}
           options={{
+            headerShown: false,
             title: "Budget Setup",
+            headerLeft: () => {},
           }}
         />
         <Stack.Screen
           name="EditCategories"
           component={EditCategories}
           options={{
+            headerShown: false,
             title: "Edit Categories",
+            headerLeft: () => {},
           }}
         />
       </Stack.Navigator>

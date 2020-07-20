@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     paddingTop: 15,
     padding: 8,
-    color: "#D16C58",
+    color: "#fc5185",
     fontWeight: 'bold',
     fontSize: 22,
  },
@@ -98,7 +98,7 @@ export const styles = StyleSheet.create({
  },
  smallerText: {
    alignSelf: 'center',
-   color: "#D16C58",
+   color: "#fc5185",
    fontWeight: 'bold',
    fontSize: 16,
  },
