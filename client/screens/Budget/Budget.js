@@ -116,9 +116,7 @@ class Budget extends Component {
           </Body>
         </Header>
 
-
         <Content style={{ padding: 20 }}>
-
         <PieChart
           data={this.getData()}
           width={screenWidth}
