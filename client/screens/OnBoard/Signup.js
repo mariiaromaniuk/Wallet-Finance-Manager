@@ -66,7 +66,7 @@ class Signup extends Component {
           </InputGroup>
           <Button
             block
-            style={{ margin: 20, marginTop: 40 }}
+            style={{ margin: 20, marginTop: 70 }}
             success
             onPress={() => {
               this.props.handleSubmit(this.state, this.props.navigation);
