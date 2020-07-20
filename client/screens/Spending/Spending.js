@@ -209,31 +209,33 @@ export class SpendingScreen extends React.Component {
           >
             Latest Transactions
           </Text>
-          {info.length
-            ? info.map((item, index) => {
-                return (
-                  <Card>
-                    <CardItem>
-                      <Body>
-                        <Text style={{ fontWeight: "500" }}>{item.name}</Text>
-                        <Text style={{ alignSelf: "flex-end" }}>
-                          <Text>{item.date}</Text>
+          {info.length ? (
+            info.map((item, index) => {
+              return (
+                <Card>
+                  <CardItem>
+                    <Body>
+                      <Text style={{ fontWeight: "500" }}>{item.name}</Text>
+                      <Text style={{ alignSelf: "flex-end" }}>
+                        <Text>{item.date}</Text>
+                      </Text>
+                      {item.amount < 0 ? (
+                        <Text style={{ color: "green", fontWeight: "bold" }}>
+                          ${item.amount}
                         </Text>
-                        {item.amount < 0 ? (
-                          <Text style={{ color: "green", fontWeight: "bold" }}>
-                            ${item.amount}
-                          </Text>
-                        ) : (
-                          <Text style={{ color: "red", fontWeight: "bold" }}>
-                            ${item.amount}
-                          </Text>
-                        )}
-                      </Body>
-                    </CardItem>
-                  </Card>
-                );
-              })
-            : null}
+                      ) : (
+                        <Text style={{ color: "red", fontWeight: "bold" }}>
+                          ${item.amount}
+                        </Text>
+                      )}
+                    </Body>
+                  </CardItem>
+                </Card>
+              );
+            })
+          ) : (
+            <Text>There are no transactions for this account</Text>
+          )}
         </Content>
       </Container>
     );
