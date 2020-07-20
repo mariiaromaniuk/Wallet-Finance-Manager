@@ -72,7 +72,7 @@ export default class LoanEntry extends React.Component {
             </Text>
             <Text style={{ alignSelf: "center" }}>
               <Text style={{ fontSize: 20, color: "white" }}>
-              Enter Loan Info:
+              Enter Loan Info to Calculate:
               </Text>
             </Text>
           </Body>
@@ -158,6 +158,8 @@ const styles = StyleSheet.create({
         // backgroundColor: '#fff',
         marginTop: 50,
         width: 360,
+        height: 50,
+        borderRadius: 8,
     },
     info: {
         flex: 1,
