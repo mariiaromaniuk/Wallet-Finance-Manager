@@ -221,11 +221,11 @@ export class SpendingScreen extends React.Component {
                       </Text>
                       {item.amount < 0 ? (
                         <Text style={{ color: "green", fontWeight: "bold" }}>
-                          ${item.amount}
+                          ${item.amount * -1}
                         </Text>
                       ) : (
                         <Text style={{ color: "red", fontWeight: "bold" }}>
-                          ${item.amount}
+                          ${item.amount * -1}
                         </Text>
                       )}
                     </Body>
