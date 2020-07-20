@@ -14,7 +14,7 @@ import {
 } from "native-base";
 import { LineChart } from "react-native-chart-kit";
 
-import { Dimensions } from "react-native";
+import { Dimensions, ScrollView } from "react-native";
 
 import { connect } from "react-redux";
 import { fetchTransactions } from "../../store/spending";
@@ -69,9 +69,11 @@ export class SpendingScreen extends React.Component {
     for (let i = 0; i < acctInfo.length; i++) {
       id = acctInfo[i].account_id;
     }
-    const info = transactions.filter((account) => {
-      return account.accountId === id;
-    });
+    const info = transactions
+      .filter((account) => {
+        return account.accountId === id;
+      })
+      .splice(0, 7);
     // const months = [
     //   "Jan",
     //   "Feb",
@@ -228,7 +230,7 @@ export class SpendingScreen extends React.Component {
                         </Text>
                       ) : (
                         <Text style={{ color: "#D75452", fontWeight: "bold" }}>
-                          ${item.amount * -1}
+                          -${("" + item.amount * -1).slice(1)}
                         </Text>
                       )}
                     </Body>
@@ -237,7 +239,7 @@ export class SpendingScreen extends React.Component {
               );
             })
           ) : (
-            <Text style={{ alignSelf: center }}>
+            <Text style={{ alignSelf: "center" }}>
               There are no transactions for this account
             </Text>
           )}
