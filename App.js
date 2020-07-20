@@ -12,16 +12,13 @@ import {
   Login,
   Link,
   Initial,
-  DummyPage,
   Dashboard,
   Profile,
   EditCategories,
   Spending,
-  Settings,
   Budget,
   BudgetSetup,
 } from "./client/screens";
-import { Root } from "native-base";
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
@@ -118,14 +115,6 @@ export default class App extends Component {
           name="Link"
           component={Link}
           options={{
-            headerLeft: () => {},
-          }}
-        />
-        <Stack.Screen
-          name="Settings"
-          component={Settings}
-          options={{
-            headerShown: false,
             headerLeft: () => {},
           }}
         />
