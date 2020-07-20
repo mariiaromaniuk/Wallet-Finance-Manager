@@ -13,9 +13,7 @@ import {
   CardItem,
 } from "native-base";
 import { LineChart } from "react-native-chart-kit";
-
 import { Dimensions } from "react-native";
-
 import { connect } from "react-redux";
 import { fetchTransactions } from "../../store/spending";
 import { fetchAccounts } from "../../store/accounts";

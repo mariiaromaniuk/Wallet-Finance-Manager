@@ -29,6 +29,7 @@ const description = [
   '(Education, donations, offering, etc.)',
   '(Presents, clothes, accessories, etc.)',
 ];
+const chartWidth = Dimensions.get("window").width - 40;
 
 
 class Budget extends Component {

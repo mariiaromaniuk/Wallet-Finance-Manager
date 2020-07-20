@@ -106,7 +106,7 @@ class BudgetSetup extends Component {
             }}
             primary
             style={{
-              margin: 22, marginTop: 100, backgroundColor: "#6CBDC3",
+              margin: 10, marginTop: 100, backgroundColor: "#6CBDC3",
             }}
           >
             <Text style={{ fontWeight: "bold" }}>Next</Text>
