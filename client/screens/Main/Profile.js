@@ -37,7 +37,7 @@ class Profile extends React.Component {
         <Header
           iosBarStyle
           androidStatusBarColor
-          style={{ backgroundColor: "#222831", height: 100 }}
+          style={{ backgroundColor: "#222831", height: 125 }}
           span
         >
           <Body
@@ -49,7 +49,7 @@ class Profile extends React.Component {
           >
             <Text
               style={{
-                fontSize: 30,
+                fontSize: 25,
                 fontWeight: "bold",
                 color: "#fc5185",
               }}

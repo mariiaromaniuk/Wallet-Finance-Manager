@@ -4,7 +4,7 @@ import { Container, Content, Header, Button, Text, Body, Card, CardItem } from "
 import { fetchBudget } from "../../store/budget";
 import { styles, pieColors } from '../../styles';
 import { PieChart } from "react-native-chart-kit";
-import { Dimensions } from "react-native";
+import { View, Dimensions } from "react-native";
 
 
 const screenWidth = Dimensions.get("window").width;
@@ -20,6 +20,15 @@ const chartConfig = {
   useShadowColorFromDataset: false, // optional
   withVerticalLabels: true,
 };
+const description = [
+  '(Groceries, restaurants, bars, nightlife, etc.)',
+  '(Gas, subway, train, bus, etc.)',
+  '(Arts, entertainment, sports, outdoors, etc.)',
+  '(Doctor visits, prescriptions, etc.)',
+  '(Self-care, automotive, home repair, etc.)',
+  '(Education, donations, offering, etc.)',
+  '(Presents, clothes, accessories, etc.)',
+];
 
 
 class Budget extends Component {
@@ -57,12 +66,22 @@ class Budget extends Component {
           amount: budget[key],
           color: pieColors[i],
           legendFontColor: "#7F7F7F",
-          legendFontSize: 15
+          legendFontSize: 13
         });
         i++;
       }
     }
     return pieData;
+  }
+
+  toTitle(str, separator) {
+    separator = typeof separator === 'undefined' ? ' ' : separator;
+    return str
+      .replace(/([a-z\d])([A-Z])/g, '$1' + separator + '$2')
+      .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1' + separator + '$2')
+      .replace(/\w\S*/g, function(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      });
   }
 
   render() {
@@ -113,11 +132,10 @@ class Budget extends Component {
         <PieChart
           data={this.getData()}
           width={screenWidth}
-          height={250}
+          height={240}
           chartConfig={chartConfig}
           accessor="amount"
           backgroundColor="transparent"
-          paddingLeft="10"
           absolute
         />
         {this.getData().map((item, index) => {
@@ -126,9 +144,12 @@ class Budget extends Component {
                     <CardItem style={{ borderRadius: 8 }}>
                       <Body>
                         <Text style={{ fontWeight: "500", borderRadius: 20 }}>
-                          {item.name}
+                          {this.toTitle(item.name)}
                         </Text>
-                        <Text style={{ color: "red", fontWeight: "bold" }}>
+                        <Text style={{ borderRadius: 20 }}>
+                          <Text>{description[index]}</Text>
+                        </Text>
+                        <Text style={{ color: "red", fontWeight: "bold", alignSelf: "flex-end" }}>
                           {item.amount}%
                         </Text>
                       </Body>
