@@ -69,12 +69,9 @@ export class SpendingScreen extends React.Component {
     for (let i = 0; i < acctInfo.length; i++) {
       id = acctInfo[i].account_id;
     }
-    const info = transactions
-      .filter((account) => {
-        return account.accountId === id;
-      })
-      .splice(0, 15);
-    //-----Please don't delete below. Might bring this in on a later iteration of Wallet-----
+    const info = transactions.filter((account) => {
+      return account.accountId === id;
+    });
     // const months = [
     //   "Jan",
     //   "Feb",
