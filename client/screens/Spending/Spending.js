@@ -161,14 +161,16 @@ export class SpendingScreen extends React.Component {
                 .map((el) => {
                   return el.date.slice(5);
                 })
-                .reverse(),
+                .reverse() || [0],
               datasets: [
                 {
-                  data: info
-                    .map((el) => {
-                      return el.amount * -1;
-                    })
-                    .reverse(),
+                  data: info.length
+                    ? info
+                        .map((el) => {
+                          return el.amount * -1;
+                        })
+                        .reverse()
+                    : [0, 0, 0, 0],
                 },
               ],
             }}
