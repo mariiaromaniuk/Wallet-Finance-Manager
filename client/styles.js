@@ -33,6 +33,7 @@ export const styles = StyleSheet.create({
   marginTop: 30,
   flexGrow: 1,
   paddingTop: 40,
+  margin: 20
 },
  logo: {
    width: 150,

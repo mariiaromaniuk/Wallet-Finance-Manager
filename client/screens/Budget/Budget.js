@@ -118,16 +118,6 @@ class Budget extends Component {
 
 
         <Content style={{ padding: 20 }}>
-        <Text
-            style={{
-              alignSelf: "center",
-              fontSize: 25,
-              marginTop: 20,
-              marginBottom: 10,
-            }}
-          >
-            Budget Categories
-          </Text>
 
         <PieChart
           data={this.getData()}

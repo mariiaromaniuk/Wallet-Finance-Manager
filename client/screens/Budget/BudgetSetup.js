@@ -43,7 +43,7 @@ class BudgetSetup extends Component {
             </Text>
             <Text style={{ alignSelf: "center" }}>
               <Text style={{ fontSize: 20, color: "white" }}>
-                Spending Budget: {this.props.budget.spendingBudget}
+                Current Spending Budget: {this.props.budget.spendingBudget}
               </Text>
               <Text
                 style={{ color: "#d3dbff", fontSize: 20, fontWeight: "bold" }}
@@ -106,7 +106,7 @@ class BudgetSetup extends Component {
             }}
             primary
             style={{
-              margin: 10, marginTop: 100, backgroundColor: "#6CBDC3",
+              margin: 22, marginTop: 100, backgroundColor: "#6CBDC3",
             }}
           >
             <Text style={{ fontWeight: "bold" }}>Next</Text>
