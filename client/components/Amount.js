@@ -21,18 +21,19 @@ const Amount = (props) => {
 const styles = StyleSheet.create({
    inputView: {
        backgroundColor: "white",
-       borderRadius: 10,
+       borderRadius: 8,
        width: 360,
        height: 50,
     //    width: 205,
     //    borderRadius: 50,
    },
    input: {
-       borderRadius: 50,
+       borderRadius: 8,
        textAlign: 'center',
        alignItems: 'center',
        flex: 1,
-       // height: 30
+       borderWidth: 1,
+       borderColor: "#999999"
    },
 })
 

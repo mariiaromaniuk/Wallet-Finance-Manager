@@ -32,26 +32,29 @@ const styles = StyleSheet.create({
             backgroundColor: "white",
             width: 205,
             // height: 50,
-            borderRadius: 10,
+            borderRadius: 8,
         },
         input: {
-            borderRadius: 10,
+            borderRadius: 8,
             textAlign: 'center',
             alignItems: 'center',
             flex: 1,
-            // height: 30
+            borderWidth: 1,
+            borderColor: "#999999"
         },
         picker: {
             backgroundColor: 'white',
             height: 45,
-            borderRadius: 10,
+            borderRadius: 8,
             marginTop: 5,
             marginLeft: 15,
             color: 'white',
             width: 140,
             textAlign: 'center',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            borderWidth: 1,
+            borderColor: "#999999"
         },
         horizontal: {
             display: 'flex',

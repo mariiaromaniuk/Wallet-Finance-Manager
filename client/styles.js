@@ -155,6 +155,7 @@ export const styles = StyleSheet.create({
    fontSize: 18,
    alignSelf: "center",
    borderRadius: 4,
+   backgroundColor: 'white',
  },
 
 });

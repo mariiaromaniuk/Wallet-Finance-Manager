@@ -1,41 +1,3 @@
-const styles = StyleSheet.create({
-    fullScreen: {
-        alignItems: 'center',
-        flex: 1,
-        justifyContent: 'space-between',
-        // marginTop: 10,
-        // marginBottom: 20,
-        // backgroundColor: '#000E23'
-    },
-    screenTitle: {
-        color: "#D75452",
-        fontWeight: 'bold',
-        fontSize: 25,
-        marginTop: 5
-    },
-    title: {
-        color: "#D75452",
-        fontWeight: 'normal',
-        fontSize: 20,
-    },
-    button: {
-        backgroundColor: '#f9002c',
-        marginTop: 50,
-        width: 500,
-    },
-    buttonDisabled: {
-        backgroundColor: '#fff',
-        marginTop: 50,
-        width: 500,
-    },
-    info: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center'
-    }
-
-})
-
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-elements'
@@ -45,6 +7,7 @@ import LoanTypePicker from '../../components/LoanTypePicker.js'
 import Amount from '../../components/Amount.js'
 import LoanTerm from '../../components/LoanTerm.js'
 import InterestRate from '../../components/InterestRate.js'
+import { Container, Content, Header, Body, Card, CardItem } from "native-base";
 
 
 export default class LoanEntry extends React.Component {
@@ -90,12 +53,35 @@ export default class LoanEntry extends React.Component {
   render() {
     const { navigate } = this.props.navigation
     return (
+        <Container>
+            <Header
+          iosBarStyle
+          androidStatusBarColor
+          style={{ backgroundColor: "#222831", height: 125 }}
+        >
+          <Body>
+            <Text
+              style={{
+                color: "#D75452",
+                alignSelf: "center",
+                fontSize: 25,
+                fontWeight: "bold",
+              }}
+            >
+              Loan Calculator
+            </Text>
+            <Text style={{ alignSelf: "center" }}>
+              <Text style={{ fontSize: 20, color: "white" }}>
+              Enter Loan Info:
+              </Text>
+            </Text>
+          </Body>
+        </Header>
         <View style={styles.fullScreen}>
             <View style={styles.info}>
-                <HeaderTitle></HeaderTitle>
 
-                <Text style={styles.screenTitle}>Enter Loan Info:</Text>
-                {/* <LoanTypePicker change={this.changeLoanType} loanState={this.state}></LoanTypePicker> */}
+                {/* <Text style={styles.screenTitle}>Enter Loan Info:</Text>
+                <LoanTypePicker change={this.changeLoanType} loanState={this.state}></LoanTypePicker> */}
 
                 <Text style={styles.title}>Amount:</Text>
                 <Amount amountEntered={this.state.amount} change={this.changeAmount}></Amount>
@@ -134,6 +120,48 @@ export default class LoanEntry extends React.Component {
                 />}
             </View>
         </View>
+        </Container>
     );
   }
 }
+
+
+const styles = StyleSheet.create({
+    fullScreen: {
+        alignItems: 'center',
+        flex: 1,
+        justifyContent: 'space-between',
+        // marginTop: 10,
+        // marginBottom: 20,
+        backgroundColor: '#F2F2F2'
+    },
+    screenTitle: {
+        color: "#D75452",
+        fontWeight: 'bold',
+        fontSize: 25,
+        marginTop: 5
+    },
+    title: {
+        color: "#D75452",
+        fontWeight: 'normal',
+        fontSize: 20,
+    },
+    button: {
+        backgroundColor: '#6CBDC3',
+        marginTop: 50,
+        width: 360,
+        height: 50,
+        borderRadius: 8,
+    },
+    buttonDisabled: {
+        backgroundColor: '#fff',
+        marginTop: 50,
+        width: 500,
+    },
+    info: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    }
+
+})
