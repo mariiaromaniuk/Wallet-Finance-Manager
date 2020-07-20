@@ -9,10 +9,9 @@ export { default as Spending } from "./Spending/Spending";
 
 // Main
 export { default as Profile } from "./Main/Profile";
-export { default as Settings } from "./Main/Settings";
 export { default as ResetPassword } from "./Main/ResetPassword";
 
 // Budget
 export { default as Budget } from "./Budget/Budget";
-export { default as BudgetSetup } from './Budget/BudgetSetup';
-export { default as EditCategories } from './Budget/EditCategories';
+export { default as BudgetSetup } from "./Budget/BudgetSetup";
+export { default as EditCategories } from "./Budget/EditCategories";

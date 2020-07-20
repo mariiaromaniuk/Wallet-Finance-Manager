@@ -12,16 +12,13 @@ import {
   Login,
   Link,
   Initial,
-  DummyPage,
   Dashboard,
   Profile,
   EditCategories,
   Spending,
-  Settings,
   Budget,
   BudgetSetup,
 } from "./client/screens";
-import { Root } from "native-base";
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
@@ -122,14 +119,6 @@ export default class App extends Component {
           }}
         />
         <Stack.Screen
-          name="Settings"
-          component={Settings}
-          options={{
-            headerShown: false,
-            headerLeft: () => {},
-          }}
-        />
-        <Stack.Screen
           name="PasswordReset"
           component={ResetPassword}
           options={{
@@ -153,24 +142,21 @@ export default class App extends Component {
           }}
         />
         <Stack.Screen
-          name="Budget"
-          component={Budget}
-          options={{
-            title: "Budget",
-          }}
-        />
-        <Stack.Screen
           name="BudgetSetup"
           component={BudgetSetup}
           options={{
+            headerShown: false,
             title: "Budget Setup",
+            headerLeft: () => {},
           }}
         />
         <Stack.Screen
           name="EditCategories"
           component={EditCategories}
           options={{
+            headerShown: false,
             title: "Edit Categories",
+            headerLeft: () => {},
           }}
         />
       </Stack.Navigator>

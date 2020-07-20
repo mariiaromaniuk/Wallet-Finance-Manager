@@ -5,6 +5,7 @@ import PlaidAuthenticator from "react-native-plaid-link";
 import { connect } from "react-redux";
 import { sendToken } from "../../store/token";
 
+
 class Link extends React.Component {
   constructor(props) {
     super(props);
@@ -54,17 +55,33 @@ class Link extends React.Component {
     this.props.sendToken(this.state.data.metadata.public_token);
     return (
       <Container style={styles.container}>
-        <Text style={styles.text}>Welcome to Wallet!</Text>
+        <Text               
+        style={{
+            color: "#303030",
+            alignSelf: "center",
+            fontSize: 40,
+            fontWeight: "bold",
+          }}>Welcome to Wallet!</Text>
+        <Text               
+        style={{
+            marginTop: 8,
+            color: "#303030",
+            alignSelf: "center",
+            fontSize: 23,
+            fontWeight: "bold",
+          }}>Your Personal Finance Manager</Text>
           <Image
             style={styles.logo}
             source={require('../../../assets/wallet.gif')}
           />
         <Button
-          block style={{ margin: 20, marginTop: 20 }} danger
           onPress={() => this.props.navigation.navigate("Dashboard")}
           primary
+          style={{
+            margin: 10, marginBottom: 40, backgroundColor: "#6CBDC3",
+          }}
         >
-          <Text>Take me to Dashboard</Text>
+          <Text style={styles.categoryText}>Take me to Dashboard</Text>
         </Button>
       </Container>
     );
@@ -117,6 +134,12 @@ const styles = StyleSheet.create({
     color: "#D16C58",
     fontWeight: 'bold',
     fontSize: 40,
+  },
+  categoryText: {
+    alignSelf: 'center',
+    color: '#000000',
+    fontWeight: 'normal',
+    fontSize: 20,
   },
 
 });

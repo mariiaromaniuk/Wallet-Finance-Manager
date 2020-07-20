@@ -9,9 +9,11 @@ import {
   Body,
   Thumbnail,
 } from "native-base";
+import { Image } from "react-native";
 import moment from "moment";
 import { FontAwesome } from "@expo/vector-icons";
 import { logout } from "../../store/user";
+import { styles } from '../../styles';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -37,8 +39,8 @@ class Profile extends React.Component {
         <Header
           iosBarStyle
           androidStatusBarColor
+          style={{ backgroundColor: "#222831", height: 125 }}
           span
-          style={{ backgroundColor: "#222831", height: 175 }}
         >
           <Body
             style={{
@@ -49,9 +51,9 @@ class Profile extends React.Component {
           >
             <Text
               style={{
-                fontSize: 30,
+                fontSize: 25,
                 fontWeight: "bold",
-                color: "#fc5185",
+                color: "#D75452",
               }}
             >
               {this.state.firstName} {this.state.lastName}
@@ -75,51 +77,45 @@ class Profile extends React.Component {
               marginBottom: 30,
             }}
           >
-            <Text style={{ color: "#fc5185", fontSize: 20 }}>Wallet </Text>
-            <Text style={{ fontSize: 20 }}>member since </Text>
-            <Text style={{ color: "#fc5185", fontSize: 20 }}>
+            <Text style={{ color: "#D75452", fontSize: 20 }}>Wallet </Text>
+            <Text style={{ fontSize: 20}}>member since </Text>
+            <Text style={{ color: "#D75452", fontSize: 20 }}>
               {this.state.joined}
             </Text>
           </Text>
+
+          <Image
+            style={styles.logo}
+            source={require('../../../assets/user2.png')}
+          />
+
           <Button
-            large
             block
-            onPress={() => this.props.navigation.navigate("Settings")}
+            onPress={() => this.props.navigation.navigate("Link")}
             primary
             style={{
               margin: 10,
-            }}
-          >
-            <Text style={{ fontWeight: "bold" }}>User Settings</Text>
-          </Button>
-          <Button
-            large
-            block
-            secondary
-            onPress={() => this.props.navigation.navigate("Link")}
-            style={{
-              margin: 10,
+              backgroundColor: "#6CBDC3",
             }}
           >
             <Text style={{ fontWeight: "bold" }}>Link Bank Account</Text>
           </Button>
           <Button
-            large
             block
             primary
             onPress={() => this.props.navigation.navigate("PasswordReset")}
             style={{
               margin: 10,
+              backgroundColor: "#6CBDC3",
             }}
           >
             <Text style={{ fontWeight: "bold" }}>Change Password</Text>
           </Button>
           <Button
-            large
             block
             danger
             style={{
-              margin: 100,
+              margin: 10,
             }}
           >
             <FontAwesome name="power-off" size={24} color="white" />

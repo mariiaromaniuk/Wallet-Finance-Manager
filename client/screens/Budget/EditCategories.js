@@ -1,13 +1,14 @@
-import React, { Component } from "react";
-import { View, Text, ScrollView } from 'react-native';
-import { Button, Card } from 'react-native-elements';
+import React from "react";
+import { View, ScrollView } from 'react-native';
+import { Card } from 'react-native-elements';
+import { Container, Content, Header, Button, Text, Body, CardItem } from "native-base";
 import { connect } from 'react-redux';
 import { fetchBudget, setBudget } from '../../store/budget';
 import Slider from 'react-native-slider';
 import { styles } from '../../styles';
 
 
-class EditCategories extends Component {
+class EditCategories extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,8 +23,8 @@ class EditCategories extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-      console.log("PROPS", props)
-      console.log("STATE", state)
+    //   console.log("PROPS", props)
+    //   console.log("STATE", state)
     if (props.budget && props.budget.foodAndDrink !== state.categories.name) {
       return {
         categories: [
@@ -92,13 +93,38 @@ class EditCategories extends Component {
     const userId = this.props.user.id
     return (
       <ScrollView>
+                <Header
+          iosBarStyle
+          androidStatusBarColor
+          style={{ backgroundColor: "#222831", height: 125 }}
+        >
+          <Body>
+            <Text
+              style={{
+                color: "#D75452",
+                alignSelf: "center",
+                fontSize: 25,
+                fontWeight: "bold",
+              }}
+            >
+              Edit Categories
+            </Text>
+            <Text style={{ alignSelf: "center" }}>
+              <Text style={{ fontSize: 20, color: "white" }}>
+                Spending Budget: {this.props.budget.spendingBudget}
+              </Text>
+              <Text
+                style={{ color: "#d3dbff", fontSize: 20, fontWeight: "bold" }}
+              >
+                $
+              </Text>
+            </Text>
+          </Body>
+        </Header>
         <View>
           {this.props.budget.id && (
             <View>
               <View>
-                <Text style={styles.headerText}>
-                  Edit Your Budget
-                </Text>
                 <View style={[styles.introInfo, { paddingTop: 10 }]}>
                   <Text style={styles.headerText}>
                     {this.state.remaining}%
@@ -125,9 +151,9 @@ class EditCategories extends Component {
               {this.state.categories &&
                 this.state.categories.map(category => {
                   return (
-                    <Card key={category.name} containerStyle={{ margin: 19, borderRadius: 6 }}>
+                    <Card key={category.name} containerStyle={{ margin: 22, marginTop: 10, borderRadius: 6 }}>
                       <View>
-                        <View style={{ padding: 5, width: '100%' }} />
+                        <View style={{ padding: 1, width: '100%' }} />
                         <View
                           style={{
                             paddingLeft: 20,
@@ -148,7 +174,7 @@ class EditCategories extends Component {
                         <Slider
                             trackStyle={styles.track}
                             thumbStyle={styles.thumb}
-                            minimumTrackTintColor="#D16C58"
+                            minimumTrackTintColor="#D75452"
                             maximumTrackTintColor="#b7b7b7"
                             style={styles.slider}
                             value={category.percentage}
@@ -166,9 +192,8 @@ class EditCategories extends Component {
                                       }
                                     })
                                   this.state.remaining = remainingNew;
-
-                              console.log("STATE REMINING", this.state.remaining)
-                              console.log("STATE CATEGORIES", this.state.categories)
+                            //   console.log("STATE REMINING", this.state.remaining)
+                            //   console.log("STATE CATEGORIES", this.state.categories)
                             }}
                             step={5}
                             minimumValue={0}
@@ -181,28 +206,26 @@ class EditCategories extends Component {
 
               {/* Button */}
               <Button
-                raised
-                // disabled={this.state.remaining >= 0 ? false : true}
-                type="outline"
-                block style={{ margin: 100, marginTop: 40 }} 
-                textStyle={{ textAlign: 'center' }}
-                title={`Finished`}
+                block
                 onPress={() => {
-                  this.props.setBudget({
-                    ...this.props.budget,
-                    foodAndDrink: this.state.categories[0].percentage,
-                    travel: this.state.categories[1].percentage,
-                    recreation: this.state.categories[2].percentage,
-                    healthcare: this.state.categories[3].percentage,
-                    service: this.state.categories[4].percentage,
-                    community: this.state.categories[5].percentage,
-                    shops: this.state.categories[6].percentage
-                  }, userId);
-                  console.log("categories", this.state.categories[0].percentage)
-                  this.props.navigation.navigate('Budget', { title: 'Budget' });
+                    this.props.setBudget({
+                      ...this.props.budget,
+                      foodAndDrink: this.state.categories[0].percentage,
+                      travel: this.state.categories[1].percentage,
+                      recreation: this.state.categories[2].percentage,
+                      healthcare: this.state.categories[3].percentage,
+                      service: this.state.categories[4].percentage,
+                      community: this.state.categories[5].percentage,
+                      shops: this.state.categories[6].percentage
+                    }, userId);
+                    this.props.navigation.navigate('Budget', { title: 'Budget' });
+                  }}
+                primary
+                style={{
+                  margin: 22, marginBottom: 40, backgroundColor: "#6CBDC3",
                 }}
               >
-                Finished
+                <Text style={{ fontWeight: "bold" }}>Finished</Text>
               </Button>
             </View>
           )}

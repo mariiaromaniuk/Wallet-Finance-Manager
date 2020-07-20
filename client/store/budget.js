@@ -1,34 +1,33 @@
-import axios from 'axios';
-import { server } from "../index";
+import axios from "axios";
+import { server } from "../server";
 
 // Action Types
-const GET_BUDGET = 'GET_BUDGET';
-const UPDATE_BUDGET = 'UPDATE_BUDGET';
+const GET_BUDGET = "GET_BUDGET";
+const UPDATE_BUDGET = "UPDATE_BUDGET";
 
 // Action Creators
-const getBudget = budget => ({ type: GET_BUDGET, budget });
-const updateBudget = budget => ({ type: UPDATE_BUDGET, budget });
+const getBudget = (budget) => ({ type: GET_BUDGET, budget });
+const updateBudget = (budget) => ({ type: UPDATE_BUDGET, budget });
 
-export const fetchBudget = userId => {
-  return async dispatch => {
+export const fetchBudget = (userId) => {
+  return async (dispatch) => {
     try {
-      const res = await axios.get(`http://localhost:8080/api/budget/${userId}`);
-      console.log("DATA", res.data)
+      const res = await axios.get(`${server}/api/budget/${userId}`);
+      console.log("DATA", res.data);
       dispatch(getBudget(res.data));
     } catch (err) {
-      console.log('Error fetching budget: ', err.message);
+      console.log("Error fetching budget: ", err.message);
     }
   };
 };
 
 export const setBudget = (budget, userId) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
-      const res = await axios.put(`http://localhost:8080/api/budget/${userId}`, budget);
+      const res = await axios.put(`${server}/api/budget/${userId}`, budget);
       dispatch(updateBudget(res.data));
     } catch (err) {
-      console.log('Error setting budget: ', err.message);
-      // console.log("!!!", budget)
+      console.log("Error setting budget: ", err.message);
     }
   };
 };

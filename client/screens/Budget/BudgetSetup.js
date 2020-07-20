@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import {
   View,
-  Text,
   TextInput,
   Image
 } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Container, Content, Header, Button, Text, Body, Card, CardItem } from "native-base";
 import { connect } from 'react-redux';
 import { setBudget } from '../../store/budget';
 import { styles } from '../../styles';
@@ -26,6 +25,34 @@ class BudgetSetup extends Component {
     const userId = this.props.userId
     return (
       <View>
+                <Header
+          iosBarStyle
+          androidStatusBarColor
+          style={{ backgroundColor: "#222831", height: 125 }}
+        >
+          <Body>
+            <Text
+              style={{
+                color: "#D75452",
+                alignSelf: "center",
+                fontSize: 25,
+                fontWeight: "bold",
+              }}
+            >
+              Budget Setup
+            </Text>
+            <Text style={{ alignSelf: "center" }}>
+              <Text style={{ fontSize: 20, color: "white" }}>
+                Current Spending Budget: {this.props.budget.spendingBudget}
+              </Text>
+              <Text
+                style={{ color: "#d3dbff", fontSize: 20, fontWeight: "bold" }}
+              >
+                $
+              </Text>
+            </Text>
+          </Body>
+        </Header>
       <View style={styles.container1}>
         <Text style={styles.categoryText}>
           What is your monthly income? ($)
@@ -58,10 +85,7 @@ class BudgetSetup extends Component {
 
       <View style={styles.container1}>
         <Text style={styles.categoryText}>
-          How much would you like 
-        </Text>
-        <Text style={styles.categoryText}>
-          to save each month? ($)
+          How much would you like to save each month? ($)
         </Text>
         <View>
           <TextInput
@@ -69,10 +93,8 @@ class BudgetSetup extends Component {
             onChangeText={savings => this.setState({ savings: +savings })}
             placeholder="Savings"
           />
-          <Button
-            type="outline"
-            block style={{ margin: 100, marginTop: 95 }} bordered danger
-            title={"Next"}
+        <Button
+            block
             onPress={() => {
               const spendingBudget =
                 this.state.income - this.state.staticCosts - this.state.savings;
@@ -82,7 +104,13 @@ class BudgetSetup extends Component {
                 title: 'Edit Categories'
               });
             }}
-          />
+            primary
+            style={{
+              margin: 22, marginTop: 100, backgroundColor: "#6CBDC3",
+            }}
+          >
+            <Text style={{ fontWeight: "bold" }}>Next</Text>
+          </Button>
         </View>
       </View>
       </View>
