@@ -142,8 +142,9 @@ const styles = StyleSheet.create({
         marginTop: 5
     },
     title: {
-        color: "#D75452",
+        color: "#222831",
         fontWeight: 'normal',
+        marginTop:18,
         fontSize: 20,
     },
     button: {
@@ -154,9 +155,9 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
     buttonDisabled: {
-        backgroundColor: '#fff',
+        // backgroundColor: '#fff',
         marginTop: 50,
-        width: 500,
+        width: 360,
     },
     info: {
         flex: 1,

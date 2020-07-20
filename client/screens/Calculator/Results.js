@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet, Dimensions,ScrollView } from 'react-native'
 import HeaderTitle from '../../components/Header.js'
 import Summary from '../../components/Summary.js'
+import { Container, Content, Header, Body, Card, CardItem } from "native-base";
 
 export default class Results extends React.Component{
 
@@ -97,13 +98,36 @@ export default class Results extends React.Component{
         const res = this.monthlyForDisplay(info)
 
         return(
+            <Container>
+            <Header
+          iosBarStyle
+          androidStatusBarColor
+          style={{ backgroundColor: "#222831", height: 125 }}
+        >
+          <Body>
+            <Text
+              style={{
+                color: "#D75452",
+                alignSelf: "center",
+                fontSize: 25,
+                fontWeight: "bold",
+              }}
+            >
+              Loan Calculator
+            </Text>
+            <Text style={{ alignSelf: "center" }}>
+              <Text style={{ fontSize: 20, color: "white" }}>
+              Results:
+              </Text>
+            </Text>
+          </Body>
+        </Header>
             <View style={styles.fullScreen}>
-                <HeaderTitle></HeaderTitle>
                 <ScrollView contentContainerStyle={styles.contentContainer}>
                     <Summary info={info} res={res}>{console.log(res,"testtsss")}</Summary>
                     <Text style={styles.title}>Loan Schedule:</Text>
                     <View style={styles.paymentRow}>
-                        <Text style={styles.itemNumber} key={0}>#</Text>
+                        {/* <Text style={styles.itemNumber} key={0}>#</Text> */}
                         <Text style={styles.item} key={1}>Interest:</Text>
                         <Text style={styles.item} key={2}>Principal:</Text>
                         <Text style={styles.item} key={3}>Balance:</Text>
@@ -121,6 +145,7 @@ export default class Results extends React.Component{
                     </View> */}
                 </ScrollView>
             </View>
+            </Container>
         )
     }
 }
@@ -130,16 +155,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#000E23',
+        backgroundColor: 'white',
         alignSelf: 'center',
     },
     item: {
-        color: 'white',
+        color: 'black',
         width: 85,
         marginLeft: 4,
     },
     itemNumber: {
-        color: 'white',
+        color: 'black',
         width: 45,
         marginLeft: 4,
     },
@@ -147,27 +172,21 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        backgroundColor: '#2608B1',
-        borderWidth: 1,
+        backgroundColor: 'white',
+        // borderWidth: 1,
         marginBottom: 1,
         borderRadius: 50,
         paddingLeft: 10,
     },
     contentContainer: {
         paddingTop: 10,
-        backgroundColor: '#000E23',
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'space-evenly',
     },
     title: {
-        color: 'white',
+        color: '#D75452',
         fontWeight: 'normal',
-        fontSize: 30,
+        fontSize: 25,
     },
-    ad: {
-        backgroundColor: 'white',
-        height: 250,
-        width: 300,
-        marginTop: 5,
-    }
 })

@@ -36,26 +36,26 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         // marginTop: 20,
         // marginBottom: 20,
-        backgroundColor: '#000E23',
+        backgroundColor: 'white',
         // alignSelf: 'stretch',
         // width: width,
     },
     text: {
-        color: 'white',
-        backgroundColor: 'red',
+        color: 'black',
+        backgroundColor: 'white',
         marginVertical: 5,
         marginHorizontal: 4,
         height: 28,
         width: 180,
-        borderRadius: 50,
+        borderRadius: 8,
         textAlignVertical: 'center',
         textAlign: 'center',
         justifyContent: 'center',
     },
     title: {
-        color: 'white',
+        color: '#D75452',
         fontWeight: 'normal',
-        fontSize: 30,
+        fontSize: 25,
         // marginHorizontal: 35,
     },
     sides: {
@@ -64,10 +64,10 @@ const styles = StyleSheet.create({
     },
     columns: {
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     items: {
-        color: 'white'
+        color: 'black'
     }
 })
 
