@@ -19,6 +19,10 @@ import {
   Budget,
   BudgetSetup,
 } from "./client/screens";
+import LoanEntry from "./client/screens/Calculator/LoanEntry";
+import Splash from './client/screens/Calculator/splash.js'
+import Results from './client/screens/Calculator/Results.js'
+
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
@@ -156,6 +160,33 @@ export default class App extends Component {
           options={{
             headerShown: false,
             title: "Edit Categories",
+            headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="Calculator"
+          component={LoanEntry}
+          options={{
+            headerShown: false,
+            title: "Loan Calculator",
+            headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="Splash"
+          component={Splash}
+          options={{
+            headerShown: false,
+            title: "Splash",
+            headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="Results"
+          component={Results}
+          options={{
+            headerShown: false,
+            title: "Results",
             headerLeft: () => {},
           }}
         />

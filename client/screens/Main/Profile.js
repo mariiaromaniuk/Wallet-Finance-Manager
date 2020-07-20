@@ -100,6 +100,19 @@ class Profile extends React.Component {
           >
             <Text style={{ fontWeight: "bold" }}>Link Bank Account</Text>
           </Button>
+
+          <Button
+            block
+            onPress={() => this.props.navigation.navigate("Calculator")}
+            primary
+            style={{
+              margin: 10,
+              backgroundColor: "#6CBDC3",
+            }}
+          >
+            <Text style={{ fontWeight: "bold" }}>Loan Calculator</Text>
+          </Button>
+
           <Button
             block
             primary
