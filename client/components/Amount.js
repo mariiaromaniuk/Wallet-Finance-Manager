@@ -21,7 +21,7 @@ const Amount = (props) => {
 const styles = StyleSheet.create({
    inputView: {
        backgroundColor: "white",
-       borderRadius: 50,
+       borderRadius: 10,
        width: 360,
        height: 50,
     //    width: 205,

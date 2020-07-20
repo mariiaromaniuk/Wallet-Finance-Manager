@@ -89,7 +89,8 @@ export default class Results extends React.Component{
 
     render(){
         const { navigation } = this.props
-        const info = "Results"
+        // const info = navigation.getParam('results','none')
+        const { info } = this.props.route.params.results
 
         const calculate = this.calculateMonthlyPayment(info)
         const res = this.monthlyForDisplay(info)

@@ -5,36 +5,23 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         // marginTop: 10,
         // marginBottom: 20,
-        backgroundColor: '#000E23'
+        // backgroundColor: '#000E23'
     },
     screenTitle: {
-        color: 'white',
+        color: "#D75452",
         fontWeight: 'bold',
-        fontSize: 35,
+        fontSize: 25,
         marginTop: 5
     },
     title: {
-        color: 'white',
+        color: "#D75452",
         fontWeight: 'normal',
-        fontSize: 30,
+        fontSize: 20,
     },
     button: {
         backgroundColor: '#f9002c',
         marginTop: 50,
         width: 500,
-    },
-    ad: {
-        width: 350,
-        height: 50,
-        backgroundColor: 'white',
-        alignContent: 'center',
-        justifyContent: 'center',
-        textAlign: 'center'
-    },
-    adText: {
-        alignContent: 'center',
-        justifyContent: 'center',
-        textAlign: 'center'
     },
     buttonDisabled: {
         backgroundColor: '#fff',
@@ -64,7 +51,9 @@ export default class LoanEntry extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { amount: 0 };
+    this.state = { 
+        amount: 0, 
+    };
   }
 
   changeAmount = (input) => {
@@ -98,10 +87,6 @@ export default class LoanEntry extends React.Component {
       })
   }
 
-  bannerError = (e) => {
-    // alert(e)
-  }
-
   render() {
     const { navigate } = this.props.navigation
     return (
@@ -110,7 +95,7 @@ export default class LoanEntry extends React.Component {
                 <HeaderTitle></HeaderTitle>
 
                 <Text style={styles.screenTitle}>Enter Loan Info:</Text>
-                <LoanTypePicker change={this.changeLoanType} loanState={this.state}></LoanTypePicker>
+                {/* <LoanTypePicker change={this.changeLoanType} loanState={this.state}></LoanTypePicker> */}
 
                 <Text style={styles.title}>Amount:</Text>
                 <Amount amountEntered={this.state.amount} change={this.changeAmount}></Amount>

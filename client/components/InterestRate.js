@@ -32,19 +32,19 @@ const styles = StyleSheet.create({
             backgroundColor: "white",
             width: 205,
             // height: 50,
-            borderRadius: 50,
+            borderRadius: 10,
         },
         input: {
-            borderRadius: 50,
+            borderRadius: 10,
             textAlign: 'center',
             alignItems: 'center',
             flex: 1,
             // height: 30
         },
         picker: {
-            backgroundColor: '#2608B1',
+            backgroundColor: 'white',
             height: 45,
-            borderRadius: 50,
+            borderRadius: 10,
             marginTop: 5,
             marginLeft: 15,
             color: 'white',
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
             height: 50
         },
         percentage: {
-            color: 'white',
+            color: 'black',
             textAlign: 'center',
             justifyContent: 'center',
             alignItems: 'center',

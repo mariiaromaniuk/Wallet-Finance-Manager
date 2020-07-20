@@ -36,19 +36,18 @@ const styles = StyleSheet.create({
        inputView: {
                backgroundColor: "white",
                width: 205,
-               borderRadius: 50,
+               borderRadius: 10,
            },
            pickerViewLoanTerm: {
                marginLeft: 15,
-               borderRadius: 50,
+               borderRadius: 10,
                color: 'white',
-               backgroundColor: '#2608B1',
-               borderWidth: 1,
+               backgroundColor: 'white',
                overflow: 'hidden',
                width: 140
            },
            input: {
-               borderRadius: 50,
+               borderRadius: 10,
                textAlign: 'center',
                alignItems: 'center',
                flex: 1,
