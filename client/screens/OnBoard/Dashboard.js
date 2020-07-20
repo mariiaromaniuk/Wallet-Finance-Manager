@@ -105,7 +105,7 @@ class Dashboard extends Component {
           <Body>
             <Text
               style={{
-                color: "#fc5185",
+                color: "#D75452",
                 alignSelf: "center",
                 fontSize: 25,
                 fontWeight: "bold",

@@ -95,7 +95,7 @@ class Budget extends Component {
           <Body>
             <Text
               style={{
-                color: "#fc5185",
+                color: "#D75452",
                 alignSelf: "center",
                 fontSize: 25,
                 fontWeight: "bold",
@@ -137,7 +137,7 @@ class Budget extends Component {
                         <Text style={{ borderRadius: 20 }}>
                           <Text>{description[index]}</Text>
                         </Text>
-                        <Text style={{ color: "red", fontWeight: "bold", alignSelf: "flex-end" }}>
+                        <Text style={{ color: "#D75452", fontWeight: "bold", alignSelf: "flex-end" }}>
                           {item.amount}%
                         </Text>
                       </Body>

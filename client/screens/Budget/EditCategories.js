@@ -101,7 +101,7 @@ class EditCategories extends React.Component {
           <Body>
             <Text
               style={{
-                color: "#fc5185",
+                color: "#D75452",
                 alignSelf: "center",
                 fontSize: 25,
                 fontWeight: "bold",
@@ -174,7 +174,7 @@ class EditCategories extends React.Component {
                         <Slider
                             trackStyle={styles.track}
                             thumbStyle={styles.thumb}
-                            minimumTrackTintColor="#fc5185"
+                            minimumTrackTintColor="#D75452"
                             maximumTrackTintColor="#b7b7b7"
                             style={styles.slider}
                             value={category.percentage}

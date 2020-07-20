@@ -115,7 +115,7 @@ export class SpendingScreen extends React.Component {
           <Body>
             <Text
               style={{
-                color: "#fc5185",
+                color: "#D75452",
                 alignSelf: "center",
                 fontSize: 25,
                 fontWeight: "bold",
@@ -221,7 +221,7 @@ export class SpendingScreen extends React.Component {
                             ${item.amount}
                           </Text>
                         ) : (
-                          <Text style={{ color: "red", fontWeight: "bold" }}>
+                          <Text style={{ color: "#D75452", fontWeight: "bold" }}>
                             ${item.amount}
                           </Text>
                         )}
