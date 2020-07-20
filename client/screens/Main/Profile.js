@@ -9,9 +9,11 @@ import {
   Body,
   Thumbnail,
 } from "native-base";
+import { Image } from "react-native";
 import moment from "moment";
 import { FontAwesome } from "@expo/vector-icons";
 import { logout } from "../../store/user";
+import { styles } from '../../styles';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -37,7 +39,7 @@ class Profile extends React.Component {
         <Header
           iosBarStyle
           androidStatusBarColor
-          style={{ backgroundColor: "#222831", height: 100 }}
+          style={{ backgroundColor: "#222831", height: 125 }}
           span
         >
           <Body
@@ -49,9 +51,9 @@ class Profile extends React.Component {
           >
             <Text
               style={{
-                fontSize: 30,
+                fontSize: 25,
                 fontWeight: "bold",
-                color: "#fc5185",
+                color: "#D75452",
               }}
             >
               {this.state.firstName} {this.state.lastName}
@@ -75,12 +77,18 @@ class Profile extends React.Component {
               marginBottom: 30,
             }}
           >
-            <Text style={{ color: "#fc5185", fontSize: 20 }}>Wallet </Text>
-            <Text style={{ fontSize: 20 }}>member since </Text>
-            <Text style={{ color: "#fc5185", fontSize: 20 }}>
+            <Text style={{ color: "#D75452", fontSize: 20 }}>Wallet </Text>
+            <Text style={{ fontSize: 20}}>member since </Text>
+            <Text style={{ color: "#D75452", fontSize: 20 }}>
               {this.state.joined}
             </Text>
           </Text>
+
+          <Image
+            style={styles.logo}
+            source={require('../../../assets/user2.png')}
+          />
+
           <Button
             block
             onPress={() => this.props.navigation.navigate("Link")}

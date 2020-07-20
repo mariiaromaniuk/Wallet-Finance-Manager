@@ -1,32 +1,34 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { View } from 'react-native';
-import { Container, Header, Button, Text, Body, } from "native-base";
+import { Container, Content, Header, Button, Text, Body, Card, CardItem } from "native-base";
 import { fetchBudget } from "../../store/budget";
 import { styles, pieColors } from '../../styles';
+import { PieChart } from "react-native-chart-kit";
+import { View, Dimensions } from "react-native";
 
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
 
-import { Dimensions } from "react-native";
 const screenWidth = Dimensions.get("window").width;
-
 const chartConfig = {
+  cutoutPercentage: "50",
   backgroundGradientFrom: "#1E2923",
-  backgroundGradientFromOpacity: 0,
+  backgroundGradientFromOpacity: 0.5,
   backgroundGradientTo: "#08130D",
   backgroundGradientToOpacity: 0.5,
   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-  strokeWidth: 2, // optional, default 3
+  strokeWidth: 3, // optional, default 3
   barPercentage: 0.5,
-  useShadowColorFromDataset: false // optional
+  useShadowColorFromDataset: false, // optional
+  withVerticalLabels: true,
 };
+const description = [
+  '(Groceries, restaurants, bars, nightlife, etc.)',
+  '(Gas, subway, train, bus, etc.)',
+  '(Arts, entertainment, sports, outdoors, etc.)',
+  '(Doctor visits, prescriptions, etc.)',
+  '(Self-care, automotive, home repair, etc.)',
+  '(Education, donations, offering, etc.)',
+  '(Presents, clothes, accessories, etc.)',
+];
 
 
 class Budget extends Component {
@@ -64,12 +66,22 @@ class Budget extends Component {
           amount: budget[key],
           color: pieColors[i],
           legendFontColor: "#7F7F7F",
-          legendFontSize: 15
+          legendFontSize: 13
         });
         i++;
       }
     }
     return pieData;
+  }
+
+  toTitle(str, separator) {
+    separator = typeof separator === 'undefined' ? ' ' : separator;
+    return str
+      .replace(/([a-z\d])([A-Z])/g, '$1' + separator + '$2')
+      .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1' + separator + '$2')
+      .replace(/\w\S*/g, function(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      });
   }
 
   render() {
@@ -83,7 +95,7 @@ class Budget extends Component {
           <Body>
             <Text
               style={{
-                color: "#fc5185",
+                color: "#D75452",
                 alignSelf: "center",
                 fontSize: 25,
                 fontWeight: "bold",
@@ -104,17 +116,37 @@ class Budget extends Component {
           </Body>
         </Header>
 
+        <Content style={{ padding: 20 }}>
         <PieChart
           data={this.getData()}
           width={screenWidth}
-          height={220}
+          height={240}
           chartConfig={chartConfig}
           accessor="amount"
           backgroundColor="transparent"
-          paddingLeft="15"
           absolute
         />
-        <Button
+        {this.getData().map((item, index) => {
+                return (
+                  <Card key={index} style={{ borderRadius: 8, padding: 8 }}>
+                    <CardItem style={{ borderRadius: 8 }}>
+                      <Body>
+                        <Text style={{ fontWeight: "500", borderRadius: 20 }}>
+                          {this.toTitle(item.name)}
+                        </Text>
+                        <Text style={{ borderRadius: 20 }}>
+                          <Text>{description[index]}</Text>
+                        </Text>
+                        <Text style={{ color: "#D75452", fontWeight: "bold", alignSelf: "flex-end" }}>
+                          {item.amount}%
+                        </Text>
+                      </Body>
+                    </CardItem>
+                  </Card>
+                );
+              })
+            }
+            <Button
             block
             onPress={() => {
               this.props.navigation.navigate('BudgetSetup', {
@@ -123,11 +155,27 @@ class Budget extends Component {
             }}
             primary
             style={{
-              margin: 10,backgroundColor: "#6CBDC3",
+              margin: 2, marginTop: 20, backgroundColor: "#6CBDC3",
             }}
           >
-            <Text style={{ fontWeight: "bold" }}>Edit Budget</Text>
+            <Text style={{ fontWeight: "bold" }}>Setup Your Budget</Text>
           </Button>
+
+          <Button
+            block
+            onPress={() => {
+              this.props.navigation.navigate('EditCategories', {
+                title: 'EditCategories'
+              });
+            }}
+            primary
+            style={{
+              margin: 2, marginTop: 20, marginBottom: 50, backgroundColor: "#6CBDC3",
+            }}
+          >
+            <Text style={{ fontWeight: "bold" }}>Edit Budget Categories</Text>
+          </Button>
+        </Content>
       </Container>
     );
   }

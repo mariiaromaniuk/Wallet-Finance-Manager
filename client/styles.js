@@ -5,13 +5,13 @@ export const deviceHeight = Dimensions.get('window').height;
  
 
 export const pieColors = [
-  "#EF4C22",
-  "#f1dd6a",
-  "#D4F2D2",
-  "#B776B2",
-  "#84A59D",
-  "#262560",
-  "#4F5DA9"
+  "#2C676C",
+  "#429AA1",
+  "#6CBDC3",
+  "#7CCDBA",
+  "#A2D9C1",
+  "#84DEAD",
+  "#A2D5D9",
 ];
  
 export const styles = StyleSheet.create({
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     paddingTop: 15,
     padding: 8,
-    color: "#D16C58",
+    color: "#D75452",
     fontWeight: 'bold',
     fontSize: 22,
  },
@@ -33,11 +33,13 @@ export const styles = StyleSheet.create({
   marginTop: 30,
   flexGrow: 1,
   paddingTop: 40,
+  margin: 20
 },
  logo: {
-   width: 150,
-   height: 108,
-   resizeMode: 'contain',
+   width: 200,
+   height: 200,
+   alignSelf: "center",
+   marginBottom: 30
  },
  buttontext: {
    textAlign: 'center',
@@ -98,7 +100,7 @@ export const styles = StyleSheet.create({
  },
  smallerText: {
    alignSelf: 'center',
-   color: "#D16C58",
+   color: "#D75452",
    fontWeight: 'bold',
    fontSize: 16,
  },
