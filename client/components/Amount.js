@@ -1,6 +1,6 @@
-import React from 'react'
-import { StyleSheet, View, TextInput } from 'react-native'
-import { Text, Input } from 'react-native-elements'
+import React from 'react';
+import { StyleSheet, View, TextInput } from 'react-native';
+
 
 const Amount = (props) => {
     const {amountEntered, change} = props
@@ -15,7 +15,6 @@ const Amount = (props) => {
                 </TextInput>
             </View>
     )
-    {/* </View> */}
 }
 
 const styles = StyleSheet.create({
@@ -24,8 +23,6 @@ const styles = StyleSheet.create({
        borderRadius: 8,
        width: 360,
        height: 50,
-    //    width: 205,
-    //    borderRadius: 50,
    },
    input: {
        borderRadius: 8,
@@ -33,8 +30,9 @@ const styles = StyleSheet.create({
        alignItems: 'center',
        flex: 1,
        borderWidth: 1,
-       borderColor: "#999999"
+       borderColor: "#999999",
+       fontSize: 18,
    },
 })
 
-export default Amount
+export default Amount;

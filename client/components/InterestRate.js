@@ -1,8 +1,8 @@
-import React from 'react'
-import { View, StyleSheet, TextInput, Text } from 'react-native'
-// import { Picker } from 'react-native-elements'
-
+import React from 'react';
+import { View, StyleSheet, TextInput, Text } from 'react-native';
+// import { Picker } from 'react-native-elements';
 state = { language: true };
+
 
 const InterestRate = (props) => {
     const { interestEntered, changeInterest } = props
@@ -28,10 +28,8 @@ const InterestRate = (props) => {
 const styles = StyleSheet.create({
     inputView: {
             marginTop: 5,
-            // underlineColorAndroid: 'transparent',
             backgroundColor: "white",
             width: 205,
-            // height: 50,
             borderRadius: 8,
         },
         input: {
@@ -40,7 +38,8 @@ const styles = StyleSheet.create({
             alignItems: 'center',
             flex: 1,
             borderWidth: 1,
-            borderColor: "#999999"
+            borderColor: "#999999",
+            fontSize: 18,
         },
         picker: {
             backgroundColor: 'white',
@@ -66,8 +65,9 @@ const styles = StyleSheet.create({
             textAlign: 'center',
             justifyContent: 'center',
             alignItems: 'center',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            fontSize: 18,
         }
 })
 
-export default InterestRate
+export default InterestRate;

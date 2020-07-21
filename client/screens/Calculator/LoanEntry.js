@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import LoanTypePicker from '../../components/LoanTypePicker.js'
-import Amount from '../../components/Amount.js'
-import LoanTerm from '../../components/LoanTerm.js'
-import InterestRate from '../../components/InterestRate.js'
-import { Container, Content, Header, Body, Card, CardItem } from "native-base";
+// import LoanTypePicker from '../../components/LoanTypePicker.js';
+import Amount from '../../components/Amount.js';
+import LoanTerm from '../../components/LoanTerm.js';
+import InterestRate from '../../components/InterestRate.js';
+import { Container, Header, Body, Left } from "native-base";
 
 
 export default class LoanEntry extends React.Component {
@@ -52,12 +52,21 @@ export default class LoanEntry extends React.Component {
   render() {
     const { navigate } = this.props.navigation
     return (
-        <Container>
-            <Header
+     <Container>
+        <Header
           iosBarStyle
           androidStatusBarColor
           style={{ backgroundColor: "#222831", height: 125 }}
         >
+         {/* <Left>
+            <Button
+              transparent
+              style={{ marginLeft: 10 }}
+              onPress={() => this.props.navigation.goBack()}
+            >
+              <Icon name="arrow-back" style={{ color: "red", fontSize: 25 }} />
+            </Button>
+          </Left> */}
           <Body>
             <Text
               style={{
@@ -119,7 +128,7 @@ export default class LoanEntry extends React.Component {
                 />}
             </View>
         </View>
-        </Container>
+      </Container>
     );
   }
 }
@@ -130,8 +139,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         justifyContent: 'space-between',
-        // marginTop: 10,
-        // marginBottom: 20,
         backgroundColor: '#F2F2F2'
     },
     screenTitle: {
@@ -154,7 +161,6 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
     buttonDisabled: {
-        // backgroundColor: '#fff',
         marginTop: 50,
         width: 360,
         height: 50,

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, Dimensions,ScrollView } from 'react-native'
 import Summary from '../../components/Summary.js'
-import { Container, Content, Header, Body, Card, CardItem } from "native-base";
+import { Container, Content, Header, Body, Left, Card, CardItem } from "native-base";
 
 export default class Results extends React.Component{
 
@@ -97,12 +97,21 @@ export default class Results extends React.Component{
         const res = this.monthlyForDisplay(info)
 
         return(
-            <Container>
-            <Header
-          iosBarStyle
-          androidStatusBarColor
-          style={{ backgroundColor: "#222831", height: 125 }}
-        >
+        <Container>
+          <Header
+            iosBarStyle
+            androidStatusBarColor
+            style={{ backgroundColor: "#222831", height: 125 }}
+          >
+      {/* <Left>
+            <Button
+              transparent
+              style={{ marginLeft: 10 }}
+              onPress={() => this.props.navigation.goBack()}
+            >
+              <Icon name="arrow-back" style={{ color: "red", fontSize: 25 }} />
+            </Button>
+          </Left> */}
           <Body>
             <Text
               style={{

@@ -1,6 +1,6 @@
-import React from 'react'
-import { StyleSheet, View, Picker, TextInput } from 'react-native'
-import { Text, Input } from 'react-native-elements'
+import React from 'react';
+import { StyleSheet, View, Picker, TextInput } from 'react-native';
+
 
 const LoanTerm = (props) => {
     const { lengthEntered, change, changeTime } = props
@@ -55,11 +55,7 @@ const styles = StyleSheet.create({
                textAlign: 'center',
                alignItems: 'center',
                flex: 1,
-
-           },
-           pickerView: {
-               // width: 130, 
-               // height: 150
+               fontSize: 18,
            },
            horizontal: {
                display: 'flex',
@@ -70,4 +66,4 @@ const styles = StyleSheet.create({
            }
 })
 
-export default LoanTerm
+export default LoanTerm;

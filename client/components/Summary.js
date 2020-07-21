@@ -1,5 +1,6 @@
-import React from 'react'
-import { View, Text, StyleSheet} from 'react-native'
+import React from 'react';
+import { View, Text, StyleSheet} from 'react-native';
+
 
 const Summary = (props) => {
     const { info, res } = props
@@ -71,4 +72,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Summary
+export default Summary;
