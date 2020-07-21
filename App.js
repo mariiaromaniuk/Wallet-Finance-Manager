@@ -2,13 +2,17 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import store from "./client/index";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  mapNavigationStateParamsToProps,
+} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   Signup,
   ResetPassword,
+  Category,
   Login,
   Link,
   Initial,
@@ -47,7 +51,7 @@ export default class App extends Component {
         />
         <Tabs.Screen
           name="Budget"
-          component={Budget}
+          component={this.budgetStack}
           options={{
             tabBarLabel: "Budget",
             tabBarIcon: ({ color, size }) => {
@@ -141,9 +145,34 @@ export default class App extends Component {
             title: "Transactions",
           }}
         />
+      </Stack.Navigator>
+    );
+  };
+
+  budgetStack = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Budget"
+          component={Budget}
+          options={{
+            headerShown: false,
+            title: "Budget Setup",
+            headerLeft: () => {},
+          }}
+        />
         <Stack.Screen
           name="BudgetSetup"
           component={BudgetSetup}
+          options={{
+            headerShown: false,
+            title: "Budget Setup",
+            headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="Category"
+          component={Category}
           options={{
             headerShown: false,
             title: "Budget Setup",
