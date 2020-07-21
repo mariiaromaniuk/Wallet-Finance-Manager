@@ -10,6 +10,8 @@ import {
   Button,
   Label,
 } from "native-base";
+import { StyleSheet, View } from "react-native";
+
 import { connect } from "react-redux";
 import { signup } from "../../store/user";
 
@@ -21,8 +23,11 @@ class Signup extends Component {
 
   render() {
     return (
-      <Container>
-        <Form style={{ paddingTop: 20 }}>
+      <Container style={GreetingStyles.container}>
+        <View style={GreetingStyles.header}>
+          <Text style={GreetingStyles.text_header}>Welcome to Wallet</Text>
+        </View>
+        <Form style={GreetingStyles.footer}>
           <InputGroup>
             <Icon name="ios-person" />
             <Input
@@ -59,17 +64,17 @@ class Signup extends Component {
               onChangeText={(text) => this.setState({ password: text })}
             />
           </InputGroup>
+          <Button
+            block
+            style={{ margin: 20, marginTop: 70 }}
+            success
+            onPress={() => {
+              this.props.handleSubmit(this.state, this.props.navigation);
+            }}
+          >
+            <Text>SIGNUP</Text>
+          </Button>
         </Form>
-        <Button
-          block
-          style={{ margin: 20, marginTop: 40 }}
-          success
-          onPress={() => {
-            this.props.handleSubmit(this.state, this.props.navigation);
-          }}
-        >
-          <Text>SIGNUP</Text>
-        </Button>
       </Container>
     );
   }
@@ -83,3 +88,73 @@ const mapDispatch = (dispatch) => {
   };
 };
 export default connect(null, mapDispatch)(Signup);
+
+const GreetingStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#003366",
+    // backgroundColor: '#7aa8ad',
+  },
+  header: {
+    flex: 1,
+    justifyContent: "flex-end",
+    paddingHorizontal: 20,
+    paddingBottom: 50,
+  },
+  footer: {
+    flex: 3,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+  },
+  text_header: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 30,
+  },
+  text_footer: {
+    color: "#05375a",
+    fontSize: 18,
+  },
+  action: {
+    flexDirection: "row",
+    marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f2f2f2",
+    paddingBottom: 5,
+  },
+  actionError: {
+    flexDirection: "row",
+    marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#FF0000",
+    paddingBottom: 5,
+  },
+  textInput: {
+    flex: 1,
+    marginTop: Platform.OS === "ios" ? 0 : -12,
+    paddingLeft: 10,
+    color: "#05375a",
+  },
+  errorMsg: {
+    color: "#FF0000",
+    fontSize: 14,
+  },
+  button: {
+    alignItems: "center",
+    marginTop: 50,
+  },
+  signIn: {
+    width: "100%",
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+  },
+  textSign: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+});

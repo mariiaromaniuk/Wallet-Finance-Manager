@@ -37,7 +37,6 @@ import Banner from "./Card";
 //   CardItem,
 // } from "native-base";
 
-
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -95,8 +94,6 @@ class Dashboard extends Component {
 
     return (
       <Container>
-        <ScrollView>
-
         <Header
           iosBarStyle
           androidStatusBarColor
@@ -105,7 +102,7 @@ class Dashboard extends Component {
           <Body>
             <Text
               style={{
-                color: "#fc5185",
+                color: "#D75452",
                 alignSelf: "center",
                 fontSize: 25,
                 fontWeight: "bold",
@@ -120,8 +117,10 @@ class Dashboard extends Component {
             </Text>
           </Body>
         </Header>
-
-          {renderAccountAndBalances(accountsAndBalances).map((comp) => comp)}
+        <ScrollView>
+          <View style={{ margin: 20 }}>
+            {renderAccountAndBalances(accountsAndBalances).map((comp) => comp)}
+          </View>
 
           {/* ============= MONEY EARNED ON A MONTHLY BASIS ============= */}
           <Text style={{ alignSelf: "center" }}>Monthy Earnings</Text>
@@ -208,9 +207,7 @@ class Dashboard extends Component {
           />
 
           {/* ============= BUDGET PROGRESSION ============= */}
-          <Text style={{ alignSelf: "center", paddingBottom: 8 }}>
-            Budget Progression
-          </Text>
+          <Text style={{ alignSelf: "center" }}>Budget Progression</Text>
           <ProgressChart
             // each value represents a goal ring in Progress chart
             data={{
@@ -283,10 +280,16 @@ export default connect(mapStateToProp, mapDispatch)(Dashboard);
 
 function renderAccountAndBalances(map) {
   const retArr = [];
+  const chartWidth = Dimensions.get("window").width - 40;
   let id = 0;
   for (let key of map.keys()) {
     retArr.push(
-      <Banner key={id++} header={key} amount={map.get(key)}></Banner>
+      <Banner
+        key={id++}
+        header={key}
+        amount={map.get(key)}
+        width={chartWidth}
+      ></Banner>
     );
   }
   return retArr;

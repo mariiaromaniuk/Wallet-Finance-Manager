@@ -1,17 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  Text,
-  Container,
-  Content,
-  Button,
-  Header,
-  Body,
-  Thumbnail,
-} from "native-base";
+import { Text, Container, Content, Button, Header, Body, Image } from "native-base";
 import moment from "moment";
 import { FontAwesome } from "@expo/vector-icons";
 import { logout } from "../../store/user";
+import { styles} from "../../styles";
+
 
 class Profile extends React.Component {
   constructor(props) {
@@ -37,7 +31,7 @@ class Profile extends React.Component {
         <Header
           iosBarStyle
           androidStatusBarColor
-          style={{ backgroundColor: "#222831", height: 125 }}
+          style={{ backgroundColor: "#222831", height: 100 }}
           span
         >
           <Body
@@ -49,7 +43,7 @@ class Profile extends React.Component {
           >
             <Text
               style={{
-                fontSize: 25,
+                fontSize: 30,
                 fontWeight: "bold",
                 color: "#fc5185",
               }}
@@ -75,29 +69,54 @@ class Profile extends React.Component {
               marginBottom: 30,
             }}
           >
-            <Text style={{ color: "#fc5185", fontSize: 20 }}>Wallet </Text>
-            <Text style={{ fontSize: 20 }}>member since </Text>
-            <Text style={{ color: "#fc5185", fontSize: 20 }}>
+            <Text style={{ color: "#D75452", fontSize: 20 }}>Wallet </Text>
+            <Text style={{ color: "#222831", fontSize: 20}}>member since </Text>
+            <Text style={{ color: "#D75452", fontSize: 20 }}>
               {this.state.joined}
             </Text>
           </Text>
+          
+          {/* <Image
+            style={styles.logo}
+            source={require('../../../assets/user2.png')}
+          /> */}
+
           <Button
             block
-            onPress={() => this.props.navigation.navigate("Settings")}
+            onPress={() => this.props.navigation.navigate("Link")}
             primary
             style={{
               margin: 10,
+              marginLeft: 22,
+              marginRight: 22,
               backgroundColor: "#6CBDC3",
             }}
           >
             <Text style={{ fontWeight: "bold" }}>Link Bank Account</Text>
           </Button>
+
+          <Button
+            block
+            onPress={() => this.props.navigation.navigate("Calculator")}
+            primary
+            style={{
+              margin: 10,
+              marginLeft: 22,
+              marginRight: 22,
+              backgroundColor: "#6CBDC3",
+            }}
+          >
+            <Text style={{ fontWeight: "bold" }}>Personal Loan Calculator</Text>
+          </Button>
+
           <Button
             block
             primary
             onPress={() => this.props.navigation.navigate("PasswordReset")}
             style={{
               margin: 10,
+              marginLeft: 22,
+              marginRight: 22,
               backgroundColor: "#6CBDC3",
             }}
           >
@@ -108,6 +127,8 @@ class Profile extends React.Component {
             danger
             style={{
               margin: 10,
+              marginLeft: 22,
+              marginRight: 22,
             }}
           >
             <FontAwesome name="power-off" size={24} color="white" />

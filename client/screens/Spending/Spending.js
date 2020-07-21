@@ -13,8 +13,7 @@ import {
   CardItem,
 } from "native-base";
 import { LineChart } from "react-native-chart-kit";
-
-import { Dimensions } from "react-native";
+import { Dimensions, ScrollView } from "react-native";
 
 import { connect } from "react-redux";
 import { fetchTransactions } from "../../store/spending";
@@ -59,7 +58,6 @@ export class SpendingScreen extends React.Component {
     return item.available_balance;
   }
 
-  // getAmountsPerTransaction(array) {}
   render() {
     const accounts = this.props.accounts.data;
     const transactions = this.props.transactions;
@@ -70,41 +68,42 @@ export class SpendingScreen extends React.Component {
     for (let i = 0; i < acctInfo.length; i++) {
       id = acctInfo[i].account_id;
     }
-    const info = transactions.filter((account) => {
-      return account.accountId === id;
-    });
+    const info = transactions
+      .filter((account) => {
+        return account.accountId === id;
+      })
+      .splice(0, 7);
+    // const months = [
+    //   "Jan",
+    //   "Feb",
+    //   "Mar",
+    //   "Apr",
+    //   "May",
+    //   "Jun",
+    //   "Jul",
+    //   "Aug",
+    //   "Sep",
+    //   "Oct",
+    //   "Nov",
+    //   "Dec",
+    // ];
 
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-
-    const monthByNums = info.map((el) => {
-      return Number(el.date.slice(5, 7) - 1);
-    });
-    const arr = [];
-    for (let i = 0; i < monthByNums.length; i++) {
-      let digit = monthByNums[i];
-      arr.push(months[digit]);
-    }
-    let newMonthArr = [arr[0]];
-    for (let i = 0; i < arr.length; i++) {
-      let current = arr[0];
-      if (arr[i] !== current) {
-        newMonthArr.push(arr[i]);
-        current = arr[i];
-      }
-    }
+    // const monthByNums = info.map((el) => {
+    //   return Number(el.date.slice(5, 7) - 1);
+    // });
+    // const arr = [];
+    // for (let i = 0; i < monthByNums.length; i++) {
+    //   let digit = monthByNums[i];
+    //   arr.push(months[digit]);
+    // }
+    // let newMonthArr = [arr[0] + info[0].date.slice(7)];
+    // for (let i = 0; i < arr.length; i++) {
+    //   let current = arr[0];
+    //   if (arr[i] !== current) {
+    //     newMonthArr.push(arr[i] + info[i].date.slice(7));
+    //     current = arr[i];
+    //   }
+    // }
     return (
       <Container>
         <Header
@@ -115,7 +114,7 @@ export class SpendingScreen extends React.Component {
           <Body>
             <Text
               style={{
-                color: "#fc5185",
+                color: "#D75452",
                 alignSelf: "center",
                 fontSize: 25,
                 fontWeight: "bold",
@@ -159,12 +158,20 @@ export class SpendingScreen extends React.Component {
         <Content style={{ padding: 20 }}>
           <LineChart
             data={{
-              labels: newMonthArr,
+              labels: info
+                .map((el) => {
+                  return el.date.slice(5);
+                })
+                .reverse() || [0],
               datasets: [
                 {
-                  data: info.map((el) => {
-                    return el.amount * -1;
-                  }),
+                  data: info.length
+                    ? info
+                        .map((el) => {
+                          return el.amount * -1;
+                        })
+                        .reverse()
+                    : [0, 0, 0, 0],
                 },
               ],
             }}
@@ -204,33 +211,37 @@ export class SpendingScreen extends React.Component {
           >
             Latest Transactions
           </Text>
-          {info.length
-            ? info.map((item, index) => {
-                return (
-                  <Card key={index} style={{ borderRadius: 8 }}>
-                    <CardItem style={{ borderRadius: 8 }}>
-                      <Body>
-                        <Text style={{ fontWeight: "500", borderRadius: 20 }}>
-                          {item.name}
+          {info.length ? (
+            info.map((item, index) => {
+              return (
+                <Card key={index} style={{ borderRadius: 8 }}>
+                  <CardItem style={{ borderRadius: 8 }}>
+                    <Body>
+                      <Text style={{ fontWeight: "500", borderRadius: 20 }}>
+                        {item.name}
+                      </Text>
+                      <Text style={{ alignSelf: "flex-end" }}>
+                        <Text>{item.date}</Text>
+                      </Text>
+                      {item.amount < 0 ? (
+                        <Text style={{ color: "green", fontWeight: "bold" }}>
+                          ${item.amount * -1}
                         </Text>
-                        <Text style={{ alignSelf: "flex-end" }}>
-                          <Text>{item.date}</Text>
+                      ) : (
+                        <Text style={{ color: "#D75452", fontWeight: "bold" }}>
+                          -${"" + item.amount}
                         </Text>
-                        {item.amount < 0 ? (
-                          <Text style={{ color: "green", fontWeight: "bold" }}>
-                            ${item.amount}
-                          </Text>
-                        ) : (
-                          <Text style={{ color: "red", fontWeight: "bold" }}>
-                            ${item.amount}
-                          </Text>
-                        )}
-                      </Body>
-                    </CardItem>
-                  </Card>
-                );
-              })
-            : null}
+                      )}
+                    </Body>
+                  </CardItem>
+                </Card>
+              );
+            })
+          ) : (
+            <Text style={{ alignSelf: "center" }}>
+              There are no transactions for this account
+            </Text>
+          )}
         </Content>
       </Container>
     );

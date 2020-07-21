@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { Container, Button} from "native-base";
 import PlaidAuthenticator from "react-native-plaid-link";
