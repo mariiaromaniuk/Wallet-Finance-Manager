@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
        flex: 1,
        borderWidth: 1,
        borderColor: "#999999",
-       fontSize: 18,
+       fontSize: 16,
    },
 })
 

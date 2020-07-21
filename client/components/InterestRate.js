@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
             flex: 1,
             borderWidth: 1,
             borderColor: "#999999",
-            fontSize: 18,
+            fontSize: 16,
         },
         picker: {
             backgroundColor: 'white',
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
             justifyContent: 'center',
             alignItems: 'center',
             fontWeight: 'bold',
-            fontSize: 18,
+            fontSize: 16,
         }
 })
 

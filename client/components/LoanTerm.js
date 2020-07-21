@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
            pickerViewLoanTerm: {
                marginLeft: 15,
                borderRadius: 8,
-               color: 'white',
                backgroundColor: 'white',
                overflow: 'hidden',
                width: 140,
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
                textAlign: 'center',
                alignItems: 'center',
                flex: 1,
-               fontSize: 18,
+               fontSize: 16,
            },
            horizontal: {
                display: 'flex',

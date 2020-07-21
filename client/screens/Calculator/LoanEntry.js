@@ -141,17 +141,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor: '#F2F2F2'
     },
-    screenTitle: {
-        color: "#D75452",
-        fontWeight: 'bold',
-        fontSize: 25,
-        marginTop: 5
-    },
     title: {
-        color: "#222831",
+        color: "black",
         fontWeight: 'normal',
         marginTop:18,
-        fontSize: 20,
+        marginBottom:10,
+        fontSize: 16,
     },
     button: {
         backgroundColor: '#6CBDC3',
