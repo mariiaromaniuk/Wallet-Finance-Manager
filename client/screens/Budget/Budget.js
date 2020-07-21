@@ -1,11 +1,19 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
-import { Container, Content, Header, Button, Text, Body, Card, CardItem } from "native-base";
+import { connect } from "react-redux";
+import {
+  Container,
+  Content,
+  Header,
+  Button,
+  Text,
+  Body,
+  Card,
+  CardItem,
+} from "native-base";
 import { fetchBudget } from "../../store/budget";
-import { styles, pieColors } from '../../styles';
+import { styles, pieColors } from "../../styles";
 import { PieChart } from "react-native-chart-kit";
-import { View, Dimensions } from "react-native";
-
+import { View, Dimensions, TouchableOpacity } from "react-native";
 
 const screenWidth = Dimensions.get("window").width;
 const chartConfig = {
@@ -22,27 +30,26 @@ const chartConfig = {
   transparent: true,
 };
 const description = [
-  '(Groceries, restaurants, bars, nightlife, etc.)',
-  '(Gas, subway, train, bus, etc.)',
-  '(Arts, entertainment, sports, outdoors, etc.)',
-  '(Doctor visits, prescriptions, etc.)',
-  '(Self-care, automotive, home repair, etc.)',
-  '(Education, donations, offering, etc.)',
-  '(Presents, clothes, accessories, etc.)',
+  "(Groceries, restaurants, bars, nightlife, etc.)",
+  "(Gas, subway, train, bus, etc.)",
+  "(Arts, entertainment, sports, outdoors, etc.)",
+  "(Doctor visits, prescriptions, etc.)",
+  "(Self-care, automotive, home repair, etc.)",
+  "(Education, donations, offering, etc.)",
+  "(Presents, clothes, accessories, etc.)",
 ];
-
 
 class Budget extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeIndex: 0
+      activeIndex: 0,
     };
     this.getData = this.getData.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchBudget(this.props.user.id)
+    this.props.fetchBudget(this.props.user.id);
   }
 
   getData() {
@@ -50,13 +57,13 @@ class Budget extends Component {
     const budget = this.props.budget;
     let pieData = [];
     let categories = [
-      'foodAndDrink',
-      'community',
-      'healthcare',
-      'recreation',
-      'service',
-      'shops',
-      'travel'
+      "foodAndDrink",
+      "community",
+      "healthcare",
+      "recreation",
+      "service",
+      "shops",
+      "travel",
     ];
 
     let i = 0;
@@ -67,7 +74,7 @@ class Budget extends Component {
           amount: budget[key],
           color: pieColors[i],
           legendFontColor: "#7F7F7F",
-          legendFontSize: 13
+          legendFontSize: 13,
         });
         i++;
       }
@@ -76,11 +83,11 @@ class Budget extends Component {
   }
 
   toTitle(str, separator) {
-    separator = typeof separator === 'undefined' ? ' ' : separator;
+    separator = typeof separator === "undefined" ? " " : separator;
     return str
-      .replace(/([a-z\d])([A-Z])/g, '$1' + separator + '$2')
-      .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1' + separator + '$2')
-      .replace(/\w\S*/g, function(txt) {
+      .replace(/([a-z\d])([A-Z])/g, "$1" + separator + "$2")
+      .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, "$1" + separator + "$2")
+      .replace(/\w\S*/g, function (txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
       });
   }
@@ -118,45 +125,62 @@ class Budget extends Component {
         </Header>
 
         <Content style={{ padding: 20 }}>
-        <PieChart
-          data={this.getData()}
-          width={screenWidth}
-          height={240}
-          chartConfig={chartConfig}
-          accessor="amount"
-          backgroundColor="transparent"
-          absolute
-        />
-        {this.getData().map((item, index) => {
-                return (
-                  <Card key={index} style={{ borderRadius: 8, padding: 8 }}>
-                    <CardItem style={{ borderRadius: 8 }}>
-                      <Body>
-                        <Text style={{ fontWeight: "500", borderRadius: 20 }}>
-                          {this.toTitle(item.name)}
-                        </Text>
-                        <Text style={{ borderRadius: 20 }}>
-                          <Text>{description[index]}</Text>
-                        </Text>
-                        <Text style={{ color: "#D75452", fontWeight: "bold", alignSelf: "flex-end" }}>
-                          {item.amount}%
-                        </Text>
-                      </Body>
-                    </CardItem>
-                  </Card>
-                );
-              })
-            }
-            <Button
+          <PieChart
+            data={this.getData()}
+            width={screenWidth}
+            height={240}
+            chartConfig={chartConfig}
+            accessor="amount"
+            backgroundColor="transparent"
+            absolute
+          />
+          {this.getData().map((item, index) => {
+            let formatedName = this.toTitle(item.name);
+            return (
+              <TouchableOpacity
+                key={index}
+                onPress={() => {
+                  this.props.navigation.navigate("Category", {
+                    name: formatedName,
+                  });
+                }}
+              >
+                <Card style={{ borderRadius: 8, padding: 8 }}>
+                  <CardItem style={{ borderRadius: 8 }}>
+                    <Body>
+                      <Text style={{ fontWeight: "500", borderRadius: 20 }}>
+                        {formatedName}
+                      </Text>
+                      <Text style={{ borderRadius: 20 }}>
+                        <Text>{description[index]}</Text>
+                      </Text>
+                      <Text
+                        style={{
+                          color: "#D75452",
+                          fontWeight: "bold",
+                          alignSelf: "flex-end",
+                        }}
+                      >
+                        {item.amount}%
+                      </Text>
+                    </Body>
+                  </CardItem>
+                </Card>
+              </TouchableOpacity>
+            );
+          })}
+          <Button
             block
             onPress={() => {
-              this.props.navigation.navigate('BudgetSetup', {
-                title: 'BudgetSetup'
+              this.props.navigation.navigate("BudgetSetup", {
+                title: "BudgetSetup",
               });
             }}
             primary
             style={{
-              margin: 2, marginTop: 20, backgroundColor: "#6CBDC3",
+              margin: 2,
+              marginTop: 20,
+              backgroundColor: "#6CBDC3",
             }}
           >
             <Text style={{ fontWeight: "bold" }}>Setup Your Budget</Text>
@@ -165,13 +189,16 @@ class Budget extends Component {
           <Button
             block
             onPress={() => {
-              this.props.navigation.navigate('EditCategories', {
-                title: 'EditCategories'
+              this.props.navigation.navigate("EditCategories", {
+                title: "EditCategories",
               });
             }}
             primary
             style={{
-              margin: 2, marginTop: 20, marginBottom: 50, backgroundColor: "#6CBDC3",
+              margin: 2,
+              marginTop: 20,
+              marginBottom: 50,
+              backgroundColor: "#6CBDC3",
             }}
           >
             <Text style={{ fontWeight: "bold" }}>Edit Budget Categories</Text>
@@ -182,7 +209,7 @@ class Budget extends Component {
   }
 }
 
-const mapState = state => {
+const mapState = (state) => {
   return {
     user: state.user,
     budget: state.budget,

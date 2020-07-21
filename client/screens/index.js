@@ -5,6 +5,7 @@ export { default as Signup } from "./OnBoard/Signup";
 export { default as Initial } from "./OnBoard/Initial";
 export { default as Dashboard } from "./OnBoard/Dashboard";
 export { default as Spending } from "./Spending/Spending";
+export { default as Category } from "./Budget/Category";
 
 // Main
 export { default as Profile } from "./Main/Profile";

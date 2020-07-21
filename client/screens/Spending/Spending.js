@@ -13,7 +13,8 @@ import {
   CardItem,
 } from "native-base";
 import { LineChart } from "react-native-chart-kit";
-import { Dimensions } from "react-native";
+import { Dimensions, ScrollView } from "react-native";
+
 import { connect } from "react-redux";
 import { fetchTransactions } from "../../store/spending";
 import { fetchAccounts } from "../../store/accounts";
@@ -67,9 +68,11 @@ export class SpendingScreen extends React.Component {
     for (let i = 0; i < acctInfo.length; i++) {
       id = acctInfo[i].account_id;
     }
-    const info = transactions.filter((account) => {
-      return account.accountId === id;
-    });
+    const info = transactions
+      .filter((account) => {
+        return account.accountId === id;
+      })
+      .splice(0, 7);
     // const months = [
     //   "Jan",
     //   "Feb",
@@ -159,14 +162,16 @@ export class SpendingScreen extends React.Component {
                 .map((el) => {
                   return el.date.slice(5);
                 })
-                .reverse(),
+                .reverse() || [0],
               datasets: [
                 {
-                  data: info
-                    .map((el) => {
-                      return el.amount * -1;
-                    })
-                    .reverse(),
+                  data: info.length
+                    ? info
+                        .map((el) => {
+                          return el.amount * -1;
+                        })
+                        .reverse()
+                    : [0, 0, 0, 0],
                 },
               ],
             }}
@@ -206,33 +211,37 @@ export class SpendingScreen extends React.Component {
           >
             Latest Transactions
           </Text>
-          {info.length
-            ? info.map((item, index) => {
-                return (
-                  <Card key={index} style={{ borderRadius: 8 }}>
-                    <CardItem style={{ borderRadius: 8 }}>
-                      <Body>
-                        <Text style={{ fontWeight: "500", borderRadius: 20 }}>
-                          {item.name}
+          {info.length ? (
+            info.map((item, index) => {
+              return (
+                <Card key={index} style={{ borderRadius: 8 }}>
+                  <CardItem style={{ borderRadius: 8 }}>
+                    <Body>
+                      <Text style={{ fontWeight: "500", borderRadius: 20 }}>
+                        {item.name}
+                      </Text>
+                      <Text style={{ alignSelf: "flex-end" }}>
+                        <Text>{item.date}</Text>
+                      </Text>
+                      {item.amount < 0 ? (
+                        <Text style={{ color: "green", fontWeight: "bold" }}>
+                          ${item.amount * -1}
                         </Text>
-                        <Text style={{ alignSelf: "flex-end" }}>
-                          <Text>{item.date}</Text>
+                      ) : (
+                        <Text style={{ color: "#D75452", fontWeight: "bold" }}>
+                          -${"" + item.amount}
                         </Text>
-                        {item.amount < 0 ? (
-                          <Text style={{ color: "green", fontWeight: "bold" }}>
-                            ${item.amount}
-                          </Text>
-                        ) : (
-                          <Text style={{ color: "#D75452", fontWeight: "bold" }}>
-                            ${item.amount}
-                          </Text>
-                        )}
-                      </Body>
-                    </CardItem>
-                  </Card>
-                );
-              })
-            : null}
+                      )}
+                    </Body>
+                  </CardItem>
+                </Card>
+              );
+            })
+          ) : (
+            <Text style={{ alignSelf: "center" }}>
+              There are no transactions for this account
+            </Text>
+          )}
         </Content>
       </Container>
     );
