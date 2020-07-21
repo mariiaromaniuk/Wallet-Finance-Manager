@@ -67,15 +67,10 @@ class Profile extends React.Component {
               marginBottom: 30,
             }}
           >
-<<<<<<< HEAD
             <Text style={{ color: "#D75452", fontSize: 20 }}>Wallet </Text>
             <Text style={{ color: "#222831", fontSize: 20}}>member since </Text>
             <Text style={{ color: "#D75452", fontSize: 20 }}>
-=======
-            <Text style={{ color: "#fc5185", fontSize: 20 }}>Wallet </Text>
-            <Text style={{ fontSize: 20 }}>member since </Text>
-            <Text style={{ color: "#fc5185", fontSize: 20 }}>
->>>>>>> 6884c7fc142098b9170d91453a96133577207078
+
               {this.state.joined}
             </Text>
           </Text>
