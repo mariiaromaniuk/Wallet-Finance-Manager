@@ -5,13 +5,13 @@ export const deviceHeight = Dimensions.get('window').height;
  
 
 export const pieColors = [
-  "#2C676C",
-  "#429AA1",
-  "#6CBDC3",
-  "#7CCDBA",
-  "#A2D9C1",
-  "#84DEAD",
-  "#A2D5D9",
+  "#7ACEB7",
+  "#88D3BF",
+  "#97D8C7",
+  "#A6DECF",
+  "#B5E3D7",
+  "#C3E9DF",
+  "#D2EEE7",
 ];
  
 export const styles = StyleSheet.create({

@@ -95,6 +95,8 @@ class Profile extends React.Component {
             primary
             style={{
               margin: 10,
+              marginLeft: 22,
+              marginRight: 22,
               backgroundColor: "#6CBDC3",
             }}
           >
@@ -107,6 +109,8 @@ class Profile extends React.Component {
             primary
             style={{
               margin: 10,
+              marginLeft: 22,
+              marginRight: 22,
               backgroundColor: "#6CBDC3",
             }}
           >
@@ -119,6 +123,8 @@ class Profile extends React.Component {
             onPress={() => this.props.navigation.navigate("PasswordReset")}
             style={{
               margin: 10,
+              marginLeft: 22,
+              marginRight: 22,
               backgroundColor: "#6CBDC3",
             }}
           >
@@ -129,6 +135,8 @@ class Profile extends React.Component {
             danger
             style={{
               margin: 10,
+              marginLeft: 22,
+              marginRight: 22,
             }}
           >
             <FontAwesome name="power-off" size={24} color="white" />
