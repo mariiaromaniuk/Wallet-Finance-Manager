@@ -230,7 +230,7 @@ export class SpendingScreen extends React.Component {
                         </Text>
                       ) : (
                         <Text style={{ color: "#D75452", fontWeight: "bold" }}>
-                          -${("" + item.amount * -1).slice(1)}
+                          -${"" + item.amount}
                         </Text>
                       )}
                     </Body>
