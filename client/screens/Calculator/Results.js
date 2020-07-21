@@ -88,13 +88,12 @@ export default class Results extends React.Component{
     }
 
     render(){
-        const { navigation } = this.props
-        // const info = navigation.getParam('results','none')
         // const { info } = this.props.route.params.results
-        const info = "Results"
+        // const info = "Results"
+        console.log("this.props.route.params.results", this.props.route.params.results)
 
-        const calculate = this.calculateMonthlyPayment(info)
-        const res = this.monthlyForDisplay(info)
+        const calculate = this.calculateMonthlyPayment(this.props.route.params.results)
+        const res = this.monthlyForDisplay(this.props.route.params.results)
 
         return(
         <Container>
@@ -132,7 +131,7 @@ export default class Results extends React.Component{
         </Header>
             <View style={styles.fullScreen}>
                 <ScrollView contentContainerStyle={styles.contentContainer}>
-                    <Summary info={info} res={res}>{console.log(res,"testtsss")}</Summary>
+                    <Summary info={this.props.route.params.results} res={res}>{console.log(res,"testtsss")}</Summary>
                     <Text style={styles.title}>Loan Schedule:</Text>
                     <View style={styles.paymentRow}>
                         {/* <Text style={styles.itemNumber} key={0}>#</Text> */}

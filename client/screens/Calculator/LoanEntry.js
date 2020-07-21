@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import LoanTypePicker from '../../components/LoanTypePicker.js';
+import LoanTypePicker from '../../components/LoanTypePicker.js';
 import Amount from '../../components/Amount.js';
 import LoanTerm from '../../components/LoanTerm.js';
 import InterestRate from '../../components/InterestRate.js';
@@ -21,8 +21,8 @@ export default class LoanEntry extends React.Component {
   changeAmount = (input) => {
      this.setState({ 
          amount: input})
-    // console.log(this.state)
-    // console.log(input)
+    console.log(this.state)
+    console.log(input)
   }
 
   changeLoanTerm = (input) => {
@@ -41,11 +41,13 @@ export default class LoanEntry extends React.Component {
       this.setState({
           interest: input
       })
+      console.log("INTEREST", this.state)
+      console.log("INPUT", input)
   }
 
   changeLoanType = (input) => {
       this.setState({
-          loanType: input
+          loanType: "personal"
       })
   }
 

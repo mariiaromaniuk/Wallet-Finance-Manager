@@ -4,6 +4,8 @@ import { Text, Container, Content, Button, Header, Body, Image } from "native-ba
 import moment from "moment";
 import { FontAwesome } from "@expo/vector-icons";
 import { logout } from "../../store/user";
+import { styles} from "../../styles";
+
 
 class Profile extends React.Component {
   constructor(props) {
@@ -70,10 +72,15 @@ class Profile extends React.Component {
             <Text style={{ color: "#D75452", fontSize: 20 }}>Wallet </Text>
             <Text style={{ color: "#222831", fontSize: 20}}>member since </Text>
             <Text style={{ color: "#D75452", fontSize: 20 }}>
-
               {this.state.joined}
             </Text>
           </Text>
+          
+          {/* <Image
+            style={styles.logo}
+            source={require('../../../assets/user2.png')}
+          /> */}
+
           <Button
             block
             onPress={() => this.props.navigation.navigate("Link")}

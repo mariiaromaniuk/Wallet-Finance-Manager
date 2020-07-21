@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     picker: {
         height: 50,
         width: 360,
-        backgroundColor: '#2608B1',
+        backgroundColor: 'white',
         color: 'white',
     },
     pickerView: {
@@ -42,13 +42,13 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     pickerViewLoanType: {
-        // marginLeft: 15,
-        // borderRadius: 50,
-        // color: 'white',
-        // backgroundColor: '#2608B1',
-        // borderWidth: 1,
-        // overflow: 'hidden',
-        // width: 140
+        marginLeft: 15,
+        borderRadius: 8,
+        backgroundColor: 'white',
+        overflow: 'hidden',
+        width: 140,
+        borderWidth: 1,
+        borderColor: "#999999"
            },
 })
 
