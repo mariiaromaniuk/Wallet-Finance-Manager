@@ -78,7 +78,7 @@ class Profile extends React.Component {
             }}
           >
             <Text style={{ color: "#D75452", fontSize: 20 }}>Wallet </Text>
-            <Text style={{ fontSize: 20}}>member since </Text>
+            <Text style={{ color: "#222831", fontSize: 20}}>member since </Text>
             <Text style={{ color: "#D75452", fontSize: 20 }}>
               {this.state.joined}
             </Text>
