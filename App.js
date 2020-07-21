@@ -148,6 +148,24 @@ export default class App extends Component {
             title: "Transactions",
           }}
         />
+        <Stack.Screen
+          name="Calculator"
+          component={LoanEntry}
+          options={{
+            headerShown: false,
+            title: "Loan Calculator",
+            headerLeft: () => {},
+          }}
+        />
+        <Stack.Screen
+          name="Results"
+          component={Results}
+          options={{
+            headerShown: false,
+            title: "Results",
+            headerLeft: () => {},
+          }}
+        />
       </Stack.Navigator>
     );
   };
@@ -188,24 +206,6 @@ export default class App extends Component {
           options={{
             headerShown: false,
             title: "Edit Categories",
-            headerLeft: () => {},
-          }}
-        />
-        <Stack.Screen
-          name="Calculator"
-          component={LoanEntry}
-          options={{
-            headerShown: false,
-            title: "Loan Calculator",
-            headerLeft: () => {},
-          }}
-        />
-        <Stack.Screen
-          name="Results"
-          component={Results}
-          options={{
-            headerShown: false,
-            title: "Results",
             headerLeft: () => {},
           }}
         />

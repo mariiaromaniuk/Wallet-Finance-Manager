@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Text, Container, Content, Button, Header, Body } from "native-base";
+import { Text, Container, Content, Button, Header, Body, Image } from "native-base";
 import moment from "moment";
 import { FontAwesome } from "@expo/vector-icons";
 import { logout } from "../../store/user";

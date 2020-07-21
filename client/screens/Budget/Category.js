@@ -48,12 +48,12 @@ const Category = (props) => {
         </Body>
         <Right />
       </Header>
-      <Content>
+      <Content style={{paddingLeft: 20, paddingRight: 20}}>
         {categoryTransactions.length ? (
           categoryTransactions.map((trans) => {
             return (
-              <Card key={trans.id} style={{ borderRadius: 8 }}>
-                <CardItem style={{ borderRadius: 8 }}>
+              <Card key={trans.id} style={{ borderRadius: 8, padding: 8 }}>
+                <CardItem style={{ borderRadius: 8, padding: 8 }}>
                   <Body>
                     <Text style={{ fontWeight: "500", borderRadius: 20 }}>
                       {trans.name}
