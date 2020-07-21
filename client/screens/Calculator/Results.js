@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, StyleSheet, Dimensions,ScrollView } from 'react-native'
-import HeaderTitle from '../../components/Header.js'
 import Summary from '../../components/Summary.js'
 import { Container, Content, Header, Body, Card, CardItem } from "native-base";
 

@@ -105,7 +105,7 @@ class ResetPassword extends React.Component {
                 fontWeight: "bold",
               }}
             >
-              CHANGE PASSWORD
+              Change Password
             </Text>
           </Button>
           <Button
@@ -121,7 +121,7 @@ class ResetPassword extends React.Component {
                 fontWeight: "bold",
               }}
             >
-              CANCEL
+              Cancel
             </Text>
           </Button>
         </Content>
