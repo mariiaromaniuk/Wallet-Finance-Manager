@@ -27,7 +27,11 @@ const Category = (props) => {
 
   return (
     <Container>
-      <Header>
+      <Header
+        iosBarStyle
+        androidStatusBarColor
+        style={{ backgroundColor: "#222831", height: 100 }}
+      >
         <Left>
           <Button
             transparent
@@ -38,30 +42,46 @@ const Category = (props) => {
           </Button>
         </Left>
         <Body>
-          <Text style={{ fontWeight: "bold" }}>{categoryName}</Text>
+          <Text style={{ fontWeight: "bold", color: "#D75452" }}>
+            {categoryName}
+          </Text>
         </Body>
         <Right />
       </Header>
       <Content>
-        {categoryTransactions.map((trans) => {
-          return (
-            <Card key={trans.id} style={{ borderRadius: 8 }}>
-              <CardItem style={{ borderRadius: 8 }}>
-                <Body>
-                  <Text style={{ fontWeight: "500", borderRadius: 20 }}>
-                    {trans.name}
-                  </Text>
-                  <Text style={{ alignSelf: "flex-end" }}>
-                    <Text>{trans.date}</Text>
-                  </Text>
-                  <Text style={{ color: "red", fontWeight: "bold" }}>
-                    {trans.amount}
-                  </Text>
-                </Body>
-              </CardItem>
-            </Card>
-          );
-        })}
+        {categoryTransactions.length ? (
+          categoryTransactions.map((trans) => {
+            return (
+              <Card key={trans.id} style={{ borderRadius: 8 }}>
+                <CardItem style={{ borderRadius: 8 }}>
+                  <Body>
+                    <Text style={{ fontWeight: "500", borderRadius: 20 }}>
+                      {trans.name}
+                    </Text>
+                    <Text style={{ alignSelf: "flex-end" }}>
+                      <Text>{trans.date}</Text>
+                    </Text>
+                    <Text style={{ color: "red", fontWeight: "bold" }}>
+                      {trans.amount}
+                    </Text>
+                  </Body>
+                </CardItem>
+              </Card>
+            );
+          })
+        ) : (
+          <Text
+            style={{
+              alignSelf: "center",
+              marginTop: 125,
+              padding: 20,
+              fontSize: 20,
+              fontWeight: "bold",
+            }}
+          >
+            No transactions found for {categoryName}
+          </Text>
+        )}
       </Content>
     </Container>
   );
