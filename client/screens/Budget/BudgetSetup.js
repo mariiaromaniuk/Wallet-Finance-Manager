@@ -1,13 +1,18 @@
 import React, { Component } from "react";
+import { View, TextInput } from "react-native";
 import {
-  View,
-  TextInput,
-  Image
-} from 'react-native';
-import { Container, Content, Header, Button, Text, Body, Card, CardItem } from "native-base";
-import { connect } from 'react-redux';
-import { setBudget } from '../../store/budget';
-import { styles } from '../../styles';
+  Container,
+  Content,
+  Header,
+  Button,
+  Text,
+  Body,
+  Card,
+  CardItem,
+} from "native-base";
+import { connect } from "react-redux";
+import { setBudget } from "../../store/budget";
+import { styles } from "../../styles";
 
 class BudgetSetup extends Component {
   constructor() {
@@ -16,16 +21,16 @@ class BudgetSetup extends Component {
       income: 0,
       staticCosts: 0,
       savings: 0,
-      spendingBudget: 0
+      spendingBudget: 0,
     };
   }
 
   render() {
     // console.log("PROPS", this.props)
-    const userId = this.props.userId
+    const userId = this.props.userId;
     return (
       <View>
-                <Header
+        <Header
           iosBarStyle
           androidStatusBarColor
           style={{ backgroundColor: "#222831", height: 125 }}
@@ -53,81 +58,86 @@ class BudgetSetup extends Component {
             </Text>
           </Body>
         </Header>
-      <View style={styles.container1}>
-        <Text style={styles.categoryText}>
-          What is your monthly income? ($)
-        </Text>
-        <View>
-          <TextInput
-            style={styles.budgetInput}
-            onChangeText={income => this.setState({ income: +income })}
-            placeholder="Income"
-          />
+        <View style={styles.container1}>
+          <Text style={styles.categoryText}>
+            What is your monthly income? ($)
+          </Text>
+          <View>
+            <TextInput
+              style={styles.budgetInput}
+              onChangeText={(income) => this.setState({ income: +income })}
+              placeholder="Income"
+            />
+          </View>
         </View>
-      </View>
 
-      <View style={styles.container1}>
-        <Text style={styles.categoryText}>
-          What are your monthly static costs? ($)
-        </Text>
-        <Text style={styles.categoryText}>
-          ex: rent, utilities, insurance, etc.
-        </Text>
-        <View>
-          <TextInput
-            style={styles.budgetInput}
-            onChangeText={staticCosts =>
-              this.setState({ staticCosts: +staticCosts })}
-            placeholder="Static Costs"
-          />
+        <View style={styles.container1}>
+          <Text style={styles.categoryText}>
+            What are your monthly static costs? ($)
+          </Text>
+          <Text style={styles.categoryText}>
+            ex: rent, utilities, insurance, etc.
+          </Text>
+          <View>
+            <TextInput
+              style={styles.budgetInput}
+              onChangeText={(staticCosts) =>
+                this.setState({ staticCosts: +staticCosts })
+              }
+              placeholder="Static Costs"
+            />
+          </View>
         </View>
-      </View>
 
-      <View style={styles.container1}>
-        <Text style={styles.categoryText}>
-          How much would you like to save each month? ($)
-        </Text>
-        <View>
-          <TextInput
-            style={styles.budgetInput}
-            onChangeText={savings => this.setState({ savings: +savings })}
-            placeholder="Savings"
-          />
-        <Button
-            block
-            onPress={() => {
-              const spendingBudget =
-                this.state.income - this.state.staticCosts - this.state.savings;
-              this.setState({ ...this.state, spendingBudget });
-              this.props.setBudget({ ...this.state, spendingBudget }, userId);
-              this.props.navigation.navigate('EditCategories', {
-                title: 'Edit Categories'
-              });
-            }}
-            primary
-            style={{
-              margin: 22, marginTop: 100, backgroundColor: "#6CBDC3",
-            }}
-          >
-            <Text style={{ fontWeight: "bold" }}>Next</Text>
-          </Button>
+        <View style={styles.container1}>
+          <Text style={styles.categoryText}>
+            How much would you like to save each month? ($)
+          </Text>
+          <View>
+            <TextInput
+              style={styles.budgetInput}
+              onChangeText={(savings) => this.setState({ savings: +savings })}
+              placeholder="Savings"
+            />
+            <Button
+              block
+              onPress={() => {
+                const spendingBudget =
+                  this.state.income -
+                  this.state.staticCosts -
+                  this.state.savings;
+                this.setState({ ...this.state, spendingBudget });
+                this.props.setBudget({ ...this.state, spendingBudget }, userId);
+                this.props.navigation.navigate("EditCategories", {
+                  title: "Edit Categories",
+                });
+              }}
+              primary
+              style={{
+                margin: 22,
+                marginTop: 100,
+                backgroundColor: "#6CBDC3",
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>Next</Text>
+            </Button>
+          </View>
         </View>
       </View>
-      </View>
-    )
+    );
   }
 }
 
-const mapState = state => {
+const mapState = (state) => {
   return {
     budget: state.budget,
-    userId: state.user.id
+    userId: state.user.id,
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
-    setBudget: (budget, userId) => dispatch(setBudget(budget, userId))
+    setBudget: (budget, userId) => dispatch(setBudget(budget, userId)),
   };
 };
 
