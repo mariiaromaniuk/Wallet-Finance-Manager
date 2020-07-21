@@ -106,7 +106,7 @@ class Profile extends React.Component {
               backgroundColor: "#6CBDC3",
             }}
           >
-            <Text style={{ fontWeight: "bold" }}>Loan Calculator</Text>
+            <Text style={{ fontWeight: "bold" }}>Personal Loan Calculator</Text>
           </Button>
 
           <Button

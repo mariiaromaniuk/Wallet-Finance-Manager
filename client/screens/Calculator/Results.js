@@ -131,10 +131,11 @@ export default class Results extends React.Component{
         </Header>
             <View style={styles.fullScreen}>
                 <ScrollView contentContainerStyle={styles.contentContainer}>
-                    <Summary info={this.props.route.params.results} res={res}>{console.log(res,"testtsss")}</Summary>
+                    <Summary info={this.props.route.params.results} res={res}>
+                    </Summary>
                     <Text style={styles.title}>Loan Schedule:</Text>
                     <View style={styles.paymentRow}>
-                        {/* <Text style={styles.itemNumber} key={0}>#</Text> */}
+                        <Text style={styles.itemNumber} key={0}>#</Text>
                         <Text style={styles.item} key={1}>Interest:</Text>
                         <Text style={styles.item} key={2}>Principal:</Text>
                         <Text style={styles.item} key={3}>Balance:</Text>
@@ -181,8 +182,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor: 'white',
         // borderWidth: 1,
-        marginBottom: 1,
-        borderRadius: 50,
+        // borderColor: "grey",
+        marginBottom: 3,
+        borderRadius: 8,
+        backgroundColor: 'white',
         paddingLeft: 10,
     },
     contentContainer: {
