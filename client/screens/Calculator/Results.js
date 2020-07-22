@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, Dimensions,ScrollView } from 'react-native'
 import Summary from '../../components/Summary.js'
-import { Container, Content, Header, Body, Left, Card, CardItem } from "native-base";
+import { Container, Content, Header, Body, Button, Left, Card, CardItem } from "native-base";
 
 export default class Results extends React.Component{
 
@@ -152,6 +152,20 @@ export default class Results extends React.Component{
 
                     </View> */}
                 </ScrollView>
+                <Button
+                  block
+                  onPress={() => this.props.navigation.navigate("Profile")}
+                  primary
+                  style={{
+                    marginTop: 1,
+                    marginBottom: 50,
+                    marginLeft: 22,
+                    marginRight: 22,
+                  backgroundColor: "#6CBDC3",
+                  }}
+                >
+                 <Text style={{ fontWeight: "bold", color: "white" }}>Back to Profile</Text>
+                </Button>
             </View>
             </Container>
         )
