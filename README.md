@@ -13,7 +13,7 @@ To run this project, navigate to the directory and run one of the following yarn
 - ```yarn android``` or ```yarn ios``` or ```yarn web```
 
 ## User Interface Wireframes  
-Used [**Figma**](https://www.figma.com/) (a vector graphics editor and prototyping design tool) to design components, layout application structure and flow, and create high fidelity User Interface wireframes. [See Figma File Here](https://www.figma.com/file/QcFeokp3adXapoI0FOqrYB/Wallet?node-id=0%3A1)
+Used [**Figma**](https://www.figma.com/) (a vector graphics editor and prototyping design tool) to design components, layout application structure and flow, and create high fidelity User Interface wireframes. [**See Figma File Here**](https://www.figma.com/file/QcFeokp3adXapoI0FOqrYB/Wallet?node-id=0%3A1)
 
 ![](assets/Wireframes1.png)
 ![](assets/Wireframes2.png)
